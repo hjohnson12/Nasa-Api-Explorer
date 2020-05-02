@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="Astro.Views.InSightLander_WeatherView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Astro.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Windows.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="12 0 0 12">
+            <TextBlock Text="InSight Mars Lander, Weather Service" FontWeight="Bold" FontSize="24"/>
+            <TextBlock Text="Weather measurements (temperature, wind, pressure) on the surface of Mars at Elysium Plantia, a flat, smooth plain near Mar' equator." />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <muxc:WebView Source="https://solarsystem.nasa.gov/gltf_embed/2380" />
+        </Grid>
+    </Grid>
+</Page>

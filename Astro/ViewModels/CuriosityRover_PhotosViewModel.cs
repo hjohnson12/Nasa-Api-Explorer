@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Testing.ViewModels
+namespace Astro.ViewModels
 {
     public class CuriosityRover_PhotosViewModel
     {

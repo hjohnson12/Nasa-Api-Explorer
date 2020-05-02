@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Astro.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Testing
+namespace Astro.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -42,6 +43,9 @@ namespace Testing
                         break;
                     case "CR_Photos":
                         mainFrame.Navigate(typeof(CuriosityRover_PhotosView));
+                        break;
+                    case "InsightLander_Weather":
+                        mainFrame.Navigate(typeof(InSightLander_WeatherView));
                         break;
                 }
             }

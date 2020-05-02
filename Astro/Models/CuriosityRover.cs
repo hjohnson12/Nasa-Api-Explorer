@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Testing.Base;
+using Astro.Base;
 
-namespace Testing
+namespace Astro
 {
     class CuriosityRover : Base.Observable
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Astro.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Testing
+namespace Astro
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

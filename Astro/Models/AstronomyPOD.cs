@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Testing
+namespace Astro
 {
     // Astronomy Picture of the Day
     public class AstronomyPOD

@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="Testing.MainPage"
+    x:Class="Astro.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Testing"
+    xmlns:local="using:Astro"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Windows.UI.Xaml.Controls"
@@ -14,6 +14,7 @@
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Icon="Home" Content="Home" Tag="HomePage" IsSelected="True" />
                 <muxc:NavigationViewItem Icon="BrowsePhotos" Content="Curiosity Rover Photos" Tag="CR_Photos" />
+                <muxc:NavigationViewItem Icon="Help" Content="InSight Mars Lander Weather Data" Tag="InsightLander_Weather" />
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="mainFrame"/>
         </muxc:NavigationView>
