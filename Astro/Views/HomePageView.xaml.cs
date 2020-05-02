@@ -29,11 +29,13 @@ namespace Astro.Views
         public HomePageView()
         {
             this.InitializeComponent();
-     
-
+    
             InitializePictureOfDay();
         }
 
+        /// <summary>
+        /// Initializes the "Astronomy Picture of the Day" data
+        /// </summary>
         public void InitializePictureOfDay()
         {
             var webRequest = WebRequest.Create("https://api.nasa.gov/planetary/apod?api_key=QAPd6iShWw0Qgx3Cd1t08wgXtKoCybGTCVLzxbgM") as HttpWebRequest;

@@ -11,7 +11,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <!--<RowDefinition Height="30" />-->
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid
@@ -25,39 +25,43 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Column="0">
-                <!--<Image
+                <Image
                         Grid.Column="0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Margin="4"
-                        Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" />-->
-                <TextBlock Text="Astro" VerticalAlignment="Center" FontSize="12" Margin="4 2 0 0" FontFamily="SegoeUI"/>
+                        Source="ms-appx:///Assets/Square44x44Logo.targetsize-256.png" />
+                <TextBlock Text="Astro Application" VerticalAlignment="Center" FontSize="12" Margin="4 2 0 0" FontFamily="SegoeUI"/>
             </StackPanel>
 
-            <!--<TextBlock
+            <TextBlock
                 x:Name="TitleBarCurrentBoardTextblock"
                 Grid.Column="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="" />-->
+                Text="" />
         </Grid>
-        <muxc:NavigationView x:Name="navMenu" SelectionChanged="navMenu_SelectionChanged" Grid.Row="1">
+        <muxc:NavigationView Style="{StaticResource CustomNavigationViewStyle}" x:Name="navMenu"  SelectionChanged="navMenu_SelectionChanged" Grid.Row="1" PaneTitle="Application Title Here" AlwaysShowHeader="True" Header="Header" IsBackButtonVisible="Collapsed" Canvas.ZIndex="0">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Icon="Home" Content="Home" Tag="HomePage" IsSelected="True" />
+                <muxc:NavigationViewItemSeparator />
                 <muxc:NavigationViewItemHeader Content="Earth"/>
+                <muxc:NavigationViewItemSeparator />
                 <muxc:NavigationViewItemHeader Content="Mars"/>
                 <muxc:NavigationViewItem Icon="BrowsePhotos" Content="Curiosity Rover Photos" Tag="CR_Photos" />
                 <muxc:NavigationViewItem Icon="Help" Content="InSight Mars Lander Weather Data" Tag="InsightLander_Weather" />
+                <muxc:NavigationViewItemSeparator />
                 <muxc:NavigationViewItemHeader Content="Space"/>
                 <muxc:NavigationViewItem Icon="Home" Content="Exoplanets" Tag="Exoplanets" IsSelected="True" />
-
-                <!--<muxc:NavigationViewItem Icon="BrowsePhotos" Content="Space Weather" Tag="SpaceWeather" />-->
-                <!--<muxc:NavigationViewItemHeader Content="Universe"/>-->
-                <!--<muxc:NavigationViewItemHeader Content="Models"/>-->
             </muxc:NavigationView.MenuItems>
-            <Frame x:Name="mainFrame"/>
+            <Grid>
+                <Frame x:Name="mainFrame"/>
+                
+                <!-- KEEP: Use for when pages are sending out HTTP Request and loading-->
+                <muxc:ProgressRing Height="100" Width="100" IsActive="True" />
+            </Grid>
         </muxc:NavigationView>
     </Grid>
 </Page>

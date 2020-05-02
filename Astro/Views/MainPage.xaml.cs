@@ -27,7 +27,7 @@ namespace Astro.Views
         public MainPage()
         {
             this.InitializeComponent();
-
+            Window.Current.SetTitleBar(AppTitleBar);
             navMenu.SelectedItem = navMenu.MenuItems.ElementAt(0);
         }
 

@@ -42,14 +42,14 @@
     </ScrollViewer>-->
     <Grid>
         
-        <ListView Name="listView">
+        <ListView Name="listView" Height="2000">
             <ListView.Header>
                 <controls:ScrollHeader Mode="Fade">
                     <Grid x:Name="MyHeaderGrid"
                             MinHeight="250" >
-                        <Image Source="ms-appx:///Images/earth.png" Stretch="UniformToFill" Height="400"/>
+                        <Image Source="ms-appx:///Images/earth.png" Stretch="UniformToFill" Height="400" VerticalAlignment="Top"/>
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Margin="12"
+                            <TextBlock Margin="0"
                      FontSize="48"
                      FontWeight="Bold"
                      Foreground="White"
