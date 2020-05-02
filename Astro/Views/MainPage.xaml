@@ -60,7 +60,7 @@
                 <Frame x:Name="mainFrame"/>
                 
                 <!-- KEEP: Use for when pages are sending out HTTP Request and loading-->
-                <muxc:ProgressRing Height="100" Width="100" IsActive="True" />
+                <!--<muxc:ProgressRing Height="100" Width="100" IsActive="True" />-->
             </Grid>
         </muxc:NavigationView>
     </Grid>

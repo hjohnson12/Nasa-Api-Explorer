@@ -461,7 +461,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Grid x:Name="TogglePaneTopPadding" Height="8"/> <!-- CHANGED -->
+                                <Grid x:Name="TogglePaneTopPadding" Height="0"/> <!-- CHANGED -->
                                 <Grid x:Name="ButtonHolderGrid" Grid.Row="1">
                                     <Button x:Name="NavigationViewBackButton" IsEnabled="{TemplateBinding IsBackEnabled}" Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                         <ToolTipService.ToolTip>
@@ -570,7 +570,7 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid x:Name="ContentTopPadding" Height="{Binding TemplateSettings.TopPadding, RelativeSource={RelativeSource Mode=TemplatedParent}}" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                        <ContentControl x:Name="HeaderContent" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" HorizontalContentAlignment="Stretch" IsTabStop="False" MinHeight="{StaticResource PaneToggleButtonHeight}" Grid.Row="1" Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" VerticalContentAlignment="Stretch"/>
+                                        <ContentControl x:Name="HeaderContent" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" HorizontalContentAlignment="Stretch" IsTabStop="False" MinHeight="{StaticResource PaneToggleButtonHeight}" Grid.Row="0"  Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" VerticalContentAlignment="Center"/>
                                         <ContentPresenter Content="{TemplateBinding Content}" AutomationProperties.LandmarkType="Main" Grid.Row="2"/>
                                     </Grid>
                                 </SplitView>
