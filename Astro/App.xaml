@@ -781,7 +781,7 @@
                                     <SplitView.Pane>
                                         <Grid x:Name="PaneContentGrid" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="12"/> <!-- CHANGED, SPACE UNDER HAMBURGER BUTTON -->
+                                                <RowDefinition Height="8"/> <!-- CHANGED, SPACE UNDER HAMBURGER BUTTON -->
                                                 <RowDefinition Height="0"/>
                                                 <RowDefinition x:Name="PaneContentGridToggleButtonRow" Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
