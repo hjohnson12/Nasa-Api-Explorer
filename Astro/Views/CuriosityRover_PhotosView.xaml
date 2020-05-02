@@ -19,6 +19,7 @@
             <!--<Button Content="Next" Click="BtnNext_Click" />
             <Button Content="Previous" Click="BtnPrev_Click" />-->
         </StackPanel>
+        
         <GridView x:Name="GridViewControl" Margin="12 0 0 0" ItemsSource="{x:Bind curiosityPhotos, Mode=OneWay}" Grid.Row="1">
             <GridView.ItemTemplate>
                 <DataTemplate>
@@ -27,7 +28,7 @@
                             <SolidColorBrush Color="{Binding Color}"/>
                         </Grid.Background>
                         <Image Source="{Binding img_src}" Stretch="Uniform" />
-                        <Border Background="#44000000" VerticalAlignment="Top" CornerRadius="2">
+                        <Border Background="#44000000" VerticalAlignment="Bottom" CornerRadius="2">
                             <TextBlock Foreground="White" Margin="3,1" TextWrapping="Wrap">
                                 <Run Text="{Binding id}"/><Run Text="."/>
                                 <Run Text="{Binding camera.full_name}"/>

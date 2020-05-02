@@ -46,8 +46,16 @@
         <muxc:NavigationView x:Name="navMenu" SelectionChanged="navMenu_SelectionChanged" Grid.Row="1">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Icon="Home" Content="Home" Tag="HomePage" IsSelected="True" />
+                <muxc:NavigationViewItemHeader Content="Earth"/>
+                <muxc:NavigationViewItemHeader Content="Mars"/>
                 <muxc:NavigationViewItem Icon="BrowsePhotos" Content="Curiosity Rover Photos" Tag="CR_Photos" />
                 <muxc:NavigationViewItem Icon="Help" Content="InSight Mars Lander Weather Data" Tag="InsightLander_Weather" />
+                <muxc:NavigationViewItemHeader Content="Space"/>
+                <muxc:NavigationViewItem Icon="Home" Content="Exoplanets" Tag="Exoplanets" IsSelected="True" />
+
+                <!--<muxc:NavigationViewItem Icon="BrowsePhotos" Content="Space Weather" Tag="SpaceWeather" />-->
+                <!--<muxc:NavigationViewItemHeader Content="Universe"/>-->
+                <!--<muxc:NavigationViewItemHeader Content="Models"/>-->
             </muxc:NavigationView.MenuItems>
             <Frame x:Name="mainFrame"/>
         </muxc:NavigationView>

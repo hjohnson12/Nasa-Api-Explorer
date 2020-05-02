@@ -29,6 +29,7 @@ namespace Astro.Views
         public HomePageView()
         {
             this.InitializeComponent();
+     
 
             InitializePictureOfDay();
         }
