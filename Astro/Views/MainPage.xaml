@@ -44,6 +44,16 @@
                 Text="" />
         </Grid>
         <muxc:NavigationView Style="{StaticResource CustomNavigationViewStyle}" x:Name="navMenu"  SelectionChanged="navMenu_SelectionChanged" Grid.Row="1" PaneTitle="Application Title Here" AlwaysShowHeader="True" Header="Header" IsBackButtonVisible="Collapsed" Canvas.ZIndex="0">
+            <muxc:NavigationView.AutoSuggestBox>
+                <muxc:AutoSuggestBox Style="{StaticResource CustomAutoSuggestBoxStyle}"
+                    x:Name="menuSearchBox"
+                    VerticalAlignment="Center"
+                    x:FieldModifier="public"
+                    PlaceholderText="Search"
+                    QueryIcon="Find"
+                    MinWidth="200">
+                </muxc:AutoSuggestBox>
+            </muxc:NavigationView.AutoSuggestBox>
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Icon="Home" Content="Home" Tag="HomePage" IsSelected="True" />
                 <muxc:NavigationViewItemSeparator />
@@ -58,7 +68,7 @@
             </muxc:NavigationView.MenuItems>
             <Grid>
                 <Frame x:Name="mainFrame"/>
-                
+
                 <!-- KEEP: Use for when pages are sending out HTTP Request and loading-->
                 <!--<muxc:ProgressRing Height="100" Width="100" IsActive="True" />-->
             </Grid>
