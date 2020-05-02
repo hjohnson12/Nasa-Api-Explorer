@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Margin="12 0 0 12">
             <TextBlock Text="Curiosity Rover Photos" FontWeight="Bold" FontSize="24" />
-            <muxc:CalendarDatePicker x:Name="RoverPhotosDatePicker" Header="Date:" DateChanged="RoverPhotosDatePicker_DateChanged" CornerRadius="2"/>
+            <muxc:CalendarDatePicker x:Name="RoverPhotosDatePicker" BorderThickness="1" Header="Date:" DateChanged="RoverPhotosDatePicker_DateChanged" CornerRadius="2"/>
             <!--<Button Content="Next" Click="BtnNext_Click" />
             <Button Content="Previous" Click="BtnPrev_Click" />-->
         </StackPanel>
