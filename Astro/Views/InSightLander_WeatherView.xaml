@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="12 0 0 12">
             <TextBlock Text="InSight Mars Lander, Weather Service" FontWeight="Bold" FontSize="24"/>
-            <TextBlock Text="Weather measurements (temperature, wind, pressure) on the surface of Mars at Elysium Plantia, a flat, smooth plain near Mar' equator." />
+            <TextBlock Text="Weather measurements (temperature, wind, pressure) on the surface of Mars at Elysium Plantia, a flat, smooth plain near Mars' equator." />
         </StackPanel>
         <Grid Grid.Row="1">
             <muxc:WebView Source="https://solarsystem.nasa.gov/gltf_embed/2380" />
