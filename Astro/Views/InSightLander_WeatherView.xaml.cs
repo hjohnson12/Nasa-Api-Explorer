@@ -75,7 +75,11 @@ namespace Astro.Views
                     }
                 }
             }
-            txtBlock.Text = CelciusToFarenheit(SolWeek[0].AtmostphericTemp.mn).ToString(); // DEBUG DATA
+            string output = "";
+            output = "On Sol " + SolWeek[0].Sol.ToString() + " the temps ranged from " + SolWeek[0].AtmostphericTemp.mx.ToString() + " degree's Celcius to " +
+                SolWeek[0].AtmostphericTemp.mn.ToString() + " degrees celcius.";
+            txtBlock.Text = output;
+            //txtBlock.Text = CelciusToFarenheit(SolWeek[0].AtmostphericTemp.mn).ToString(); // DEBUG DATA
         }
 
         public double CelciusToFarenheit(double degC)

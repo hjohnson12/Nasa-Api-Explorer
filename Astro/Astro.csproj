@@ -122,6 +122,7 @@
     <Compile Include="Models\AstronomyPOD.cs" />
     <Compile Include="Base\Observable.cs" />
     <Compile Include="Models\CuriosityRover.cs" />
+    <Compile Include="Models\OpportunityRover.cs" />
     <Compile Include="Models\SolDay.cs" />
     <Compile Include="ViewModels\CuriosityRover_PhotosViewModel.cs" />
     <Compile Include="Views\CuriosityRover_PhotosView.xaml.cs">
