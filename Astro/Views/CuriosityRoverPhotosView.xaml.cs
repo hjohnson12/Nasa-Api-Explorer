@@ -39,7 +39,7 @@ namespace Astro.Views
         {
             curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
 
-            var webRequest = WebRequest.Create(String.Format("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key=QAPd6iShWw0Qgx3Cd1t08wgXtKoCybGTCVLzxbgM", date)) as HttpWebRequest;
+            var webRequest = WebRequest.Create(String.Format("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}", date, StaticKeys.API_KEY)) as HttpWebRequest;
             if (webRequest == null)
             {
                 return;

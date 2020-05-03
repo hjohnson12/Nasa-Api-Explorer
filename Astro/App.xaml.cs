@@ -1,4 +1,5 @@
 ﻿using Astro.Views;
+using Astro.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +21,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Astro
 {
+    public static class StaticKeys
+    {
+        public static string API_KEY { get; set; }
+    }
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -40,8 +46,21 @@ namespace Astro
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            // Register NASA API Value
+            // Check to see if API KEY is in your Environment Variables with name NASA_API_KEY
+            if (Environment.GetEnvironmentVariable("NASA_API_KEY") == null)
+            {
+                // Key not available, halt application?
+                InvalidAPIKeyDialogView dialog = new InvalidAPIKeyDialogView();
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                StaticKeys.API_KEY = Environment.GetEnvironmentVariable("NASA_API_KEY").ToString();
+            }
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

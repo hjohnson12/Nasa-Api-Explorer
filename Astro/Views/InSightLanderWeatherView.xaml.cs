@@ -34,14 +34,13 @@ namespace Astro.Views
             this.InitializeComponent();
 
             InitializeWeather();
-
         }
 
         public void InitializeWeather()
         {
             //curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
 
-            var webRequest = WebRequest.Create("https://api.nasa.gov/insight_weather/?api_key=QAPd6iShWw0Qgx3Cd1t08wgXtKoCybGTCVLzxbgM&feedtype=json&ver=1.0") as HttpWebRequest;
+            var webRequest = WebRequest.Create(String.Format("https://api.nasa.gov/insight_weather/?api_key={0}&feedtype=json&ver=1.0", StaticKeys.API_KEY)) as HttpWebRequest;
             if (webRequest == null)
             {
                 return;

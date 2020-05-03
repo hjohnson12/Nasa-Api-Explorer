@@ -130,6 +130,9 @@
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml.cs">
+      <DependentUpon>InvalidAPIKeyDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomePageView.xaml.cs">
       <DependentUpon>HomePageView.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
     <Page Include="Views\CuriosityRoverPhotosView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomePageView.xaml">
       <SubType>Designer</SubType>

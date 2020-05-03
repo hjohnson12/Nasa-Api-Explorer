@@ -38,7 +38,7 @@ namespace Astro.Views
         /// </summary>
         public void InitializePictureOfDay()
         {
-            var webRequest = WebRequest.Create("https://api.nasa.gov/planetary/apod?api_key=QAPd6iShWw0Qgx3Cd1t08wgXtKoCybGTCVLzxbgM") as HttpWebRequest;
+            var webRequest = WebRequest.Create(String.Format("https://api.nasa.gov/planetary/apod?api_key={0}", StaticKeys.API_KEY)) as HttpWebRequest;
             if (webRequest == null)
             {
                 return;
