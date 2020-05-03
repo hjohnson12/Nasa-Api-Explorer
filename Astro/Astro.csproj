@@ -125,16 +125,16 @@
     <Compile Include="Models\NaturalEventTracker.cs" />
     <Compile Include="Models\OpportunityRover.cs" />
     <Compile Include="Models\SolDay.cs" />
-    <Compile Include="ViewModels\CuriosityRover_PhotosViewModel.cs" />
+    <Compile Include="ViewModels\CuriosityRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\NaturalEventTrackerViewModel.cs" />
-    <Compile Include="Views\CuriosityRover_PhotosView.xaml.cs">
-      <DependentUpon>CuriosityRover_PhotosView.xaml</DependentUpon>
+    <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
+      <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomePageView.xaml.cs">
       <DependentUpon>HomePageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InSightLander_WeatherView.xaml.cs">
-      <DependentUpon>InSightLander_WeatherView.xaml</DependentUpon>
+    <Compile Include="Views\InSightLanderWeatherView.xaml.cs">
+      <DependentUpon>InSightLanderWeatherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -166,7 +166,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\CuriosityRover_PhotosView.xaml">
+    <Page Include="Views\CuriosityRoverPhotosView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -174,7 +174,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InSightLander_WeatherView.xaml">
+    <Page Include="Views\InSightLanderWeatherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

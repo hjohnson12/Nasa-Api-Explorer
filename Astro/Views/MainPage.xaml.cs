@@ -45,10 +45,10 @@ namespace Astro.Views
                         mainFrame.Navigate(typeof(NaturalEventTrackerView));
                         break;
                     case "CR_Photos":
-                        mainFrame.Navigate(typeof(CuriosityRover_PhotosView));
+                        mainFrame.Navigate(typeof(CuriosityRoverPhotosView));
                         break;
                     case "InsightLander_Weather":
-                        mainFrame.Navigate(typeof(InSightLander_WeatherView));
+                        mainFrame.Navigate(typeof(InSightLanderWeatherView));
                         break;
                 }
             }

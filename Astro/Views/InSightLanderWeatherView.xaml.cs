@@ -25,11 +25,11 @@ namespace Astro.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class InSightLander_WeatherView : Page
+    public sealed partial class InSightLanderWeatherView : Page
     {
         public ObservableCollection<SolDay> SolWeek = new ObservableCollection<SolDay>();
 
-        public InSightLander_WeatherView()
+        public InSightLanderWeatherView()
         {
             this.InitializeComponent();
 

@@ -6,7 +6,7 @@ using Astro.Base;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Testing.Models
+namespace Astro.Models
 {
     public class OpportunityRover : Observable
     {

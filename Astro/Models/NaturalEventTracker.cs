@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Testing.Models
+namespace Astro.Models
 {
     public class NaturalEventTracker
     {

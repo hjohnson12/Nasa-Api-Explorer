@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Astro.ViewModels
 {
-    public class CuriosityRover_PhotosViewModel
+    public class CuriosityRoverPhotosViewModel
     {
     }
 }
