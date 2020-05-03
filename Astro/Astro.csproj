@@ -7,8 +7,8 @@
     <ProjectGuid>{533F8761-4890-4B80-A7CB-96DEF81D0995}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Testing</RootNamespace>
-    <AssemblyName>Testing</AssemblyName>
+    <RootNamespace>Astro</RootNamespace>
+    <AssemblyName>Astro</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
@@ -126,6 +126,8 @@
     <Compile Include="Models\OpportunityRover.cs" />
     <Compile Include="Models\SolDay.cs" />
     <Compile Include="ViewModels\CuriosityRoverPhotosViewModel.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\InsightLanderWeatherViewModel.cs" />
     <Compile Include="ViewModels\NaturalEventTrackerViewModel.cs" />
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
