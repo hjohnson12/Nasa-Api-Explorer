@@ -18,7 +18,8 @@
             <TextBlock Text="Weather measurements (temperature, wind, pressure) on the surface of Mars at Elysium Plantia, a flat, smooth plain near Mars' equator." />
         </StackPanel>
         <Grid Grid.Row="1">
-            <muxc:WebView Source="https://solarsystem.nasa.gov/gltf_embed/2380" />
+            <TextBlock x:Name="txtBlock" Text="TEST" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <!--<muxc:WebView Source="https://solarsystem.nasa.gov/gltf_embed/2380" />-->
         </Grid>
     </Grid>
 </Page>

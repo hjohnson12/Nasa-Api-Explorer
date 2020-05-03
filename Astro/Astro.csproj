@@ -122,6 +122,8 @@
     <Compile Include="Models\AstronomyPOD.cs" />
     <Compile Include="Base\Observable.cs" />
     <Compile Include="Models\CuriosityRover.cs" />
+    <Compile Include="Models\SolDay.cs" />
+    <Compile Include="ViewModels\CuriosityRover_PhotosViewModel.cs" />
     <Compile Include="Views\CuriosityRover_PhotosView.xaml.cs">
       <DependentUpon>CuriosityRover_PhotosView.xaml</DependentUpon>
     </Compile>
@@ -135,7 +137,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CuriosityRover_PhotosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -160,8 +161,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\CuriosityRover_PhotosView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\HomePageView.xaml">
       <SubType>Designer</SubType>
