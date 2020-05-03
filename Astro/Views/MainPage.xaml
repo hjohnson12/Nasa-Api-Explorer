@@ -81,6 +81,10 @@
                     Content="Earth Natrual Event Tracker Data"
                     Icon="Help"
                     Tag="Earth_EventTracker" />
+                <muxc:NavigationViewItem
+                    Content="Earth Now Poineer Observer"
+                    Icon="Help"
+                    Tag="Earth_EarthNow" />
                 <muxc:NavigationViewItemSeparator />
                 <muxc:NavigationViewItemHeader Content="Mars" />
                 <muxc:NavigationViewItem

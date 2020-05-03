@@ -135,6 +135,9 @@
     <Compile Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml.cs">
       <DependentUpon>InvalidAPIKeyDialogView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EarthClimateView.xaml.cs">
+      <DependentUpon>EarthClimateView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomePageView.xaml.cs">
       <DependentUpon>HomePageView.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EarthClimateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -44,6 +44,9 @@ namespace Astro.Views
                     case "Earth_EventTracker":
                         mainFrame.Navigate(typeof(NaturalEventTrackerView));
                         break;
+                    case "Earth_EarthNow":
+                        mainFrame.Navigate(typeof(EarthClimateView));
+                        break;
                     case "CR_Photos":
                         mainFrame.Navigate(typeof(CuriosityRoverPhotosView));
                         break;
