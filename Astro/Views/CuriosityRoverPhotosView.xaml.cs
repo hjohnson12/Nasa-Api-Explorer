@@ -6,7 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.Web.Http;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -27,43 +29,39 @@ namespace Astro.Views
     {
         ObservableCollection<CuriosityRover.Photo> curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
 
+
         public CuriosityRoverPhotosView()
         {
             this.InitializeComponent();
-
             // Initialize here
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
         }
 
-        public void InitializePhotos_Curiosity(string date)
+        private async Task InitializePhotos_Curiosity(string date)
         {
+            
             curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
 
-            var webRequest = WebRequest.Create(String.Format("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}", date, StaticKeys.API_KEY)) as HttpWebRequest;
-            if (webRequest == null)
+            using (var httpClient = new HttpClient())
             {
-                return;
-            }
-
-            webRequest.ContentType = "application/json";
-            webRequest.UserAgent = "Nothing";
-
-            using (var s = webRequest.GetResponse().GetResponseStream())
-            {
-                using (var sr = new StreamReader(s))
+                try
                 {
-                    var json = sr.ReadToEnd();
-                    var response = JsonConvert.DeserializeObject<CuriosityRover>(json);
-                    foreach (var photo in response.Photos)
+                    string result = await httpClient.GetStringAsync(new Uri(String.Format("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}", date, StaticKeys.API_KEY)));
+                    var test = JsonConvert.DeserializeObject<CuriosityRover>(result);
+                    foreach (var photo in test.Photos)
                     {
                         curiosityPhotos.Add(photo);
                     }
+                }
+                catch
+                {
+                    // ...
                 }
             }
             GridViewControl.ItemsSource = curiosityPhotos;
         }
 
-        private void RoverPhotosDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        private async void RoverPhotosDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
         {
             var calendarName = sender.Name.ToString();
             if (string.IsNullOrEmpty(args.NewDate.ToString()))
@@ -72,7 +70,7 @@ namespace Astro.Views
             {
                 var datePicked = args.NewDate;
                 var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
-                InitializePhotos_Curiosity(photoDate);
+                await InitializePhotos_Curiosity(photoDate);
             }
         }
 
