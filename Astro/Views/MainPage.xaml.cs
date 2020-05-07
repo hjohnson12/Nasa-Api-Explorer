@@ -10,7 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
@@ -22,7 +22,7 @@ namespace Astro.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page
     {
         public MainPage()
         {
@@ -31,9 +31,9 @@ namespace Astro.Views
             navMenu.SelectedItem = navMenu.MenuItems.ElementAt(0);
         }
 
-        private void navMenu_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private void navMenu_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            var selectedItem = navMenu.SelectedItem as NavigationViewItem;
+            var selectedItem = navMenu.SelectedItem as Microsoft.UI.Xaml.Controls.NavigationViewItem;
             if (selectedItem != null)
             {
                 switch (selectedItem.Tag)

@@ -6,10 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Astro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Windows.UI.Xaml.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <Thickness x:Key="NavigationView">80,0</Thickness>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <!--<RowDefinition Height="30" />-->
@@ -49,6 +51,7 @@
                 Foreground="Gray"
                 Text="" />
         </Grid>
+
         <muxc:NavigationView
             x:Name="navMenu"
             Grid.Row="1"
@@ -56,25 +59,29 @@
             Canvas.ZIndex="0"
             Header="Header"
             IsBackButtonVisible="Collapsed"
+            IsTitleBarAutoPaddingEnabled="False"
             PaneTitle="Application Title Here"
-            SelectionChanged="navMenu_SelectionChanged"
-            Style="{StaticResource CustomNavigationViewStyle}">
+            SelectionChanged="navMenu_SelectionChanged">
             <muxc:NavigationView.AutoSuggestBox>
-                <muxc:AutoSuggestBox
+                <AutoSuggestBox
                     x:Name="menuSearchBox"
                     MinWidth="200"
+                    Margin="0,4,0,0"
                     VerticalAlignment="Center"
                     x:FieldModifier="public"
                     PlaceholderText="Search"
-                    QueryIcon="Find"
-                    Style="{StaticResource CustomAutoSuggestBoxStyle}" />
+                    QueryIcon="Find" />
             </muxc:NavigationView.AutoSuggestBox>
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem
                     Content="Home"
                     Icon="Home"
                     IsSelected="True"
-                    Tag="HomePage" />
+                    Tag="HomePage">
+                    <muxc:NavigationViewItem.MenuItems>
+                        <muxc:NavigationViewItem Content="Test" Tag="Test" />
+                    </muxc:NavigationViewItem.MenuItems>
+                </muxc:NavigationViewItem>
                 <muxc:NavigationViewItemSeparator />
                 <muxc:NavigationViewItemHeader Content="Earth" />
                 <muxc:NavigationViewItem
@@ -105,9 +112,12 @@
             </muxc:NavigationView.MenuItems>
             <Grid>
                 <Frame x:Name="mainFrame" />
-
                 <!--  KEEP: Use for when pages are sending out HTTP Request and loading  -->
-                <!--<muxc:ProgressRing Height="100" Width="100" IsActive="True" />-->
+                <muxc:ProgressRing
+                    Width="100"
+                    Height="100"
+                    IsActive="True" />
+
             </Grid>
         </muxc:NavigationView>
     </Grid>
