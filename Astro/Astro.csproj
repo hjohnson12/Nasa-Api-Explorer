@@ -138,6 +138,9 @@
     <Compile Include="Views\EarthClimateView.xaml.cs">
       <DependentUpon>EarthClimateView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Feeds\NasaClimateFeedView.xaml.cs">
+      <DependentUpon>NasaClimateFeedView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomePageView.xaml.cs">
       <DependentUpon>HomePageView.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EarthClimateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Feeds\NasaClimateFeedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -109,14 +109,22 @@
                     Icon="Home"
                     IsSelected="True"
                     Tag="Exoplanets" />
+                <muxc:NavigationViewItem Content="News Feeds">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE14C;" />
+                    </muxc:NavigationViewItem.Icon>
+                    <muxc:NavigationViewItem.MenuItems>
+                        <muxc:NavigationViewItem Content="NASA Climate Feed" Tag="NASAClimate_Feed" />
+                    </muxc:NavigationViewItem.MenuItems>
+                </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
             <Grid>
                 <Frame x:Name="mainFrame" />
                 <!--  KEEP: Use for when pages are sending out HTTP Request and loading  -->
-                <muxc:ProgressRing
+                <!--<muxc:ProgressRing
                     Width="100"
                     Height="100"
-                    IsActive="True" />
+                    IsActive="True" />-->
 
             </Grid>
         </muxc:NavigationView>

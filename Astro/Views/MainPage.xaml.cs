@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Astro.Views.Feeds;
 
 namespace Astro.Views
 {
@@ -52,6 +53,9 @@ namespace Astro.Views
                         break;
                     case "InsightLander_Weather":
                         mainFrame.Navigate(typeof(InSightLanderWeatherView));
+                        break;
+                    case "NASAClimate_Feed":
+                        mainFrame.Navigate(typeof(NasaClimateFeedView));
                         break;
                 }
             }
