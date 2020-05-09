@@ -79,5 +79,14 @@ namespace Astro.Views.Feeds
 
             RSSList.SelectedItem = null;
         }
+
+        private void imgNews_Loaded(object sender, RoutedEventArgs e)
+        {
+            var test = sender as Image;
+            if (test.Source == null)
+            {
+                //(sender as Image).Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }
