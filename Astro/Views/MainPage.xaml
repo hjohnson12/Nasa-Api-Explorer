@@ -120,6 +120,7 @@
                     </muxc:NavigationViewItem.Icon>
                     <muxc:NavigationViewItem.MenuItems>
                         <muxc:NavigationViewItem Content="NASA Climate Feed" Tag="NASAClimate_Feed" />
+                        <muxc:NavigationViewItem Content="Earth Observatory Feed" Tag="NASAEarthObserv_Feed" />
                     </muxc:NavigationViewItem.MenuItems>
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>

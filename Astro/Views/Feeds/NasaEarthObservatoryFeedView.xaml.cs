@@ -24,17 +24,16 @@ namespace Astro.Views.Feeds
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NasaClimateFeedView : Page
+    public sealed partial class NasaEarthObservatoryFeedView : Page
     {
         public ObservableCollection<RssSchema> RSSFeed { get; } = new ObservableCollection<RssSchema>();
 
-        public NasaClimateFeedView()
+        public NasaEarthObservatoryFeedView()
         {
             this.InitializeComponent();
-            ParseRSS();
         }
 
-        public string Url { get; set; } = "https://climate.nasa.gov/news/rss.xml";
+        public string Url { get; set; } = "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss";
 
         public async void ParseRSS()
         {

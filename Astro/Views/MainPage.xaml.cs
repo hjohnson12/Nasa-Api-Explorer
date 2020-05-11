@@ -57,6 +57,9 @@ namespace Astro.Views
                     case "NASAClimate_Feed":
                         mainFrame.Navigate(typeof(NasaClimateFeedView));
                         break;
+                    case "NASAEarthObserv_Feed":
+                        mainFrame.Navigate(typeof(NasaEarthObservatoryFeedView));
+                        break;
                 }
             }
         }
