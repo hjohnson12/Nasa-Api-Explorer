@@ -34,6 +34,8 @@
             x:Name="GridViewControl"
             Grid.Row="1"
             Margin="12,0,0,0"
+            IsItemClickEnabled="True"
+            ItemClick="GridViewControl_ItemClick"
             ItemsSource="{x:Bind curiosityPhotos, Mode=OneWay}">
             <GridView.ItemTemplate>
                 <DataTemplate>

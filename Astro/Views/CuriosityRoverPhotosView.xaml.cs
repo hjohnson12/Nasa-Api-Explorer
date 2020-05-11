@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Astro.Views.Dialogs;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -72,6 +73,13 @@ namespace Astro.Views
                 var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
                 await InitializePhotos_Curiosity(photoDate);
             }
+        }
+
+        private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
+            //CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as CuriosityRover.Photo, curiosityPhotos);
+            //await diag.ShowAsync();
         }
 
         //private void BtnNext_Click(object sender, RoutedEventArgs e)

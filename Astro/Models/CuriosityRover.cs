@@ -8,7 +8,7 @@ using Astro.Base;
 
 namespace Astro
 {
-    class CuriosityRover : Base.Observable
+    public class CuriosityRover : Base.Observable
     {
         private List<Photo> _photos;
 

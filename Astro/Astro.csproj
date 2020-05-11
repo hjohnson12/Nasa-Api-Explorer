@@ -132,6 +132,9 @@
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\CuriosityPhotoDetailsDialogView.xaml.cs">
+      <DependentUpon>CuriosityPhotoDetailsDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml.cs">
       <DependentUpon>InvalidAPIKeyDialogView.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\NaturalEventTrackerView.xaml.cs">
       <DependentUpon>NaturalEventTrackerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhotoDetailsView.xaml.cs">
+      <DependentUpon>PhotoDetailsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +189,10 @@
     <Page Include="Views\CuriosityRoverPhotosView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\CuriosityPhotoDetailsDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml">
       <SubType>Designer</SubType>
@@ -213,6 +223,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NaturalEventTrackerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PhotoDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
