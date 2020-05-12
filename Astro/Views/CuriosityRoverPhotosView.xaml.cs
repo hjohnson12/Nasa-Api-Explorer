@@ -78,8 +78,8 @@ namespace Astro.Views
         private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
         {
             //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
-            //CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as CuriosityRover.Photo, curiosityPhotos);
-            //await diag.ShowAsync();
+            CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as CuriosityRover.Photo, curiosityPhotos);
+            await diag.ShowAsync();
         }
 
         //private void BtnNext_Click(object sender, RoutedEventArgs e)
