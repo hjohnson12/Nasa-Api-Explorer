@@ -104,6 +104,10 @@
                     Icon="BrowsePhotos"
                     Tag="CR_Photos" />
                 <muxc:NavigationViewItem
+                    Content="Opportunity Rover Photos"
+                    Icon="BrowsePhotos"
+                    Tag="OR_Photos" />
+                <muxc:NavigationViewItem
                     Content="InSight Mars Lander Weather Data"
                     Icon="Help"
                     Tag="InsightLander_Weather" />

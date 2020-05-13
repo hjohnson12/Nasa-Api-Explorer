@@ -160,6 +160,9 @@
     <Compile Include="Views\NaturalEventTrackerView.xaml.cs">
       <DependentUpon>NaturalEventTrackerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OpportunityRoverPhotosView.xaml.cs">
+      <DependentUpon>OpportunityRoverPhotosView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PhotoDetailsView.xaml.cs">
       <DependentUpon>PhotoDetailsView.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NaturalEventTrackerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpportunityRoverPhotosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

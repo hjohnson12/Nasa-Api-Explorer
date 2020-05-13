@@ -51,6 +51,9 @@ namespace Astro.Views
                     case "CR_Photos":
                         mainFrame.Navigate(typeof(CuriosityRoverPhotosView));
                         break;
+                    case "OR_Photos":
+                        mainFrame.Navigate(typeof(OpportunityRoverPhotosView));
+                        break;
                     case "InsightLander_Weather":
                         mainFrame.Navigate(typeof(InSightLanderWeatherView));
                         break;
