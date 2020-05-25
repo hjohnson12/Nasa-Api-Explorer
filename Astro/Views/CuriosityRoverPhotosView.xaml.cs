@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Astro.Views.Dialogs;
+using System.Collections;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,36 +31,30 @@ namespace Astro.Views
     {
         ObservableCollection<CuriosityRover.Photo> curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
 
-
         public CuriosityRoverPhotosView()
         {
             this.InitializeComponent();
-            // Initialize here
+
+            // Initialize starting date here
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
         }
-
-        private async Task InitializePhotos_Curiosity(string date)
+ 
+        private async void InitializePhotos_Curiosity(string date)
         {
-            
-            curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
-
-            using (var httpClient = new HttpClient())
+            progressRing.IsActive = true;
+            try
             {
-                try
-                {
-                    string result = await httpClient.GetStringAsync(new Uri(String.Format("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}", date, StaticKeys.API_KEY)));
-                    var test = JsonConvert.DeserializeObject<CuriosityRover>(result);
-                    foreach (var photo in test.Photos)
-                    {
-                        curiosityPhotos.Add(photo);
-                    }
-                }
-                catch
-                {
-                    // ...
-                }
+                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await NasaApiHelper.GetCuriosityRoverPhotosAsync(date));
+                GridViewControl.ItemsSource = curiosityPhotos;
             }
-            GridViewControl.ItemsSource = curiosityPhotos;
+            catch (Exception ex)
+            {
+                // ...
+            }
+            finally
+            {
+                progressRing.IsActive = false;
+            }
         }
 
         private async void RoverPhotosDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
@@ -71,7 +66,7 @@ namespace Astro.Views
             {
                 var datePicked = args.NewDate;
                 var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
-                await InitializePhotos_Curiosity(photoDate);
+                InitializePhotos_Curiosity(photoDate);
             }
         }
 

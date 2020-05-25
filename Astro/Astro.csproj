@@ -119,12 +119,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\NasaAPI\NasaApiHelper.cs" />
     <Compile Include="Models\AstronomyPOD.cs" />
     <Compile Include="Base\Observable.cs" />
     <Compile Include="Models\CuriosityRover.cs" />
     <Compile Include="Models\NaturalEventTracker.cs" />
     <Compile Include="Models\OpportunityRover.cs" />
     <Compile Include="Models\SolDay.cs" />
+    <Compile Include="NasaApiHelper.cs" />
     <Compile Include="ViewModels\CuriosityRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\InsightLanderWeatherViewModel.cs" />
@@ -256,7 +258,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
