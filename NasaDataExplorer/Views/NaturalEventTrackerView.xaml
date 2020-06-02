@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="NasaDataExplorer.Views.NaturalEventTrackerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:NasaDataExplorer.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
+            <TextBlock
+                Margin="0,0,0,16"
+                FontSize="24"
+                Text="Earth Observatory Natural Event Tracker API Data Test" />
+            <TextBlock x:Name="txtBlock" Text="" />
+        </StackPanel>
+    </Grid>
+</Page>
