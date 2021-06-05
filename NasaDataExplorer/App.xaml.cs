@@ -1,6 +1,11 @@
-﻿using NasaDataExplorer.Views;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http;
+using Microsoft.Extensions.Hosting;
+using NasaDataExplorer.Services;
+using NasaDataExplorer.Views;
 using NasaDataExplorer.Views.Dialogs;
 using System;
+using System.Net.Http;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +36,8 @@ namespace NasaDataExplorer
     /// </summary>
     sealed partial class App : Application
     {
+        public IHost NasaApiServiceHost { get; set; }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -39,7 +46,21 @@ namespace NasaDataExplorer
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            buildAndSetNasaApiService();
         }
+
+        public void buildAndSetNasaApiService()
+        {
+            var builder = new HostBuilder()
+            .ConfigureServices((hostContext, services) =>
+            {
+                services.AddHttpClient();
+                services.AddTransient<INasaApiService, NasaApiService>();
+            }).UseConsoleLifetime();
+            NasaApiServiceHost = builder.Build();
+        }
+
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

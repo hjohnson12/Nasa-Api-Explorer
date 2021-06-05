@@ -18,7 +18,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using NasaDataExplorer.Views.Dialogs;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
+using Microsoft.Extensions.Logging;
+using NasaDataExplorer.Services;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,26 +33,31 @@ namespace NasaDataExplorer.Views
     public sealed partial class CuriosityRoverPhotosView : Page
     {
         ObservableCollection<CuriosityRover.Photo> curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
-
+        
         public CuriosityRoverPhotosView()
         {
             this.InitializeComponent();
 
             // Initialize starting date here
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
+
         }
- 
+
         private async void InitializePhotos_Curiosity(string date)
         {
             progressRing.IsActive = true;
+            var nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
+            
             try
             {
-                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await NasaApiHelper.GetCuriosityRoverPhotosAsync(date));
+                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await nasaApiService.GetCuriosityRoverPhotosAsync(date));
                 GridViewControl.ItemsSource = curiosityPhotos;
             }
             catch (Exception ex)
             {
                 // ...
+                var logger = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<ILogger<App>>();
+                logger.LogError(ex, "An error occurred.");
             }
             finally
             {
