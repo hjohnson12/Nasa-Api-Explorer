@@ -47,7 +47,7 @@
 
         <ListView Name="listView" Height="2000">
             <ListView.Header>
-                <controls:ScrollHeader Mode="Fade">
+                <!--<controls:ScrollHeader Mode="Fade">
                     <Grid x:Name="MyHeaderGrid" MinHeight="250">
                         <Image
                             Height="400"
@@ -72,7 +72,31 @@
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
                     </Grid>
-                </controls:ScrollHeader>
+                </controls:ScrollHeader>-->
+                <Grid x:Name="MyHeaderGrid" MinHeight="250">
+                    <Image
+                        Height="400"
+                        VerticalAlignment="Top"
+                        Source="ms-appx:///Images/earth.png"
+                        Stretch="UniformToFill" />
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock
+                            Margin="0"
+                            FontSize="48"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Earth"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                        <TextBlock
+                            Margin="12,0,12,12"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="The scroll header supports quick return, sticky and fade behavior. If fade is enabled the header fades out while scrolling down. If quick return is enabled the header hides when the ListView is scrolled down and reappears immediately as soon as the ListView is scrolled up again. If sticky is enabled the header is displayed regardless of scrolling."
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+                </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>

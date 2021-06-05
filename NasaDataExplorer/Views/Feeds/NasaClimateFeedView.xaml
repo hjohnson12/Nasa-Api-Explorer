@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
     <Grid Padding="12" Background="{ThemeResource SystemControlChromeHighAcrylicElementMediumBrush}">
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -94,7 +94,7 @@
                             </Grid>
                         </Grid>
 
-                        <!--<StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
                             <Image
                                 x:Name="imgNews"
                                 Width="300"
@@ -119,7 +119,7 @@
                                     TextTrimming="CharacterEllipsis"
                                     TextWrapping="Wrap" />
                             </StackPanel>
-                        </StackPanel>-->
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
@@ -129,6 +129,6 @@
                     <Setter Property="BorderThickness" Value="0" />
                 </Style>
             </GridView.ItemContainerStyle>
-        </GridView>
+        </GridView>-->
     </Grid>
 </Page>

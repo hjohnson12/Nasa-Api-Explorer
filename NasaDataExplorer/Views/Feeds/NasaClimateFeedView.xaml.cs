@@ -1,97 +1,97 @@
-﻿using Microsoft.Toolkit.Parsers.Rss;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.Web.Http;
+﻿//using Microsoft.Toolkit.Parsers.Rss;
+//using System;
+//using System.Collections.Generic;
+//using System.Collections.ObjectModel;
+//using System.IO;
+//using System.Linq;
+//using System.Runtime.InteropServices.WindowsRuntime;
+//using Windows.Foundation;
+//using Windows.Foundation.Collections;
+//using Windows.System;
+//using Windows.UI.Xaml;
+//using Windows.UI.Xaml.Controls;
+//using Windows.UI.Xaml.Controls.Primitives;
+//using Windows.UI.Xaml.Data;
+//using Windows.UI.Xaml.Input;
+//using Windows.UI.Xaml.Media;
+//using Windows.UI.Xaml.Navigation;
+//using Windows.Web.Http;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+//// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace NasaDataExplorer.Views.Feeds
-{
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class NasaClimateFeedView : Page
-    {
-        public ObservableCollection<RssSchema> RSSFeed { get; } = new ObservableCollection<RssSchema>();
+//namespace NasaDataExplorer.Views.Feeds
+//{
+//    /// <summary>
+//    /// An empty page that can be used on its own or navigated to within a Frame.
+//    /// </summary>
+//    public sealed partial class NasaClimateFeedView : Page
+//    {
+//        public ObservableCollection<RssSchema> RSSFeed { get; } = new ObservableCollection<RssSchema>();
 
-        public NasaClimateFeedView()
-        {
-            this.InitializeComponent();
-            ParseRSS();
-        }
+//        public NasaClimateFeedView()
+//        {
+//            this.InitializeComponent();
+//            ParseRSS();
+//        }
 
-        public string Url { get; set; } = "https://climate.nasa.gov/news/rss.xml";
+//        public string Url { get; set; } = "https://climate.nasa.gov/news/rss.xml";
 
-        public async void ParseRSS()
-        {
-            string feed = null;
-            RSSFeed.Clear();
+//        public async void ParseRSS()
+//        {
+//            string feed = null;
+//            RSSFeed.Clear();
 
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    feed = await client.GetStringAsync(new Uri(Url));
-                }
-                catch
-                {
-                }
-            }
+//            using (var client = new HttpClient())
+//            {
+//                try
+//                {
+//                    feed = await client.GetStringAsync(new Uri(Url));
+//                }
+//                catch
+//                {
+//                }
+//            }
 
-            if (feed != null)
-            {
-                var parser = new RssParser();
-                var rss = parser.Parse(feed);
+//            if (feed != null)
+//            {
+//                var parser = new RssParser();
+//                var rss = parser.Parse(feed);
 
-                foreach (var element in rss)
-                {
-                    RSSFeed.Add(element);
-                }
-            }
-        }
+//                foreach (var element in rss)
+//                {
+//                    RSSFeed.Add(element);
+//                }
+//            }
+//        }
 
-        private async void RSSList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (RSSList.SelectedItem is RssSchema rssItem)
-            {
-                try
-                {
-                    await Launcher.LaunchUriAsync(new Uri(rssItem.FeedUrl));
-                }
-                catch
-                {
-                }
-            }
+//        private async void RSSList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+//        {
+//            if (RSSList.SelectedItem is RssSchema rssItem)
+//            {
+//                try
+//                {
+//                    await Launcher.LaunchUriAsync(new Uri(rssItem.FeedUrl));
+//                }
+//                catch
+//                {
+//                }
+//            }
 
-            RSSList.SelectedItem = null;
-        }
+//            RSSList.SelectedItem = null;
+//        }
 
-        private void imgNews_Loaded(object sender, RoutedEventArgs e)
-        {
-            var test = sender as Image;
-            if (test.Source == null)
-            {
-                //(sender as Image).Visibility = Visibility.Collapsed;
-            }
-        }
+//        private void imgNews_Loaded(object sender, RoutedEventArgs e)
+//        {
+//            var test = sender as Image;
+//            if (test.Source == null)
+//            {
+//                //(sender as Image).Visibility = Visibility.Collapsed;
+//            }
+//        }
 
-        private void imgNews_ImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-            var test = e.OriginalSource;
-        }
-    }
-}
+//        private void imgNews_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+//        {
+//            var test = e.OriginalSource;
+//        }
+//    }
+//}
