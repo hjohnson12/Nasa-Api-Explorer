@@ -26,6 +26,12 @@
                 CornerRadius="2"
                 DateChanged="RoverPhotosDatePicker_DateChanged"
                 Header="Date:" />
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    x:Name="btnCancelRequest"
+                    Click="btnCancelRequest_Click"
+                    Content="Cancel" />
+            </StackPanel>
             <!--<Button Content="Next" Click="BtnNext_Click" />
             <Button Content="Previous" Click="BtnPrev_Click" />-->
         </StackPanel>

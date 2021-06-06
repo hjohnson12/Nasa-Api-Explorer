@@ -22,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
 using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Services;
+using System.Threading;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,6 +35,7 @@ namespace NasaDataExplorer.Views
     {
         ObservableCollection<CuriosityRover.Photo> curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
         private INasaApiService _nasaApiService;
+        CancellationTokenSource cancellationTokenSource;
 
         public CuriosityRoverPhotosView()
         {
@@ -45,12 +47,19 @@ namespace NasaDataExplorer.Views
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
         }
 
-        private async void InitializePhotos_Curiosity(string date)
+        private async Task InitializePhotos_Curiosity(string date)
         {
             progressRing.IsActive = true;
             try
             {
-                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await _nasaApiService.GetCuriosityRoverPhotosAsync(date));
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.Token.Register(() =>
+                {
+                    Console.WriteLine("User requested to cancel.");
+                });
+
+                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await _nasaApiService.GetCuriosityRoverPhotosAsync(date, cancellationTokenSource.Token));
+                cancellationTokenSource = null;
                 GridViewControl.ItemsSource = curiosityPhotos;
             }
             catch (Exception ex)
@@ -61,6 +70,7 @@ namespace NasaDataExplorer.Views
             finally
             {
                 progressRing.IsActive = false;
+                cancellationTokenSource = null;
             }
         }
 
@@ -73,7 +83,7 @@ namespace NasaDataExplorer.Views
             {
                 var datePicked = args.NewDate;
                 var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
-                InitializePhotos_Curiosity(photoDate);
+                await InitializePhotos_Curiosity(photoDate);
             }
         }
 
@@ -82,6 +92,16 @@ namespace NasaDataExplorer.Views
             //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
             CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as CuriosityRover.Photo, curiosityPhotos);
             await diag.ShowAsync();
+        }
+
+        private void btnCancelRequest_Click(object sender, RoutedEventArgs e)
+        {
+            if (cancellationTokenSource != null)
+            {
+                // If instance already exists, buttons been pressed already
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+            }
         }
 
         //private void BtnNext_Click(object sender, RoutedEventArgs e)
@@ -100,6 +120,5 @@ namespace NasaDataExplorer.Views
         //    date = RoverPhotosDatePicker.Date.Value.Year.ToString() + "-" + RoverPhotosDatePicker.Date.Value.Month.ToString() + "-" + RoverPhotosDatePicker.Date.Value.AddDays(-1).Day.ToString();
         //    InitializePhotos_Curiosity(date);
         //}
-
     }
 }

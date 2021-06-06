@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace NasaDataExplorer
 {
-    // NasaDataExplorernomy Picture of the Day
     public class AstronomyPictureOfTheDay
     {
         [JsonProperty("copyright")]

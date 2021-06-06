@@ -64,6 +64,39 @@ namespace NasaDataExplorer.Services
             }
         }
 
+        public async Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(
+            string specifiedDate,
+            CancellationToken cancellationToken)
+        {
+            // Another way with http CLient: helps avoid the middle memory stream
+            // Using streams to reduce memory and improve performance with reads
+            // Helps avoid socket exhaustion when not having a "using" with httpclient
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                String.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
+                    specifiedDate,
+                    StaticKeys.API_KEY));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                using (var response = await _httpClient.SendAsync(request, cancellationToken))
+                {
+                    await Task.Delay(6000);
+                    response.EnsureSuccessStatusCode();
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    var curiosityRover = stream.ReadAndDeserializeFromJson<CuriosityRover>();
+                    return curiosityRover.Photos;
+                }
+            }
+            catch (OperationCanceledException ocException)
+            {
+                Console.WriteLine($"Operation cancelled with message {ocException.Message}");
+                return new CuriosityRover().Photos;
+            }
+        }
+
         public async Task<List<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate)
         {
             var request = new HttpRequestMessage(
@@ -105,7 +138,6 @@ namespace NasaDataExplorer.Services
             }
         }
 
-
         private async Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosWithoutStreamAsync(string specifiedDate)
         {
             // Test 2 - Through HttpRequest Message
@@ -140,37 +172,7 @@ namespace NasaDataExplorer.Services
         public async Task RunCancelTest()
         {
             _cancellationTokenSource.CancelAfter(2000);
-            await GetAndCancelTest("6/04/2021", _cancellationTokenSource.Token);
-        }
-
-        private async Task<List<CuriosityRover.Photo>> GetAndCancelTest(string specifiedDate, CancellationToken cancellationToken)
-        {
-            // Another way with http CLient: helps avoid the middle memory stream
-            // Using streams to reduce memory and improve performance with reads
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                String.Format(
-                    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
-                    specifiedDate,
-                    StaticKeys.API_KEY));
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            try
-            {
-                using (var response = await _httpClient.SendAsync(request, cancellationToken))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    var curiosityRover = stream.ReadAndDeserializeFromJson<CuriosityRover>();
-                    return curiosityRover.Photos;
-                }
-            }
-            catch (OperationCanceledException ocException)
-            {
-                Console.WriteLine($"Operation cancelled with message {ocException.Message}");
-                return new CuriosityRover().Photos;
-            }
-        
+            await GetCuriosityRoverPhotosAsync("6/04/2021", _cancellationTokenSource.Token);
         }
 
         private async Task DeleteResource()

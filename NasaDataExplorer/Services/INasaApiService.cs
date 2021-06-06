@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NasaDataExplorer.Services
@@ -12,6 +13,8 @@ namespace NasaDataExplorer.Services
         Task<List<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate);
 
         Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate);
+
+        Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate, CancellationToken cancellationToken);
 
         Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync();
     }
