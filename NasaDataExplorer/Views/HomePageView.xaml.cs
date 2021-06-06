@@ -35,7 +35,7 @@ namespace NasaDataExplorer.Views
         public HomePageView()
         {
             this.InitializeComponent();
-            _nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
+            _nasaApiService = ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>();
 
         }
 

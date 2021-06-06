@@ -36,7 +36,7 @@ namespace NasaDataExplorer
     /// </summary>
     sealed partial class App : Application
     {
-        public IHost NasaApiServiceHost { get; set; }
+        public IHost ServiceHost { get; set; }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -47,10 +47,13 @@ namespace NasaDataExplorer
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            buildAndSetNasaApiService();
+            configureAndBuildServices();
         }
 
-        public void buildAndSetNasaApiService()
+        /// <summary>
+        /// Configures and builds the Nasa API service
+        /// </summary>
+        public void configureAndBuildServices()
         {
             var builder = new HostBuilder()
             .ConfigureServices((hostContext, services) =>
@@ -58,7 +61,7 @@ namespace NasaDataExplorer
                 services.AddHttpClient();
                 services.AddTransient<INasaApiService, NasaApiService>();
             }).UseConsoleLifetime();
-            NasaApiServiceHost = builder.Build();
+            ServiceHost = builder.Build();
         }
 
 

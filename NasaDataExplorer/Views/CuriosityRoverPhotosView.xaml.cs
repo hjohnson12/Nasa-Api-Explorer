@@ -23,6 +23,7 @@ using System.Collections;
 using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Services;
 using System.Threading;
+using NasaDataExplorer.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,17 +34,22 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class CuriosityRoverPhotosView : Page
     {
-        ObservableCollection<CuriosityRover.Photo> curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
-        private INasaApiService _nasaApiService;
-        CancellationTokenSource cancellationTokenSource;
+        private ObservableCollection<CuriosityRover.Photo> curiosityPhotos = 
+            new ObservableCollection<CuriosityRover.Photo>();
+
+        private CancellationTokenSource cancellationTokenSource;
+
+        public CuriosityRoverPhotosViewModel ViewModel { get; set; }
 
         public CuriosityRoverPhotosView()
         {
             this.InitializeComponent();
 
-            _nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
+            ViewModel = 
+                new CuriosityRoverPhotosViewModel(
+                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
 
-            // Initialize starting date - Mission is ended so no new days
+            // Mission hasn't ended so can just set a previous date
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
         }
 
@@ -58,13 +64,14 @@ namespace NasaDataExplorer.Views
                     Console.WriteLine("User requested to cancel.");
                 });
 
-                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await _nasaApiService.GetCuriosityRoverPhotosAsync(date, cancellationTokenSource.Token));
-                cancellationTokenSource = null;
+                curiosityPhotos = 
+                    new ObservableCollection<CuriosityRover.Photo>(
+                        await ViewModel.LoadCuriosityRoverPhotos(date, cancellationTokenSource.Token));
                 GridViewControl.ItemsSource = curiosityPhotos;
             }
             catch (Exception ex)
             {
-                var logger = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<ILogger<App>>();
+                var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
                 logger.LogError(ex, "An error occurred.");
             }
             finally

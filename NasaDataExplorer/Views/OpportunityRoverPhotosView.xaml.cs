@@ -43,7 +43,7 @@ namespace NasaDataExplorer.Views
             RoverPhotosDatePicker.MinDate = missionStartDate;
             RoverPhotosDatePicker.MaxDate = missionEndDate;
 
-            _nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
+            _nasaApiService = ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>();
         }
 
         private async Task InitializePhotos_Opportunity(string date)
@@ -55,7 +55,7 @@ namespace NasaDataExplorer.Views
             }
             catch (Exception ex)
             {
-                var logger = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<ILogger<App>>();
+                var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
                 logger.LogError(ex, "An error occurred.");
             }
         }
