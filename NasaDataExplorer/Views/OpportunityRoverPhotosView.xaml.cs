@@ -1,4 +1,7 @@
-﻿using NasaDataExplorer.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NasaDataExplorer.Models;
+using NasaDataExplorer.Services;
 using NasaDataExplorer.Views.Dialogs;
 using Newtonsoft.Json;
 using System;
@@ -28,37 +31,33 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class OpportunityRoverPhotosView : Page
     {
+        private readonly INasaApiService _nasaApiService;
         public ObservableCollection<OpportunityRover.Photo> OpportunityPhotos { get; set; }
+
         public OpportunityRoverPhotosView()
         {
             this.InitializeComponent();
 
-            // The mission start and end date for Mars Opportunity Rover
-            RoverPhotosDatePicker.MinDate = new DateTimeOffset(2004, 1, 25, default, default, default, default);
-            RoverPhotosDatePicker.MaxDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);
+            var missionStartDate = new DateTimeOffset(2004, 1, 25, default, default, default, default);
+            var missionEndDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);
+            RoverPhotosDatePicker.MinDate = missionStartDate;
+            RoverPhotosDatePicker.MaxDate = missionEndDate;
+
+            _nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
         }
 
         private async Task InitializePhotos_Opportunity(string date)
         {
-            OpportunityPhotos = new ObservableCollection<OpportunityRover.Photo>();
-
-            using (var httpClient = new HttpClient())
+            try
             {
-                try
-                {
-                    string result = await httpClient.GetStringAsync(new Uri(String.Format("https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date={0}&api_key={1}", date, StaticKeys.API_KEY)));
-                    var rover = JsonConvert.DeserializeObject<OpportunityRover>(result);
-                    foreach (var photo in rover.Photos)
-                    {
-                        OpportunityPhotos.Add(photo);
-                    }
-                }
-                catch
-                {
-                    // ...
-                }
+                OpportunityPhotos = new ObservableCollection<OpportunityRover.Photo>(await _nasaApiService.GetOpportunityRoverPhotosAsync(date));
+                GridViewControl.ItemsSource = OpportunityPhotos;
             }
-            GridViewControl.ItemsSource = OpportunityPhotos;
+            catch (Exception ex)
+            {
+                var logger = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<ILogger<App>>();
+                logger.LogError(ex, "An error occurred.");
+            }
         }
 
         private async void RoverPhotosDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)

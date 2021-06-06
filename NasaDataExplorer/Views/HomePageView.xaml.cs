@@ -46,7 +46,8 @@ namespace NasaDataExplorer.Views
         {
             PictureOfDay = await _nasaApiService.GetAstronomyPictureOfTheDayAsync();
             imgPictureOfDay.Source = new BitmapImage(
-                new Uri("https://apod.nasa.gov/apod/image/2106/PIA24622-Curiosity_Clouds_Mont_Mercou1100.jpg"));
+                new Uri(PictureOfDay.hdurl));
+
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)

@@ -13,41 +13,44 @@
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid
                 Grid.Row="0"
                 Margin="0,0,0,0"
                 HorizontalAlignment="Stretch">
-                <!--<Image
-                    Height="650"
-                    Source="ms-appx:///Images/earth.png"
-                    Stretch="UniformToFill" />-->
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="48"
-                    FontWeight="Bold"
-                    Text="Earth" />
 
-                <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
-
-                    <TextBlock
-                        Margin="0,0,0,12"
-                        FontSize="18"
-                        Text="NasaDataExplorernomy Picture of the Day" />
-                    <TextBlock Foreground="White" Text="{x:Bind PictureOfDay.title, Mode=OneWay}" />
-                    <TextBlock Text="{x:Bind PictureOfDay.date}" />
-                    <TextBlock Text="{x:Bind PictureOfDay.explanation}" />
-                    <TextBlock Text="{x:Bind PictureOfDay.copyright}" />
+                <StackPanel Orientation="Vertical">
                     <Image
-                        Width="566"
-                        Height="300"
-                        HorizontalAlignment="Left"
-                        Source="{x:Bind PictureOfDay.url, Mode=OneWay}"
+                        Height="650"
+                        Source="ms-appx:///Images/earth.png"
                         Stretch="UniformToFill" />
 
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="48"
+                        FontWeight="Bold"
+                        Text="Earth" />
+                    <!--<StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+
+                        <TextBlock
+                            Margin="0,0,0,12"
+                            FontSize="18"
+                            Text="Nasa Astronomy Picture of the Day" />
+                        <TextBlock Foreground="White" Text="{x:Bind PictureOfDay.title, Mode=OneWay}" />
+                        <TextBlock Text="{x:Bind PictureOfDay.date}" />
+                        <TextBlock Text="{x:Bind PictureOfDay.explanation}" />
+                        <TextBlock Text="{x:Bind PictureOfDay.copyright}" />
+                        <Image
+                            Width="566"
+                            Height="300"
+                            HorizontalAlignment="Left"
+                            Source="{x:Bind PictureOfDay.url, Mode=OneWay}"
+                            Stretch="UniformToFill" />
+
+                    </StackPanel>-->
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
@@ -60,10 +63,10 @@
                     <TextBlock
                         Margin="0,0,0,12"
                         FontSize="18"
-                        Text="NasaDataExplorernomy Picture of the Day" />
+                        Text="Nasa Astronomy Picture of the Day" />
                     <TextBlock Text="{x:Bind PictureOfDay.title}" />
                     <TextBlock Text="{x:Bind PictureOfDay.date}" />
-                    <TextBlock Text="{x:Bind PictureOfDay.explanation}" />
+                    <TextBlock Text="{x:Bind PictureOfDay.explanation, Mode=OneWay}" />
                     <TextBlock Text="{x:Bind PictureOfDay.copyright}" />
                     <Image
                         x:Name="imgPictureOfDay"
@@ -79,34 +82,7 @@
 
         <ListView Name="listView" Height="2000">
             <ListView.Header>
-    -->
-    <!--<controls:ScrollHeader Mode="Fade">
-                    <Grid x:Name="MyHeaderGrid" MinHeight="250">
-                        <Image
-                            Height="400"
-                            VerticalAlignment="Top"
-                            Source="ms-appx:///Images/earth.png"
-                            Stretch="UniformToFill" />
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock
-                                Margin="0"
-                                FontSize="48"
-                                FontWeight="Bold"
-                                Foreground="White"
-                                Text="Earth"
-                                TextAlignment="Center"
-                                TextWrapping="WrapWholeWords" />
-                            <TextBlock
-                                Margin="12,0,12,12"
-                                VerticalAlignment="Center"
-                                Foreground="White"
-                                Text="The scroll header supports quick return, sticky and fade behavior. If fade is enabled the header fades out while scrolling down. If quick return is enabled the header hides when the ListView is scrolled down and reappears immediately as soon as the ListView is scrolled up again. If sticky is enabled the header is displayed regardless of scrolling."
-                                TextAlignment="Center"
-                                TextWrapping="WrapWholeWords" />
-                        </StackPanel>
-                    </Grid>
-                </controls:ScrollHeader>-->
-    <!--
+
                 <Grid x:Name="MyHeaderGrid" MinHeight="250">
                     <Image
                         Height="400"
@@ -131,6 +107,33 @@
                             TextWrapping="WrapWholeWords" />
                     </StackPanel>
                 </Grid>
+
+    -->
+    <!--<Grid x:Name="MyHeaderGrid" MinHeight="250">
+                    <Image
+                        Height="400"
+                        VerticalAlignment="Top"
+                        Source="ms-appx:///Images/earth.png"
+                        Stretch="UniformToFill" />
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock
+                            Margin="0"
+                            FontSize="48"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Earth"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                        <TextBlock
+                            Margin="12,0,12,12"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="The scroll header supports quick return, sticky and fade behavior. If fade is enabled the header fades out while scrolling down. If quick return is enabled the header hides when the ListView is scrolled down and reappears immediately as soon as the ListView is scrolled up again. If sticky is enabled the header is displayed regardless of scrolling."
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />-->
+    <!--</StackPanel>
+                </Grid>-->
+    <!--
             </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>

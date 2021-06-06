@@ -55,7 +55,6 @@ namespace NasaDataExplorer.Views
             }
             catch (Exception ex)
             {
-                // ...
                 var logger = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<ILogger<App>>();
                 logger.LogError(ex, "An error occurred.");
             }
