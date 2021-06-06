@@ -33,6 +33,17 @@ namespace NasaDataExplorer.Services
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        // Constructor for TypedClient demo
+        public NasaApiService(HttpClient client)
+        {
+            client.BaseAddress = new Uri("https://api.nasa.gov/");
+            client.Timeout = new TimeSpan(0, 0, 30);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient = client;
+        }
+
         public NasaApiService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
