@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NasaDataExplorer.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,6 +16,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -24,38 +28,30 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class HomePageView : Page
     {
-        public NasaDataExplorernomyPOD PictureOfDay { get; set; }
+        private INasaApiService _nasaApiService;
+
+        public AstronomyPictureOfTheDay PictureOfDay { get; set; }
 
         public HomePageView()
         {
             this.InitializeComponent();
-    
-            InitializePictureOfDay();
+            _nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
+
         }
 
         /// <summary>
-        /// Initializes the "NasaDataExplorernomy Picture of the Day" data
+        /// Initializes the "Astronomy Picture of the Day" data
         /// </summary>
-        public void InitializePictureOfDay()
+        public async Task InitializePictureOfDay()
         {
-            var webRequest = WebRequest.Create(String.Format("https://api.nasa.gov/planetary/apod?api_key={0}", StaticKeys.API_KEY)) as HttpWebRequest;
-            if (webRequest == null)
-            {
-                return;
-            }
+            PictureOfDay = await _nasaApiService.GetAstronomyPictureOfTheDayAsync();
+            imgPictureOfDay.Source = new BitmapImage(
+                new Uri("https://apod.nasa.gov/apod/image/2106/PIA24622-Curiosity_Clouds_Mont_Mercou1100.jpg"));
+        }
 
-            webRequest.ContentType = "application/json";
-            webRequest.UserAgent = "Nothing";
-
-            using (var s = webRequest.GetResponse().GetResponseStream())
-            {
-                using (var sr = new StreamReader(s))
-                {
-                    var json = sr.ReadToEnd();
-                    var response = JsonConvert.DeserializeObject<NasaDataExplorernomyPOD>(json);
-                    PictureOfDay = response;
-                }
-            }
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await InitializePictureOfDay();
         }
     }
 }

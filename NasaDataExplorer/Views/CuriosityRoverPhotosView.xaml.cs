@@ -33,24 +33,24 @@ namespace NasaDataExplorer.Views
     public sealed partial class CuriosityRoverPhotosView : Page
     {
         ObservableCollection<CuriosityRover.Photo> curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
-        
+        private INasaApiService _nasaApiService;
+
         public CuriosityRoverPhotosView()
         {
             this.InitializeComponent();
 
-            // Initialize starting date here
-            RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
+            _nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
 
+            // Initialize starting date - Mission is ended so no new days
+            RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
         }
 
         private async void InitializePhotos_Curiosity(string date)
         {
             progressRing.IsActive = true;
-            var nasaApiService = ((App)Application.Current).NasaApiServiceHost.Services.GetRequiredService<INasaApiService>();
-            
             try
             {
-                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await nasaApiService.GetCuriosityRoverPhotosAsync(date));
+                curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>(await _nasaApiService.GetCuriosityRoverPhotosAsync(date));
                 GridViewControl.ItemsSource = curiosityPhotos;
             }
             catch (Exception ex)

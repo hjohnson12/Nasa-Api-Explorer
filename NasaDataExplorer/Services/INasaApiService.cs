@@ -13,6 +13,6 @@ namespace NasaDataExplorer.Services
 
         Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate);
 
-        Task<NasaDataExplorernomyPOD> GetNasaDataExplorernomyPODAsync();
+        Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync();
     }
 }

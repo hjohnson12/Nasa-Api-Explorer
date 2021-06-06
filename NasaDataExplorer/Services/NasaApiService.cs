@@ -69,6 +69,7 @@ namespace NasaDataExplorer.Services
         {
             // Another way with http CLient: helps avoid the middle memory stream
             // Using streams to reduce memory and improve performance with reads
+            // Helps avoid socket exhaustion when not having a "using" with httpclient
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
                 String.Format(
@@ -82,64 +83,58 @@ namespace NasaDataExplorer.Services
                 response.EnsureSuccessStatusCode();
 
                 var stream = await response.Content.ReadAsStreamAsync();
-                var opportunityRover = stream.ReadAndDeserializeFromJson<CuriosityRover>();
+                var curiosityRover = stream.ReadAndDeserializeFromJson<CuriosityRover>();
 
-                return opportunityRover.Photos;
+                return curiosityRover.Photos;
             }
-
-            // OLD WAY - Troublesome
-            // Try to avoid because underlying socket isn't realeased (socket exhaustion)
         }
 
-        public async Task GetCuriosityRoverPhotosWithRetryAsync(string specifiedDate, CancellationToken cancellationToken)
+        public async Task<List<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate)
         {
             var request = new HttpRequestMessage(
-               HttpMethod.Get,
-               String.Format(
-                   "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
-                   specifiedDate,
-                   StaticKeys.API_KEY));
+                HttpMethod.Get,
+                String.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date={0}&api_key={1}",
+                    specifiedDate,
+                    StaticKeys.API_KEY));
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             using (var response = await _httpClient.SendAsync(request))
             {
-                if (!response.IsSuccessStatusCode)
-                {
-                    // inspect the status code
-                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                    {
-                        // show this to the user
-                        Console.WriteLine("The requested resource cannot be found.");
-                        return;
-                    }
-                }
-
                 response.EnsureSuccessStatusCode();
 
                 var stream = await response.Content.ReadAsStreamAsync();
-                var opportunityRover = stream.ReadAndDeserializeFromJson<CuriosityRover>();
+                var opportunityRover = stream.ReadAndDeserializeFromJson<OpportunityRover>();
 
-                return;
+                return opportunityRover.Photos;
             }
-           
         }
 
-        public Task<List<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate)
+        public async Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync()
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                String.Format(
+                    "https://api.nasa.gov/planetary/apod?api_key={0}",
+                    StaticKeys.API_KEY));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            using (var response = await _httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+
+                var stream = await response.Content.ReadAsStreamAsync();
+                var astronomyPictureOfTheDay = stream.ReadAndDeserializeFromJson<AstronomyPictureOfTheDay>();
+
+                return astronomyPictureOfTheDay;
+            }
         }
 
-        public Task<NasaDataExplorernomyPOD> GetNasaDataExplorernomyPODAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task RunTest()
+        public async Task RunCancelTest()
         {
             _cancellationTokenSource.CancelAfter(2000);
             await GetAndCancelTest("6/04/2021", _cancellationTokenSource.Token);
         }
-
 
         private async Task<List<CuriosityRover.Photo>> GetAndCancelTest(string specifiedDate, CancellationToken cancellationToken)
         {

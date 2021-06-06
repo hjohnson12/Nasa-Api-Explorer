@@ -121,7 +121,7 @@
     </Compile>
     <Compile Include="Helpers\NasaAPI\NasaApiHelper.cs" />
     <Compile Include="Helpers\StreamExtensions.cs" />
-    <Compile Include="Models\AstronomyPOD.cs" />
+    <Compile Include="Models\AstronomyPictureOfTheDay.cs" />
     <Compile Include="Base\Observable.cs" />
     <Compile Include="Models\CuriosityRover.cs" />
     <Compile Include="Models\NaturalEventTracker.cs" />

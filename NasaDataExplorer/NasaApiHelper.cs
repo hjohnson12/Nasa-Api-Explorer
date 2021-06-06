@@ -22,7 +22,7 @@ namespace NasaDataExplorer
             API_KEY = apiKey;
         }
 
-        public async static Task<NasaDataExplorernomyPOD> GetNasaDataExplorernomyPODAsync()
+        public async static Task<AstronomyPictureOfTheDay> GetNasaDataExplorernomyPODAsync()
         {
             var webRequest = System.Net.WebRequest.Create(String.Format("https://api.nasa.gov/planetary/apod?api_key={0}", StaticKeys.API_KEY)) as System.Net.HttpWebRequest;
             if (webRequest == null)
@@ -38,7 +38,7 @@ namespace NasaDataExplorer
                 using (var sr = new StreamReader(s))
                 {
                     var json = sr.ReadToEnd();
-                    var NasaDataExplorernomyPOD = JsonConvert.DeserializeObject<NasaDataExplorernomyPOD>(json);
+                    var NasaDataExplorernomyPOD = JsonConvert.DeserializeObject<AstronomyPictureOfTheDay>(json);
                     return NasaDataExplorernomyPOD;
                 }
             }
