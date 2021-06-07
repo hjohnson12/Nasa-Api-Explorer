@@ -52,7 +52,7 @@ namespace NasaDataExplorer.Views
                 });
 
                 curiosityPhotos = 
-                    new ObservableCollection<CuriosityRover.Photo>(
+                   new ObservableCollection<CuriosityRover.Photo>(
                         await ViewModel.LoadCuriosityRoverPhotos(date, cancellationTokenSource.Token));
                 GridViewControl.ItemsSource = curiosityPhotos;
             }
@@ -84,8 +84,11 @@ namespace NasaDataExplorer.Views
         private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
         {
             //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
-            CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as CuriosityRover.Photo, curiosityPhotos);
-            await diag.ShowAsync();
+            CuriosityPhotoDetailsDialogView photoDialog = new CuriosityPhotoDetailsDialogView(
+                e.ClickedItem as CuriosityRover.Photo,
+                curiosityPhotos);
+
+            await photoDialog.ShowAsync();
         }
 
         private void btnCancelRequest_Click(object sender, RoutedEventArgs e)
