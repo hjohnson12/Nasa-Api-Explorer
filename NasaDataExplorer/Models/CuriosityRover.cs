@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NasaDataExplorer.Base;
 
-namespace NasaDataExplorer
+namespace NasaDataExplorer.Models
 {
     public class CuriosityRover : Base.Observable
     {

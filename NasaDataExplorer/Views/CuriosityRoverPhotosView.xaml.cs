@@ -1,29 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Web.Http;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using NasaDataExplorer.Views.Dialogs;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections;
 using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Services;
 using System.Threading;
 using NasaDataExplorer.ViewModels;
+using NasaDataExplorer.Models;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -48,7 +34,8 @@ namespace NasaDataExplorer.Views
             ViewModel = 
                 new CuriosityRoverPhotosViewModel(
                     ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
-
+            this.DataContext = ViewModel;
+            
             // Mission hasn't ended so can just set a previous date
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
         }

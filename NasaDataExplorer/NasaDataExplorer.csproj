@@ -136,6 +136,7 @@
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\InsightLanderWeatherViewModel.cs" />
     <Compile Include="ViewModels\NaturalEventTrackerViewModel.cs" />
+    <Compile Include="ViewModels\OpportunityRoverPhotosViewModel.cs" />
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
     </Compile>
