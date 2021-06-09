@@ -10,12 +10,12 @@ namespace NasaDataExplorer.Services
 {
     public interface INasaApiService
     {
-        Task<List<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate);
+        Task<IEnumerable<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate);
 
-        Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate);
+        Task<IEnumerable<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate);
 
-        Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate, CancellationToken cancellationToken);
-        Task<List<PerseveranceRover.Photo>> GetPerseveranceRoverPhotosAsync(string specifiedDate, CancellationToken cancellationToken);
+        Task<IEnumerable<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate, CancellationToken cancellationToken);
+        Task<IEnumerable<PerseveranceRover.Photo>> GetPerseveranceRoverPhotosAsync(string specifiedDate, CancellationToken cancellationToken);
 
         Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync();
     }

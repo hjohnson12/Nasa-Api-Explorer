@@ -47,7 +47,7 @@ namespace NasaDataExplorer.Services
             // Ex use: var client = _httpClientFactory.CreateClient();
         }
   
-        public async Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate)
+        public async Task<IEnumerable<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate)
         {
             // Another way with http CLient: helps avoid the middle memory stream
             // Using streams to reduce memory and improve performance with reads
@@ -71,7 +71,7 @@ namespace NasaDataExplorer.Services
             }
         }
 
-        public async Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(
+        public async Task<IEnumerable<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(
             string specifiedDate,
             CancellationToken cancellationToken)
         {
@@ -104,7 +104,7 @@ namespace NasaDataExplorer.Services
             }
         }
 
-        public async Task<List<PerseveranceRover.Photo>> GetPerseveranceRoverPhotosAsync(
+        public async Task<IEnumerable<PerseveranceRover.Photo>> GetPerseveranceRoverPhotosAsync(
             string specifiedDate,
             CancellationToken cancellationToken)
         {
@@ -137,7 +137,7 @@ namespace NasaDataExplorer.Services
             }
         }
 
-        public async Task<List<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate)
+        public async Task<IEnumerable<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate)
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -178,7 +178,7 @@ namespace NasaDataExplorer.Services
             }
         }
 
-        private async Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosWithoutStreamAsync(string specifiedDate)
+        private async Task<IEnumerable<CuriosityRover.Photo>> GetCuriosityRoverPhotosWithoutStreamAsync(string specifiedDate)
         {
             // Test 2 - Through HttpRequest Message
             var request = new HttpRequestMessage(HttpMethod.Get,
@@ -193,7 +193,7 @@ namespace NasaDataExplorer.Services
             return curiosityRover.Photos;
         }
 
-        private async Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosBasicTest(string specifiedDate)
+        private async Task<IEnumerable<CuriosityRover.Photo>> GetCuriosityRoverPhotosBasicTest(string specifiedDate)
         {
             // Test 1 
             var response = await _httpClient.GetAsync(
