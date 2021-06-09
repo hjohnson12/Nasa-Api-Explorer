@@ -98,7 +98,11 @@
                     Icon="Help"
                     Tag="Earth_EarthNow" />
                 <muxc:NavigationViewItemSeparator />
-                <muxc:NavigationViewItemHeader Content="Mars" />
+                <muxc:NavigationViewItemHeader Content="Mars Rover Photos" />
+                <muxc:NavigationViewItem
+                    Content="Perseverance Rover Photos"
+                    Icon="BrowsePhotos"
+                    Tag="PR_Photos" />
                 <muxc:NavigationViewItem
                     Content="Curiosity Rover Photos"
                     Icon="BrowsePhotos"

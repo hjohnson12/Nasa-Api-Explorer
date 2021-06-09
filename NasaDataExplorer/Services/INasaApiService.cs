@@ -15,6 +15,7 @@ namespace NasaDataExplorer.Services
         Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate);
 
         Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate, CancellationToken cancellationToken);
+        Task<List<PerseveranceRover.Photo>> GetPerseveranceRoverPhotosAsync(string specifiedDate, CancellationToken cancellationToken);
 
         Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync();
     }

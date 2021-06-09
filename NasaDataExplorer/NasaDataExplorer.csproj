@@ -126,6 +126,7 @@
     <Compile Include="Models\CuriosityRover.cs" />
     <Compile Include="Models\NaturalEventTracker.cs" />
     <Compile Include="Models\OpportunityRover.cs" />
+    <Compile Include="Models\PerseveranceRover.cs" />
     <Compile Include="Models\SolDay.cs" />
     <Compile Include="NasaApiHelper.cs" />
     <Compile Include="RetryDelegatingHandler.cs" />
@@ -170,6 +171,9 @@
     </Compile>
     <Compile Include="Views\OpportunityRoverPhotosView.xaml.cs">
       <DependentUpon>OpportunityRoverPhotosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PerseveranceRoverPhotosView.xaml.cs">
+      <DependentUpon>PerseveranceRoverPhotosView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PhotoDetailsView.xaml.cs">
       <DependentUpon>PhotoDetailsView.xaml</DependentUpon>
@@ -238,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OpportunityRoverPhotosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PerseveranceRoverPhotosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

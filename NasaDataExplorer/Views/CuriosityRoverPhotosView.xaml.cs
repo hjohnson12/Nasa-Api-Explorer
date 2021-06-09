@@ -54,6 +54,7 @@ namespace NasaDataExplorer.Views
                 curiosityPhotos = 
                    new ObservableCollection<CuriosityRover.Photo>(
                         await ViewModel.LoadCuriosityRoverPhotos(date, cancellationTokenSource.Token));
+                var photo = curiosityPhotos[0];
                 GridViewControl.ItemsSource = curiosityPhotos;
             }
             catch (Exception ex)
