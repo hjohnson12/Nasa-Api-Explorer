@@ -44,7 +44,7 @@ namespace NasaDataExplorer
             }
         }
 
-        public async static Task<List<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate)
+        public async static Task<IEnumerable<CuriosityRover.Photo>> GetCuriosityRoverPhotosAsync(string specifiedDate)
         {
             using (var httpClient = new HttpClient())
             {
@@ -62,7 +62,7 @@ namespace NasaDataExplorer
             }
         }
 
-        public async static Task<List<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate)
+        public async static Task<IEnumerable<OpportunityRover.Photo>> GetOpportunityRoverPhotosAsync(string specifiedDate)
         {
             using (var httpClient = new HttpClient())
             {

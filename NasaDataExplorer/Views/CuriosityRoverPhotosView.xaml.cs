@@ -54,13 +54,14 @@ namespace NasaDataExplorer.Views
                 curiosityPhotos = 
                    new ObservableCollection<CuriosityRover.Photo>(
                         await ViewModel.LoadCuriosityRoverPhotos(date, cancellationTokenSource.Token));
+                
                 var photo = curiosityPhotos[0];
-                GridViewControl.ItemsSource = curiosityPhotos;
+                //GridViewControl.ItemsSource = curiosityPhotos;
             }
             catch (Exception ex)
             {
-                var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
-                logger.LogError(ex, "An error occurred.");
+                //var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
+                //logger.LogError(ex, "An error occurred.");
             }
             finally
             {

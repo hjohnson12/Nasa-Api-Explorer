@@ -10,10 +10,10 @@ namespace NasaDataExplorer.Models
 {
     public class CuriosityRover : Base.Observable
     {
-        private List<Photo> _photos;
+        private IEnumerable<Photo> _photos;
 
         [JsonProperty("photos")]
-        public List<Photo> Photos { get => _photos; set { _photos = value; OnPropertyChanged(); } }
+        public IEnumerable<Photo> Photos { get => _photos; set { _photos = value; OnPropertyChanged(); } }
 
         public class Photo
         {

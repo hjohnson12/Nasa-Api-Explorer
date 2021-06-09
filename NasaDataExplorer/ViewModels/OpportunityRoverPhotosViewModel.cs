@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace NasaDataExplorer.ViewModels
 {
@@ -13,19 +14,19 @@ namespace NasaDataExplorer.ViewModels
     {
         private INasaApiService _nasaApiService;
 
-        public List<OpportunityRover.Photo> OpportunityPhotos { get; set; }
-        public List<OpportunityRover> OpportunityRover { get; set; }
+        public ObservableCollection<OpportunityRover.Photo> OpportunityPhotos { get; set; }
+        public ObservableCollection<OpportunityRover> OpportunityRover { get; set; }
 
         public OpportunityRoverPhotosViewModel(INasaApiService nasaApiService)
         {
             _nasaApiService = nasaApiService;
         }
 
-        public async Task<List<OpportunityRover.Photo>> LoadCuriosityRoverPhotos(
+        public async Task<ObservableCollection<OpportunityRover.Photo>> LoadCuriosityRoverPhotos(
             string date,
             CancellationToken cancellationToken)
         {
-            OpportunityPhotos = await _nasaApiService.GetOpportunityRoverPhotosAsync(date);
+            OpportunityPhotos = (ObservableCollection<OpportunityRover.Photo>)await _nasaApiService.GetOpportunityRoverPhotosAsync(date);
             return OpportunityPhotos;
         }
     }
