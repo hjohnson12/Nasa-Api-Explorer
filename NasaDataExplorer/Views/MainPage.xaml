@@ -60,7 +60,7 @@
             Header="Header"
             IsBackButtonVisible="Collapsed"
             IsTitleBarAutoPaddingEnabled="False"
-            PaneTitle="Application Title Here"
+            PaneTitle="Nasa Data Explorer"
             SelectionChanged="navMenu_SelectionChanged">
             <muxc:NavigationView.Style>
                 <Style TargetType="muxc:NavigationView">
@@ -88,7 +88,7 @@
                     </muxc:NavigationViewItem.MenuItems>
                 </muxc:NavigationViewItem>
                 <muxc:NavigationViewItemSeparator />
-                <muxc:NavigationViewItemHeader Content="Earth" />
+                <!--<muxc:NavigationViewItemHeader Content="Earth" />
                 <muxc:NavigationViewItem
                     Content="Earth Natrual Event Tracker Data"
                     Icon="Help"
@@ -97,7 +97,7 @@
                     Content="Earth Now Poineer Observer"
                     Icon="Help"
                     Tag="Earth_EarthNow" />
-                <muxc:NavigationViewItemSeparator />
+                <muxc:NavigationViewItemSeparator />-->
                 <muxc:NavigationViewItemHeader Content="Mars Rover Photos" />
                 <muxc:NavigationViewItem
                     Content="Perseverance Rover Photos"
@@ -116,7 +116,7 @@
                     Icon="Help"
                     Tag="InsightLander_Weather" />
                 <muxc:NavigationViewItemSeparator />
-                <muxc:NavigationViewItemHeader Content="Space" />
+                <!--<muxc:NavigationViewItemHeader Content="Space" />
                 <muxc:NavigationViewItem
                     Content="Exoplanets"
                     Icon="Home"
@@ -130,7 +130,7 @@
                         <muxc:NavigationViewItem Content="NASA Climate Feed" Tag="NASAClimate_Feed" />
                         <muxc:NavigationViewItem Content="Earth Observatory Feed" Tag="NASAEarthObserv_Feed" />
                     </muxc:NavigationViewItem.MenuItems>
-                </muxc:NavigationViewItem>
+                </muxc:NavigationViewItem>-->
             </muxc:NavigationView.MenuItems>
             <Grid>
                 <Frame x:Name="mainFrame" />

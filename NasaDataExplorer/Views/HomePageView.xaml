@@ -10,30 +10,29 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <ScrollViewer>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid
-                Grid.Row="0"
-                Margin="0,0,0,0"
-                HorizontalAlignment="Stretch">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Margin="0,0,0,0"
+            HorizontalAlignment="Stretch">
 
-                <StackPanel Orientation="Vertical">
-                    <Image
+            <StackPanel Orientation="Vertical">
+                <!--<Image
                         Height="650"
                         Source="ms-appx:///Images/earth.png"
-                        Stretch="UniformToFill" />
+                        Stretch="UniformToFill" />-->
 
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="48"
-                        FontWeight="Bold"
-                        Text="Earth" />
-                    <!--<StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="48"
+                    FontWeight="Bold"
+                    Text="Home" />
+                <!--<StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
 
                         <TextBlock
                             Margin="0,0,0,12"
@@ -51,33 +50,40 @@
                             Stretch="UniformToFill" />
 
                     </StackPanel>-->
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        FontSize="24"
-                        FontWeight="Bold"
-                        Text="Home Page" />
-                    <TextBlock
-                        Margin="0,0,0,12"
-                        FontSize="18"
-                        Text="Nasa Astronomy Picture of the Day" />
-                    <TextBlock Text="{x:Bind PictureOfDay.title}" />
-                    <TextBlock Text="{x:Bind PictureOfDay.date}" />
-                    <TextBlock Text="{x:Bind PictureOfDay.explanation, Mode=OneWay}" />
-                    <TextBlock Text="{x:Bind PictureOfDay.copyright}" />
-                    <Image
-                        x:Name="imgPictureOfDay"
-                        Height="300"
-                        HorizontalAlignment="Left"
-                        Source="{x:Bind PictureOfDay.url, Mode=OneWay}"
-                        Stretch="Uniform" />
-                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Text="Nasa Astronomy Picture of the Day" />
+                <TextBlock
+                    Margin="0,0,0,12"
+                    FontSize="18"
+                    Text="Nasa Astronomy Picture of the Day" />
+                <TextBlock Text="{x:Bind PictureOfDay.title}" />
+                <TextBlock Text="{x:Bind PictureOfDay.date}" TextWrapping="Wrap" />
+                <TextBlock Text="{x:Bind PictureOfDay.explanation, Mode=OneWay}" TextWrapping="Wrap" />
+                <TextBlock Text="{x:Bind PictureOfDay.copyright}" />
+
+            </StackPanel>
+            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                <Image
+                    x:Name="imgPictureOfDay"
+                    Height="Auto"
+                    HorizontalAlignment="Left"
+                    Source="{x:Bind PictureOfDay.url, Mode=OneWay}"
+                    Stretch="Uniform" />
             </Grid>
         </Grid>
-    </ScrollViewer>
+    </Grid>
     <!--<Grid Background="{ThemeResource SystemControlChromeHighAcrylicElementMediumBrush}">
 
         <ListView Name="listView" Height="2000">
