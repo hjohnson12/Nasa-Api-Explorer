@@ -1,5 +1,7 @@
-﻿using NasaDataExplorer.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,15 +29,18 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class PerseveranceRoverPhotosView : Page
     {
-        private ObservableCollection<PerseveranceRover.Photo> perseverancePhotos =
-            new ObservableCollection<PerseveranceRover.Photo>();
+        private ObservableCollection<MarsRoverPhoto> perseverancePhotos =
+            new ObservableCollection<MarsRoverPhoto>();
         private CancellationTokenSource cancellationTokenSource;
         private NasaApiService _nasaApiService;
+        public PerseveranceRoverPhotosViewModel ViewModel { get; set; }
 
         public PerseveranceRoverPhotosView()
         {
             this.InitializeComponent();
-            _nasaApiService = new NasaApiService(new System.Net.Http.HttpClient());
+            ViewModel =
+                new PerseveranceRoverPhotosViewModel(
+                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
         }
 
@@ -51,7 +56,7 @@ namespace NasaDataExplorer.Views
                 });
 
                 perseverancePhotos =
-                   new ObservableCollection<PerseveranceRover.Photo>(
+                   new ObservableCollection<MarsRoverPhoto>(
                         await _nasaApiService.GetPerseveranceRoverPhotosAsync(date, cancellationTokenSource.Token));
                 GridViewControl.ItemsSource = perseverancePhotos;
             }

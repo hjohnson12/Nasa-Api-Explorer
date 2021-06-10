@@ -123,10 +123,11 @@
     <Compile Include="Helpers\StreamExtensions.cs" />
     <Compile Include="Models\AstronomyPictureOfTheDay.cs" />
     <Compile Include="Base\Observable.cs" />
-    <Compile Include="Models\CuriosityRover.cs" />
+    <Compile Include="Models\MarsRover.cs" />
+    <Compile Include="Models\MarsRoverPhoto.cs" />
     <Compile Include="Models\NaturalEventTracker.cs" />
-    <Compile Include="Models\OpportunityRover.cs" />
-    <Compile Include="Models\PerseveranceRover.cs" />
+    <Compile Include="Models\MarsRoverPhotoData.cs" />
+    <Compile Include="Models\MarsRoverCamera.cs" />
     <Compile Include="Models\SolDay.cs" />
     <Compile Include="NasaApiHelper.cs" />
     <Compile Include="RetryDelegatingHandler.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="ViewModels\InsightLanderWeatherViewModel.cs" />
     <Compile Include="ViewModels\NaturalEventTrackerViewModel.cs" />
     <Compile Include="ViewModels\OpportunityRoverPhotosViewModel.cs" />
+    <Compile Include="ViewModels\PerseveranceRoverPhotosViewModel.cs" />
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
     </Compile>

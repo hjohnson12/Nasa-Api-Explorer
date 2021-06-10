@@ -13,14 +13,14 @@ namespace NasaDataExplorer.ViewModels
     public class CuriosityRoverPhotosViewModel : Base.Observable
     {
         private INasaApiService _nasaApiService;
-        private ObservableCollection<CuriosityRover.Photo> _curiosityPhotos;
+        private ObservableCollection<MarsRoverPhoto> _curiosityPhotos;
 
         public CuriosityRoverPhotosViewModel(INasaApiService nasaApiService)
         {
             _nasaApiService = nasaApiService;
         }
 
-        public ObservableCollection<CuriosityRover.Photo> CuriosityPhotos
+        public ObservableCollection<MarsRoverPhoto> CuriosityPhotos
         {
             get { return _curiosityPhotos; }
             set
@@ -31,18 +31,17 @@ namespace NasaDataExplorer.ViewModels
             }
         }
 
-        public ObservableCollection<CuriosityRover> CuriosityRover { get; set; }
+        public ObservableCollection<MarsRoverPhoto> CuriosityRover { get; set; }
 
-        public async Task<ObservableCollection<CuriosityRover.Photo>> LoadCuriosityRoverPhotos(
+        public async Task<ObservableCollection<MarsRoverPhoto>> LoadCuriosityRoverPhotos(
             string date,
             CancellationToken cancellationToken)
         {
             try
             {
                 CuriosityPhotos =
-                    new ObservableCollection<CuriosityRover.Photo>(
+                    new ObservableCollection<MarsRoverPhoto>(
                         await _nasaApiService.GetCuriosityRoverPhotosAsync(date));
-
                 return CuriosityPhotos;
             }
             catch (Exception ex)

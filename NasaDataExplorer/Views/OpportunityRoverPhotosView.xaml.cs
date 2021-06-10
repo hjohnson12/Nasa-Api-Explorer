@@ -32,7 +32,7 @@ namespace NasaDataExplorer.Views
     public sealed partial class OpportunityRoverPhotosView : Page
     {
         private readonly INasaApiService _nasaApiService;
-        public ObservableCollection<OpportunityRover.Photo> OpportunityPhotos { get; set; }
+        public ObservableCollection<MarsRoverPhoto> OpportunityPhotos { get; set; }
 
         public OpportunityRoverPhotosView()
         {
@@ -50,7 +50,7 @@ namespace NasaDataExplorer.Views
         {
             try
             {
-                OpportunityPhotos = new ObservableCollection<OpportunityRover.Photo>(await _nasaApiService.GetOpportunityRoverPhotosAsync(date));
+                OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(await _nasaApiService.GetOpportunityRoverPhotosAsync(date));
                 GridViewControl.ItemsSource = OpportunityPhotos;
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace NasaDataExplorer.Views
         private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
         {
             //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
-            //CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as OpportunityRover.Photo, OpportunityPhotos);
+            //CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as MarsRoverPhoto, OpportunityPhotos);
             //await diag.ShowAsync();
         }
     }

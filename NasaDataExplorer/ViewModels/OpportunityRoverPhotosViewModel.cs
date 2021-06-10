@@ -14,19 +14,19 @@ namespace NasaDataExplorer.ViewModels
     {
         private INasaApiService _nasaApiService;
 
-        public ObservableCollection<OpportunityRover.Photo> OpportunityPhotos { get; set; }
-        public ObservableCollection<OpportunityRover> OpportunityRover { get; set; }
+        public ObservableCollection<MarsRoverPhoto> OpportunityPhotos { get; set; }
+        public ObservableCollection<MarsRoverPhoto> OpportunityRover { get; set; }
 
         public OpportunityRoverPhotosViewModel(INasaApiService nasaApiService)
         {
             _nasaApiService = nasaApiService;
         }
 
-        public async Task<ObservableCollection<OpportunityRover.Photo>> LoadCuriosityRoverPhotos(
+        public async Task<ObservableCollection<MarsRoverPhoto>> LoadCuriosityRoverPhotos(
             string date,
             CancellationToken cancellationToken)
         {
-            OpportunityPhotos = (ObservableCollection<OpportunityRover.Photo>)await _nasaApiService.GetOpportunityRoverPhotosAsync(date);
+            OpportunityPhotos = (ObservableCollection<MarsRoverPhoto>)await _nasaApiService.GetOpportunityRoverPhotosAsync(date);
             return OpportunityPhotos;
         }
     }

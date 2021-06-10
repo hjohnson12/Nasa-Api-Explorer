@@ -24,8 +24,8 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class PhotoDetailsView : Page
     {
-        private CuriosityRover.Photo CurrentPhoto { get; set; }
-        private ObservableCollection<CuriosityRover.Photo> Photos { get; set; }
+        private MarsRoverPhoto CurrentPhoto { get; set; }
+        private ObservableCollection<MarsRoverPhoto> Photos { get; set; }
 
         public PhotoDetailsView()
         {
@@ -34,7 +34,7 @@ namespace NasaDataExplorer.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            CurrentPhoto = e.Parameter as CuriosityRover.Photo;
+            CurrentPhoto = e.Parameter as MarsRoverPhoto;
             base.OnNavigatedTo(e);
         }
     }

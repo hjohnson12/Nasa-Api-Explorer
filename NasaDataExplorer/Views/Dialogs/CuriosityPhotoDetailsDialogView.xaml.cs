@@ -21,10 +21,10 @@ namespace NasaDataExplorer.Views.Dialogs
 {
     public sealed partial class CuriosityPhotoDetailsDialogView : ContentDialog
     {
-        private CuriosityRover.Photo CurrentPhoto { get; set; }
-        private ObservableCollection<CuriosityRover.Photo> Photos { get; set; }
+        private MarsRoverPhoto CurrentPhoto { get; set; }
+        private ObservableCollection<MarsRoverPhoto> Photos { get; set; }
 
-        public CuriosityPhotoDetailsDialogView(CuriosityRover.Photo currentPhoto,ObservableCollection<CuriosityRover.Photo> curiosityPhotos)
+        public CuriosityPhotoDetailsDialogView(MarsRoverPhoto currentPhoto,ObservableCollection<MarsRoverPhoto> curiosityPhotos)
         {
             this.InitializeComponent();
             CurrentPhoto = currentPhoto;

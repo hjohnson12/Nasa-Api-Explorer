@@ -20,8 +20,8 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class CuriosityRoverPhotosView : Page
     {
-        private ObservableCollection<CuriosityRover.Photo> curiosityPhotos = 
-            new ObservableCollection<CuriosityRover.Photo>();
+        private ObservableCollection<MarsRoverPhoto> curiosityPhotos = 
+            new ObservableCollection<MarsRoverPhoto>();
 
         private CancellationTokenSource cancellationTokenSource;
 
@@ -52,16 +52,14 @@ namespace NasaDataExplorer.Views
                 });
 
                 curiosityPhotos = 
-                   new ObservableCollection<CuriosityRover.Photo>(
+                   new ObservableCollection<MarsRoverPhoto>(
                         await ViewModel.LoadCuriosityRoverPhotos(date, cancellationTokenSource.Token));
-                
                 var photo = curiosityPhotos[0];
-                //GridViewControl.ItemsSource = curiosityPhotos;
             }
             catch (Exception ex)
             {
-                //var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
-                //logger.LogError(ex, "An error occurred.");
+                var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
+                logger.LogError(ex, "An error occurred.");
             }
             finally
             {
@@ -87,7 +85,7 @@ namespace NasaDataExplorer.Views
         {
             //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
             CuriosityPhotoDetailsDialogView photoDialog = new CuriosityPhotoDetailsDialogView(
-                e.ClickedItem as CuriosityRover.Photo,
+                e.ClickedItem as MarsRoverPhoto,
                 curiosityPhotos);
 
             await photoDialog.ShowAsync();
