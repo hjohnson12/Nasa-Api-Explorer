@@ -10,23 +10,35 @@ using System.Threading.Tasks;
 
 namespace NasaDataExplorer.ViewModels
 {
-    public class PerseveranceRoverPhotosViewModel
+    public class PerseveranceRoverPhotosViewModel : Base.Observable
     {
         private INasaApiService _nasaApiService;
+        private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
 
         public PerseveranceRoverPhotosViewModel(INasaApiService nasaApiService)
         {
             _nasaApiService = nasaApiService;
         }
 
-        public ObservableCollection<MarsRoverPhoto> PerseverancePhotos { get; set; }
+        public ObservableCollection<MarsRoverPhoto> PerseverancePhotos
+        {
+            get => _perseverancePhotos;
+            set
+            {
+                if (_perseverancePhotos != value)
+                    _perseverancePhotos = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MarsRover PerseveranceRover { get; set; }
 
-        public async Task<ObservableCollection<MarsRoverPhoto>> LoadCuriosityRoverPhotos(
+        public async Task<ObservableCollection<MarsRoverPhoto>> LoadPerseveranceRoverPhotos(
             string date,
             CancellationToken cancellationToken)
         {
-            PerseverancePhotos = (ObservableCollection<MarsRoverPhoto>)await _nasaApiService.GetOpportunityRoverPhotosAsync(date);
+            PerseverancePhotos = new ObservableCollection<MarsRoverPhoto>(await _nasaApiService.GetPerseveranceRoverPhotosAsync(date,
+                cancellationToken));
             PerseveranceRover = PerseverancePhotos[0].Rover;
             return PerseverancePhotos;
         }

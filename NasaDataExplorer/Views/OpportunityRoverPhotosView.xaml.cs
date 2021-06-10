@@ -2,25 +2,12 @@
 using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
-using NasaDataExplorer.Views.Dialogs;
-using Newtonsoft.Json;
+using NasaDataExplorer.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.Web.Http;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,8 +18,9 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class OpportunityRoverPhotosView : Page
     {
-        private readonly INasaApiService _nasaApiService;
-        public ObservableCollection<MarsRoverPhoto> OpportunityPhotos { get; set; }
+        public ObservableCollection<MarsRoverPhoto> OpportunityPhotos =
+            new ObservableCollection<MarsRoverPhoto>();
+        public OpportunityRoverPhotosViewModel ViewModel { get; set; }    
 
         public OpportunityRoverPhotosView()
         {
@@ -43,15 +31,17 @@ namespace NasaDataExplorer.Views
             RoverPhotosDatePicker.MinDate = missionStartDate;
             RoverPhotosDatePicker.MaxDate = missionEndDate;
 
-            _nasaApiService = ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>();
+            ViewModel =
+                new OpportunityRoverPhotosViewModel(
+                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
         }
 
         private async Task InitializePhotos_Opportunity(string date)
         {
             try
             {
-                OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(await _nasaApiService.GetOpportunityRoverPhotosAsync(date));
-                GridViewControl.ItemsSource = OpportunityPhotos;
+                OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(
+                    await ViewModel.LoadOpportunityRoverPhotos(date));
             }
             catch (Exception ex)
             {

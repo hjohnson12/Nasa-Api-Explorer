@@ -39,8 +39,7 @@ namespace NasaDataExplorer.ViewModels
         {
             try
             {
-                CuriosityPhotos =
-                    new ObservableCollection<MarsRoverPhoto>(
+                CuriosityPhotos = new ObservableCollection<MarsRoverPhoto>(
                         await _nasaApiService.GetCuriosityRoverPhotosAsync(date));
                 return CuriosityPhotos;
             }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
 using NasaDataExplorer.ViewModels;
@@ -32,7 +33,6 @@ namespace NasaDataExplorer.Views
         private ObservableCollection<MarsRoverPhoto> perseverancePhotos =
             new ObservableCollection<MarsRoverPhoto>();
         private CancellationTokenSource cancellationTokenSource;
-        private NasaApiService _nasaApiService;
         public PerseveranceRoverPhotosViewModel ViewModel { get; set; }
 
         public PerseveranceRoverPhotosView()
@@ -57,13 +57,12 @@ namespace NasaDataExplorer.Views
 
                 perseverancePhotos =
                    new ObservableCollection<MarsRoverPhoto>(
-                        await _nasaApiService.GetPerseveranceRoverPhotosAsync(date, cancellationTokenSource.Token));
-                GridViewControl.ItemsSource = perseverancePhotos;
+                        await ViewModel.LoadPerseveranceRoverPhotos(date, cancellationTokenSource.Token));
             }
             catch (Exception ex)
             {
-                //var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
-                //logger.LogError(ex, "An error occurred.");
+                var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
+                logger.LogError(ex, "An error occurred.");
             }
             finally
             {
