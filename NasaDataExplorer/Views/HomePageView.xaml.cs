@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,26 +29,26 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class HomePageView : Page
     {
-        private INasaApiService _nasaApiService;
-
         public AstronomyPictureOfTheDay PictureOfDay { get; set; }
+        public HomePageViewModel ViewModel { get; set;  }
 
         public HomePageView()
         {
             this.InitializeComponent();
-            _nasaApiService = ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>();
 
+            ViewModel = 
+                new HomePageViewModel(
+                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
+            
+            this.DataContext = ViewModel;
         }
 
         /// <summary>
-        /// Initializes the "Astronomy Picture of the Day" data
+        /// Initializes the "Astronomy Picture of the Day" photo and data
         /// </summary>
         public async Task InitializePictureOfDay()
         {
-            PictureOfDay = await _nasaApiService.GetAstronomyPictureOfTheDayAsync();
-            imgPictureOfDay.Source = new BitmapImage(
-                new Uri(PictureOfDay.hdurl));
-
+            PictureOfDay = await ViewModel.LoadAstronomyPictureOfTheDay();
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
