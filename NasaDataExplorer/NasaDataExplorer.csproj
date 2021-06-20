@@ -129,7 +129,6 @@
     <Compile Include="Models\MarsRoverPhotoData.cs" />
     <Compile Include="Models\MarsRoverCamera.cs" />
     <Compile Include="Models\SolDay.cs" />
-    <Compile Include="NasaApiHelper.cs" />
     <Compile Include="RetryDelegatingHandler.cs" />
     <Compile Include="Services\INasaApiService.cs" />
     <Compile Include="Services\NasaApiService.cs" />
