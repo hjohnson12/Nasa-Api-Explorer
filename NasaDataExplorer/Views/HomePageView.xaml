@@ -10,7 +10,7 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="{ThemeResource SystemControlChromeHighAcrylicElementMediumBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -26,12 +26,12 @@
                         Source="ms-appx:///Images/earth.png"
                         Stretch="UniformToFill" />-->
 
-                <TextBlock
+                <!--<TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="48"
                     FontWeight="Bold"
-                    Text="Home" />
+                    Text="Home" />-->
                 <!--<StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
 
                         <TextBlock
