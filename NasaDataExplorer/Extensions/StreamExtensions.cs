@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NasaDataExplorer.Helpers
+namespace NasaDataExplorer.Extensions
 {
     public static class StreamExtensions
     {

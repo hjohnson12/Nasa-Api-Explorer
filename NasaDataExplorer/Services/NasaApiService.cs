@@ -1,4 +1,4 @@
-﻿using NasaDataExplorer.Helpers;
+﻿using NasaDataExplorer.Extensions;
 using NasaDataExplorer.Models;
 using Newtonsoft.Json;
 using System;
