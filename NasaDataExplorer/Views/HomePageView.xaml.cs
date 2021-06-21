@@ -48,7 +48,9 @@ namespace NasaDataExplorer.Views
         /// </summary>
         public async Task InitializePictureOfDay()
         {
+            progressRing.IsActive = true;
             PictureOfDay = await ViewModel.LoadAstronomyPictureOfTheDay();
+            progressRing.IsActive = false;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)

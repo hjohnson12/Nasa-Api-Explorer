@@ -59,6 +59,7 @@
             Canvas.ZIndex="0"
             Header="Header"
             IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
             IsTitleBarAutoPaddingEnabled="False"
             PaneTitle="Nasa Data Explorer"
             SelectionChanged="navMenu_SelectionChanged">
@@ -67,7 +68,7 @@
                     <Setter Property="CompactPaneLength" Value="48" />
                 </Style>
             </muxc:NavigationView.Style>
-            <muxc:NavigationView.AutoSuggestBox>
+            <!--<muxc:NavigationView.AutoSuggestBox>
                 <AutoSuggestBox
                     x:Name="menuSearchBox"
                     MinWidth="200"
@@ -76,7 +77,7 @@
                     x:FieldModifier="public"
                     PlaceholderText="Search"
                     QueryIcon="Find" />
-            </muxc:NavigationView.AutoSuggestBox>
+            </muxc:NavigationView.AutoSuggestBox>-->
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem
                     Content="Home"
