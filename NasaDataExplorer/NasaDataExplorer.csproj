@@ -177,9 +177,6 @@
     <Compile Include="Views\PerseveranceRoverPhotosView.xaml.cs">
       <DependentUpon>PerseveranceRoverPhotosView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PhotoDetailsView.xaml.cs">
-      <DependentUpon>PhotoDetailsView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -248,10 +245,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PerseveranceRoverPhotosView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PhotoDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
