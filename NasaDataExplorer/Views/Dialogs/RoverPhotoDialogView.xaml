@@ -1,5 +1,5 @@
 ﻿<ContentDialog
-    x:Class="NasaDataExplorer.Views.Dialogs.CuriosityPhotoDetailsDialogView"
+    x:Class="NasaDataExplorer.Views.Dialogs.RoverPhotoDialogView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -31,7 +31,10 @@
         <Grid Grid.Row="1">
             <Image Source="{x:Bind CurrentPhoto.img_src}" />
         </Grid>-->
-        <muxc:FlipView Background="Transparent" ItemsSource="{x:Bind Photos}">
+        <muxc:FlipView
+            Background="Transparent"
+            ItemsSource="{x:Bind Photos}"
+            SelectedItem="{x:Bind CurrentPhoto}">
             <muxc:FlipView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -43,7 +46,7 @@
                             Grid.Row="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Source="{Binding img_src}"
+                            Source="{Binding Img_src}"
                             Stretch="Uniform" />
                         <Grid Grid.Row="1" Margin="24,24,24,0">
                             <Border BorderBrush="LightGray" BorderThickness="0,.5,0,0">
@@ -52,24 +55,57 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel
-                                        Grid.Column="0"
-                                        Margin="0,12,0,0"
-                                        Orientation="Horizontal">
-                                        <TextBlock Margin="0,0,4,0" Text="Image taken on: " />
-                                        <TextBlock Margin="0" Text="{Binding earth_date}" />
-                                        <TextBlock Margin="2,0,2,0" Text="(Sol " />
-                                        <TextBlock Margin="2,0,0,0" Text="{Binding sol}" />
-                                        <TextBlock Margin="0,0,2,0" Text=")" />
-                                    </StackPanel>
-                                    <StackPanel
-                                        Grid.Column="1"
-                                        Margin="0,12,0,0"
-                                        HorizontalAlignment="Right"
-                                        Orientation="Vertical">
-                                        <HyperlinkButton Content="Download Image" />
-                                        <HyperlinkButton Content="View Original" NavigateUri="{Binding img_src}" />
-                                    </StackPanel>
+                                    <Grid Grid.Column="0">
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="0,12,0,0"
+                                                Orientation="Horizontal">
+                                                <TextBlock Margin="0,0,4,0" Text="Rover: " />
+                                                <TextBlock Margin="0" Text="{Binding Rover.Name}" />
+                                            </StackPanel>
+                                            <StackPanel
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="0,12,0,0"
+                                                Orientation="Horizontal">
+                                                <TextBlock Margin="0,0,4,0" Text="ID: " />
+                                                <TextBlock Margin="0" Text="{Binding Id}" />
+                                            </StackPanel>
+                                            <StackPanel
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="0,12,0,0"
+                                                Orientation="Horizontal">
+                                                <TextBlock Margin="0,0,4,0" Text="Date taken: " />
+                                                <TextBlock Margin="0" Text="{Binding Earth_date}" />
+                                                <TextBlock Margin="2,0,2,0" Text=", Sol " />
+                                                <TextBlock Margin="2,0,0,0" Text="{Binding Sol}" />
+                                                <TextBlock Margin="0,0,2,0" Text="" />
+                                            </StackPanel>
+                                            <StackPanel
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Margin="0,12,0,0"
+                                                Orientation="Horizontal">
+                                                <TextBlock Margin="0,0,4,0" Text="Camera: " />
+                                                <TextBlock Margin="0" Text="{Binding Camera.Full_name}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel
+                                                Grid.Column="1"
+                                                Margin="0,12,0,0"
+                                                HorizontalAlignment="Right"
+                                                Orientation="Vertical">
+                                                <HyperlinkButton Content="Download Image" />
+                                                <HyperlinkButton Content="View Original" NavigateUri="{Binding Img_src}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
                                 </Grid>
                             </Border>
                         </Grid>

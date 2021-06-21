@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
 using NasaDataExplorer.ViewModels;
+using NasaDataExplorer.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -82,6 +83,15 @@ namespace NasaDataExplorer.Views
                 var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
                 await InitializePhotos_Perseverance(photoDate);
             }
+        }
+
+        private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
+                e.ClickedItem as MarsRoverPhoto,
+                perseverancePhotos);
+
+            await photoDialog.ShowAsync();
         }
     }
 }

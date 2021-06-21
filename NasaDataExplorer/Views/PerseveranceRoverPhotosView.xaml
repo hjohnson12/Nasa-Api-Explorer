@@ -38,6 +38,7 @@
             Grid.Row="1"
             Margin="12,0,0,0"
             IsItemClickEnabled="True"
+            ItemClick="GridViewControl_ItemClick"
             ItemsSource="{x:Bind ViewModel.PerseverancePhotos, Mode=OneWay}">
             <GridView.ItemTemplate>
                 <DataTemplate>

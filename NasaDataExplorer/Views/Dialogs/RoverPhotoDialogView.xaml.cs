@@ -19,12 +19,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NasaDataExplorer.Views.Dialogs
 {
-    public sealed partial class CuriosityPhotoDetailsDialogView : ContentDialog
+    public sealed partial class RoverPhotoDialogView : ContentDialog
     {
         private MarsRoverPhoto CurrentPhoto { get; set; }
         private ObservableCollection<MarsRoverPhoto> Photos { get; set; }
 
-        public CuriosityPhotoDetailsDialogView(MarsRoverPhoto currentPhoto,ObservableCollection<MarsRoverPhoto> curiosityPhotos)
+        public RoverPhotoDialogView(MarsRoverPhoto currentPhoto,ObservableCollection<MarsRoverPhoto> curiosityPhotos)
         {
             this.InitializeComponent();
             CurrentPhoto = currentPhoto;

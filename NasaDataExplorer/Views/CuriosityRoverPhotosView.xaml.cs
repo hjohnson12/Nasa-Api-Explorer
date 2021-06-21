@@ -83,8 +83,7 @@ namespace NasaDataExplorer.Views
 
         private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
-            CuriosityPhotoDetailsDialogView photoDialog = new CuriosityPhotoDetailsDialogView(
+            RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
                 e.ClickedItem as MarsRoverPhoto,
                 curiosityPhotos);
 
