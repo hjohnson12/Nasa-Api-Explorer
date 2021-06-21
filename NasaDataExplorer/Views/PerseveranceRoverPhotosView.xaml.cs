@@ -42,7 +42,11 @@ namespace NasaDataExplorer.Views
             ViewModel =
                 new PerseveranceRoverPhotosViewModel(
                     ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
+
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
+
+            // Current day since mission is still active
+            RoverPhotosDatePicker.MaxDate = DateTime.Today;
         }
 
         private async Task InitializePhotos_Perseverance(string date)
