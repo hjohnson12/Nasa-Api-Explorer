@@ -73,6 +73,7 @@
         </GridView>
         <muxc:ProgressRing
             x:Name="progressRing"
+            Grid.Row="1"
             Width="100"
             Height="100"
             HorizontalAlignment="Center"
