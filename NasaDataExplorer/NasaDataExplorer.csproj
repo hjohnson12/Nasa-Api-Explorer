@@ -131,6 +131,8 @@
     <Compile Include="Models\MarsRoverCamera.cs" />
     <Compile Include="Models\SolDay.cs" />
     <Compile Include="RetryDelegatingHandler.cs" />
+    <Compile Include="Services\DownloaderService.cs" />
+    <Compile Include="Services\IDownloaderService.cs" />
     <Compile Include="Services\INasaApiService.cs" />
     <Compile Include="Services\NasaApiService.cs" />
     <Compile Include="TimeoutDelegatingHandler.cs" />

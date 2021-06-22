@@ -60,6 +60,7 @@ namespace NasaDataExplorer
             {
                 services.AddHttpClient();
                 services.AddTransient<INasaApiService, NasaApiService>();
+                services.AddTransient<IDownloaderService, DownloaderService>();
             }).UseConsoleLifetime();
             ServiceHost = builder.Build();
         }

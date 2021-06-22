@@ -1,4 +1,6 @@
-﻿using NasaDataExplorer.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NasaDataExplorer.Models;
+using NasaDataExplorer.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,11 +26,15 @@ namespace NasaDataExplorer.Views.Dialogs
         private MarsRoverPhoto CurrentPhoto { get; set; }
         private ObservableCollection<MarsRoverPhoto> Photos { get; set; }
 
+        private IDownloaderService downloaderService;
+
         public RoverPhotoDialogView(MarsRoverPhoto currentPhoto,ObservableCollection<MarsRoverPhoto> curiosityPhotos)
         {
             this.InitializeComponent();
             CurrentPhoto = currentPhoto;
             Photos = curiosityPhotos;
+
+            downloaderService = ((App)Application.Current).ServiceHost.Services.GetRequiredService<IDownloaderService>();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -37,6 +43,11 @@ namespace NasaDataExplorer.Views.Dialogs
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+        }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            downloaderService.DownloadFile(CurrentPhoto.Img_src, @"C:\users\hlj51\desktop\");
         }
     }
 }
