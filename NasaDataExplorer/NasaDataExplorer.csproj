@@ -138,8 +138,6 @@
     <Compile Include="TimeoutDelegatingHandler.cs" />
     <Compile Include="ViewModels\CuriosityRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
-    <Compile Include="ViewModels\InsightLanderWeatherViewModel.cs" />
-    <Compile Include="ViewModels\NaturalEventTrackerViewModel.cs" />
     <Compile Include="ViewModels\OpportunityRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\PerseveranceRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\RoverPhotoDialogViewModel.cs" />

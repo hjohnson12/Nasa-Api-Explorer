@@ -24,16 +24,6 @@
     </ContentDialog.Resources>
 
     <Grid>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <TextBlock Text="Curiosity Rover" />
-        </Grid>
-        <Grid Grid.Row="1">
-            <Image Source="{x:Bind CurrentPhoto.img_src}" />
-        </Grid>-->
         <muxc:FlipView
             x:Name="flipView"
             Background="Transparent"
@@ -122,41 +112,5 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
         </muxc:FlipView>
-        <!--<controls:Carousel
-            InvertPositive="True"
-            ItemDepth="250"
-            ItemMargin="0"
-            ItemRotationX="0"
-            ItemRotationY="45"
-            ItemRotationZ="0"
-            ItemsSource="{x:Bind Photos}"
-            Orientation="Horizontal">
-            <controls:Carousel.EasingFunction>
-                <CubicEase EasingMode="EaseOut" />
-            </controls:Carousel.EasingFunction>
-            <controls:Carousel.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Image
-                                Width="500"
-                                Height="500"
-                                Source="{Binding img_src}"
-                                Stretch="UniformToFill" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Margin="0,0,2,0" Text="Captured on Sol" />
-                                <TextBlock Margin="0,0,2,0" Text="{Binding sol}" />
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                </DataTemplate>
-            </controls:Carousel.ItemTemplate>
-        </controls:Carousel>-->
     </Grid>
 </ContentDialog>
