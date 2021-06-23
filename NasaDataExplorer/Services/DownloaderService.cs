@@ -37,7 +37,7 @@ namespace NasaDataExplorer.Services
             }
         }
 
-        public async Task DownloadFile(string url, string targetPathLocation)
+        public async Task DownloadFileAsync(string url, string targetPathLocation)
         {
             var httpClient = _httpClientFactory.CreateClient();
             byte[] buffer = await httpClient.GetByteArrayAsync(url);
@@ -62,7 +62,7 @@ namespace NasaDataExplorer.Services
                     photoFolder = await pickedFolder.CreateFolderAsync("Mars Photos", CreationCollisionOption.OpenIfExists);
                     photoFolderByDate = await photoFolder.CreateFolderAsync(todaysDate, CreationCollisionOption.OpenIfExists);
                     StorageFile photoFile = await photoFolderByDate.CreateFileAsync(
-                        Path.GetFileNameWithoutExtension(url), CreationCollisionOption.ReplaceExisting);
+                        Path.GetFileName(url), CreationCollisionOption.ReplaceExisting);
 
                     // Using a stream
                     using (Stream stream = await photoFile.OpenStreamForWriteAsync())
@@ -72,7 +72,7 @@ namespace NasaDataExplorer.Services
                 // Demo 2 - W/o file picker
                 //photoFolderByDate = await folder.CreateFolderAsync(todaysDate, CreationCollisionOption.ReplaceExisting);
                 //StorageFile photoFile = await photoFolderByDate.CreateFileAsync(
-                //    Path.GetFileNameWithoutExtension(url), CreationCollisionOption.ReplaceExisting);
+                //    Path.GetFileName(url), CreationCollisionOption.ReplaceExisting);
                 ////await FileIO.WriteBytesAsync(photoFile, buffer);
                 //// Using a stream
                 //using (Stream stream = await photoFile.OpenStreamForWriteAsync())

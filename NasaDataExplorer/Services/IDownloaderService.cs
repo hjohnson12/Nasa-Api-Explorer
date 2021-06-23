@@ -8,7 +8,7 @@ namespace NasaDataExplorer.Services
 {
     public interface IDownloaderService
     {
-        Task DownloadFile(string url, string targetPathLocation);
+        Task DownloadFileAsync(string url, string targetPathLocation);
         void DownloadFiles(string[] urls);
     }
 }
