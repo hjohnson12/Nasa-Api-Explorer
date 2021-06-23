@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,19 +24,21 @@ namespace NasaDataExplorer.Views.Dialogs
 {
     public sealed partial class RoverPhotoDialogView : ContentDialog
     {
-        private MarsRoverPhoto CurrentPhoto { get; set; }
-        private ObservableCollection<MarsRoverPhoto> Photos { get; set; }
-
-        private IDownloaderService downloaderService;
-
-        public RoverPhotoDialogView(MarsRoverPhoto currentPhoto,ObservableCollection<MarsRoverPhoto> curiosityPhotos)
+        public RoverPhotoDialogView(MarsRoverPhoto currentPhoto,ObservableCollection<MarsRoverPhoto> roverPhotos)
         {
             this.InitializeComponent();
-            CurrentPhoto = currentPhoto;
-            Photos = curiosityPhotos;
 
-            downloaderService = ((App)Application.Current).ServiceHost.Services.GetRequiredService<IDownloaderService>();
+            ViewModel =
+                new RoverPhotoDialogViewModel(
+                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<IDownloaderService>(),
+                    roverPhotos,
+                    currentPhoto);
+
+            flipView.SelectedItem = currentPhoto;
+            DataContext = ViewModel;
         }
+
+        public RoverPhotoDialogViewModel ViewModel { get; set; }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
@@ -45,9 +48,22 @@ namespace NasaDataExplorer.Views.Dialogs
         {
         }
 
-        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            downloaderService.DownloadFile(CurrentPhoto.Img_src, @"C:\users\hlj51\desktop\");
+            try
+            {
+                await ViewModel.DownloadImageAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void FlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count != 0)
+                ViewModel.ChangeSelection(e.AddedItems[0] as MarsRoverPhoto);
         }
     }
 }

@@ -32,9 +32,11 @@
             <Image Source="{x:Bind CurrentPhoto.img_src}" />
         </Grid>-->
         <muxc:FlipView
+            x:Name="flipView"
             Background="Transparent"
-            ItemsSource="{x:Bind Photos}"
-            SelectedItem="{x:Bind CurrentPhoto}">
+            ItemsSource="{x:Bind ViewModel.RoverPhotos}"
+            SelectedItem="{x:Bind ViewModel.SelectedPhoto}"
+            SelectionChanged="FlipView_SelectionChanged">
             <muxc:FlipView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -101,7 +103,7 @@
                                                 Margin="0,12,0,0"
                                                 HorizontalAlignment="Right"
                                                 Orientation="Vertical">
-                                                <HyperlinkButton Content="Download Image" Click="HyperlinkButton_Click" />
+                                                <HyperlinkButton Click="HyperlinkButton_Click" Content="Download Image" />
                                                 <HyperlinkButton Content="View Original" NavigateUri="{Binding Img_src}" />
                                             </StackPanel>
                                         </StackPanel>
