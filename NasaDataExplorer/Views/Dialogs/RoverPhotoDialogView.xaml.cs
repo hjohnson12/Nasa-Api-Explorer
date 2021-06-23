@@ -34,7 +34,7 @@ namespace NasaDataExplorer.Views.Dialogs
                     roverPhotos,
                     currentPhoto);
 
-            flipView.SelectedItem = currentPhoto;
+            //flipView.SelectedItem = currentPhoto;
             DataContext = ViewModel;
         }
 
@@ -46,24 +46,6 @@ namespace NasaDataExplorer.Views.Dialogs
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-        }
-
-        private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                await ViewModel.DownloadImageAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        private void FlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count != 0)
-                ViewModel.ChangeSelection(e.AddedItems[0] as MarsRoverPhoto);
         }
     }
 }
