@@ -49,46 +49,6 @@ namespace NasaDataExplorer.Views
             RoverPhotosDatePicker.MaxDate = DateTime.Today;
         }
 
-        private async Task InitializePhotos_Perseverance(string date)
-        {
-            progressRing.IsActive = true;
-            try
-            {
-                cancellationTokenSource = new CancellationTokenSource();
-                cancellationTokenSource.Token.Register(() =>
-                {
-                    Console.WriteLine("User requested to cancel.");
-                });
-
-                perseverancePhotos =
-                   new ObservableCollection<MarsRoverPhoto>(
-                        await ViewModel.LoadPerseveranceRoverPhotos(date, cancellationTokenSource.Token));
-            }
-            catch (Exception ex)
-            {
-                var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
-                logger.LogError(ex, "An error occurred.");
-            }
-            finally
-            {
-                progressRing.IsActive = false;
-                cancellationTokenSource = null;
-            }
-        }
-
-        private async void RoverPhotosDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
-        {
-            var calendarName = sender.Name.ToString();
-            if (string.IsNullOrEmpty(args.NewDate.ToString()))
-                return;
-            else
-            {
-                var datePicked = args.NewDate;
-                var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
-                await InitializePhotos_Perseverance(photoDate);
-            }
-        }
-
         private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
         {
             RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
