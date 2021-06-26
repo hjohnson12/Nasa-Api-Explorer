@@ -33,17 +33,15 @@ namespace NasaDataExplorer.Views
     {
         private ObservableCollection<MarsRoverPhoto> perseverancePhotos =
             new ObservableCollection<MarsRoverPhoto>();
-        private CancellationTokenSource cancellationTokenSource;
-        public PerseveranceRoverPhotosViewModel ViewModel { get; set; }
+        public PerseveranceRoverPhotosViewModel ViewModel => (PerseveranceRoverPhotosViewModel)DataContext;
 
         public PerseveranceRoverPhotosView()
         {
             this.InitializeComponent();
-            ViewModel =
+
+            this.DataContext =
                 new PerseveranceRoverPhotosViewModel(
                     ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
-
-            RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);
 
             // Current day since mission is still active
             RoverPhotosDatePicker.MaxDate = DateTime.Today;
@@ -53,7 +51,7 @@ namespace NasaDataExplorer.Views
         {
             RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
                 e.ClickedItem as MarsRoverPhoto,
-                perseverancePhotos);
+                ViewModel.PerseverancePhotos);
 
             await photoDialog.ShowAsync();
         }

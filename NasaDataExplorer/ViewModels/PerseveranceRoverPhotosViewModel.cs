@@ -1,15 +1,11 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
-using NasaDataExplorer.Models;
-using NasaDataExplorer.Services;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.UI.Xaml.Controls;
+using Microsoft.Toolkit.Mvvm.Input;
+using NasaDataExplorer.Models;
+using NasaDataExplorer.Services;
 
 namespace NasaDataExplorer.ViewModels
 {
@@ -18,6 +14,7 @@ namespace NasaDataExplorer.ViewModels
         private INasaApiService _nasaApiService;
         private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
+        private CancellationTokenSource cancellationTokenSource;
         private bool _isLoading;
 
         public ICommand LoadPhotosCommand { get; set; }
@@ -27,22 +24,20 @@ namespace NasaDataExplorer.ViewModels
             _nasaApiService = nasaApiService;
 
             LoadPhotosCommand =
-                new AsyncRelayCommand<CalendarDatePickerDateChangedEventArgs>(ChangeDate);
+                new AsyncRelayCommand<string>(LoadPerseveranceRoverPhotos);
         }
 
-        public async Task ChangeDate(CalendarDatePickerDateChangedEventArgs args)
+        public async Task ChangeDate(DateTime args)
         {
-            if (string.IsNullOrEmpty(args.NewDate.ToString()))
+            if (string.IsNullOrEmpty(args.ToString()))
                 return;
             else
             {
-                var datePicked = args.NewDate;
-                var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
+                var datePicked = args;
+                var photoDate = datePicked.Year.ToString() + "-" + datePicked.Month.ToString() + "-" + datePicked.Day.ToString();
                 await LoadPerseveranceRoverPhotos(photoDate);
             }
         }
-
-        private CancellationTokenSource cancellationTokenSource;
 
         public ObservableCollection<MarsRoverPhoto> PerseverancePhotos
         {

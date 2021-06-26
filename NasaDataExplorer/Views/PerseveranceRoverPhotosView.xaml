@@ -5,6 +5,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="using:NasaDataExplorer.Helpers"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:NasaDataExplorer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,9 +29,7 @@
                 CornerRadius="2"
                 Header="Date:">
                 <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="DateChanged">
-                        <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadPhotosCommand}" />
-                    </core:EventTriggerBehavior>
+                    <helpers:DateChangedTriggerBehavior Command="{x:Bind ViewModel.LoadPhotosCommand}" />
                 </interactivity:Interaction.Behaviors>
             </muxc:CalendarDatePicker>
             <StackPanel Orientation="Horizontal">
