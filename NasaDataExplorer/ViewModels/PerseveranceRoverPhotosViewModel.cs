@@ -24,19 +24,7 @@ namespace NasaDataExplorer.ViewModels
             _nasaApiService = nasaApiService;
 
             LoadPhotosCommand =
-                new AsyncRelayCommand<string>(LoadPerseveranceRoverPhotos);
-        }
-
-        public async Task ChangeDate(DateTime args)
-        {
-            if (string.IsNullOrEmpty(args.ToString()))
-                return;
-            else
-            {
-                var datePicked = args;
-                var photoDate = datePicked.Year.ToString() + "-" + datePicked.Month.ToString() + "-" + datePicked.Day.ToString();
-                await LoadPerseveranceRoverPhotos(photoDate);
-            }
+                new AsyncRelayCommand<DateTimeOffset?>(LoadPerseveranceRoverPhotos);
         }
 
         public ObservableCollection<MarsRoverPhoto> PerseverancePhotos
@@ -63,9 +51,10 @@ namespace NasaDataExplorer.ViewModels
             }
         }
 
-        public async Task LoadPerseveranceRoverPhotos(string date)
+        public async Task LoadPerseveranceRoverPhotos(DateTimeOffset? date)
         {
             IsLoading = true;
+            string photosDate = FormatDateString(date);
             try
             {
                 cancellationTokenSource = new CancellationTokenSource();
@@ -77,7 +66,7 @@ namespace NasaDataExplorer.ViewModels
                 PerseverancePhotos = 
                     new ObservableCollection<MarsRoverPhoto>(
                         await _nasaApiService.GetPerseveranceRoverPhotosAsync(
-                            date, cancellationTokenSource.Token));
+                            photosDate, cancellationTokenSource.Token));
 
                 PerseveranceRover = PerseverancePhotos[0].Rover;
             }
@@ -92,6 +81,13 @@ namespace NasaDataExplorer.ViewModels
                 IsLoading = false;
                 cancellationTokenSource = null;
             }
+        }
+
+        public string FormatDateString(DateTimeOffset? date)
+        {
+            return date.Value.Year.ToString() 
+                + "-" + date.Value.Month.ToString() 
+                + "-" + date.Value.Day.ToString();
         }
     }
 }

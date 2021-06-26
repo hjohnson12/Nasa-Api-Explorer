@@ -12,16 +12,15 @@ namespace NasaDataExplorer.Helpers
 {
     public class DateChangedTriggerBehavior : Trigger<CalendarDatePicker>
     {
-        public static readonly DependencyProperty ChangeDateCommandProperty =
-            DependencyProperty.RegisterAttached(
-                "ChangeDateCommand", typeof(ICommand),
-                typeof(CalendarDatePicker), new PropertyMetadata(null));
-
         public ICommand Command
         {
-            get { return (ICommand)GetValue(ChangeDateCommandProperty); }
-            set { SetValue(ChangeDateCommandProperty, value); }
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Command.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommandProperty =
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(CalendarDatePicker), new PropertyMetadata(0));
 
         protected override void OnAttached()
         {
@@ -34,11 +33,8 @@ namespace NasaDataExplorer.Helpers
         private void AssociatedObject_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
         {
             // Invoke the command with the new chosen date
-            var newDate = args.NewDate;
-            var photoDate = 
-                newDate.Value.Year.ToString() + "-" + newDate.Value.Month.ToString() + "-" + newDate.Value.Day.ToString();
             if (Command != null)
-                Command.Execute(photoDate);
+                Command.Execute(args.NewDate);
         }
 
         protected override void OnDetaching()
