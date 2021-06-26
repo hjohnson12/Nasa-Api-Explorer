@@ -37,8 +37,9 @@ namespace NasaDataExplorer.ViewModels
             string date,
             CancellationToken cancellationToken)
         {
-            PerseverancePhotos = new ObservableCollection<MarsRoverPhoto>(await _nasaApiService.GetPerseveranceRoverPhotosAsync(date,
-                cancellationToken));
+            PerseverancePhotos = new ObservableCollection<MarsRoverPhoto>(
+                await _nasaApiService.GetPerseveranceRoverPhotosAsync(date, cancellationToken));
+
             PerseveranceRover = PerseverancePhotos[0].Rover;
             return PerseverancePhotos;
         }

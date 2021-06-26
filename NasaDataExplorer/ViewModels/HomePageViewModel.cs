@@ -1,9 +1,11 @@
-﻿using NasaDataExplorer.Services;
+﻿using Microsoft.Toolkit.Mvvm.Input;
+using NasaDataExplorer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NasaDataExplorer.ViewModels
 {
@@ -11,10 +13,16 @@ namespace NasaDataExplorer.ViewModels
     {
         private INasaApiService _nasaApiService;
         private AstronomyPictureOfTheDay _astronomyPictureOfTheDay;
+        private bool _isLoading;
+
+        public ICommand LoadApodCommand { get; set; }
 
         public HomePageViewModel(INasaApiService nasaApiService)
         {
             _nasaApiService = nasaApiService;
+
+            LoadApodCommand =
+                new AsyncRelayCommand(LoadAstronomyPictureOfTheDayAsync, () => true);
         }
 
         public AstronomyPictureOfTheDay AstronomyPictureOfTheDay
@@ -28,16 +36,31 @@ namespace NasaDataExplorer.ViewModels
             }
         } 
 
-        public async Task<AstronomyPictureOfTheDay> LoadAstronomyPictureOfTheDay()
+        public bool IsLoading
         {
+            get => _isLoading;
+            set
+            {
+                if (_isLoading != value)
+                    _isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public async Task LoadAstronomyPictureOfTheDayAsync()
+        {
+            IsLoading = true;
             try
             {
                 AstronomyPictureOfTheDay = await _nasaApiService.GetAstronomyPictureOfTheDayAsync();
-                return AstronomyPictureOfTheDay;
             }
             catch (Exception ex)
             {
-                return AstronomyPictureOfTheDay;
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
     }

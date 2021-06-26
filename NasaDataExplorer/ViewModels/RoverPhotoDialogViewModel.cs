@@ -20,7 +20,7 @@ namespace NasaDataExplorer.ViewModels
 
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand DownloadImageCommand { get; set; }
-
+        
         public RoverPhotoDialogViewModel(IDownloaderService downloaderService,
             ObservableCollection<MarsRoverPhoto> roverPhotos,
             MarsRoverPhoto selectedPhoto)

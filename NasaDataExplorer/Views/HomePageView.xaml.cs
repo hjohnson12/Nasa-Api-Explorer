@@ -29,7 +29,6 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class HomePageView : Page
     {
-        public AstronomyPictureOfTheDay PictureOfDay { get; set; }
         public HomePageViewModel ViewModel { get; set;  }
 
         public HomePageView()
@@ -41,21 +40,6 @@ namespace NasaDataExplorer.Views
                     ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
             
             this.DataContext = ViewModel;
-        }
-
-        /// <summary>
-        /// Initializes the "Astronomy Picture of the Day" photo and data
-        /// </summary>
-        public async Task InitializePictureOfDay()
-        {
-            progressRing.IsActive = true;
-            PictureOfDay = await ViewModel.LoadAstronomyPictureOfTheDay();
-            progressRing.IsActive = false;
-        }
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            await InitializePictureOfDay();
         }
     }
 }
