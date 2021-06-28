@@ -37,8 +37,11 @@
                     x:Name="roverCamerasComboBox"
                     Margin="8,0,0,0"
                     Header="Cameras:"
-                    ItemsSource="{x:Bind ViewModel.RoverCameras2, Mode=OneWay}"
-                    SelectedIndex="0" />
+                    ItemsSource="{x:Bind ViewModel.RoverCameras2, Mode=OneWay}">
+                    <interactivity:Interaction.Behaviors>
+                        <helpers:ComboBoxSelectionChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateSelectedCameraCommand}" />
+                    </interactivity:Interaction.Behaviors>
+                </muxc:ComboBox>
             </StackPanel>
             <StackPanel Margin="0,8,8,8" Orientation="Horizontal">
                 <Button

@@ -18,14 +18,14 @@ namespace NasaDataExplorer.ViewModels
         private MarsRover _perseveranceRover;
         private ObservableCollection<string> _roverCameras;
         private ObservableCollection<string> _roverCameras2;
-
-
         private CancellationTokenSource cancellationTokenSource;
         private bool _isLoading;
         private DateTimeOffset? _selectedDate;
+        private string _selectedCamera;
 
         public ICommand LoadPhotosCommand { get; set; }
         public ICommand UpdateDateCommand { get; set; }
+        public ICommand UpdateSelectedCameraCommand { get; set; }
 
         public PerseveranceRoverPhotosViewModel(INasaApiService nasaApiService)
         {
@@ -43,7 +43,11 @@ namespace NasaDataExplorer.ViewModels
                 new AsyncRelayCommand(LoadPerseveranceRoverPhotos);
             UpdateDateCommand =
                 new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
+            UpdateSelectedCameraCommand =
+                new Base.RelayCommand<string>(UpdateSelectedCamera);
         }
+
+        public MarsRover PerseveranceRover { get; set; }
 
         public ObservableCollection<MarsRoverPhoto> PerseverancePhotos
         {
@@ -88,7 +92,16 @@ namespace NasaDataExplorer.ViewModels
             }
         }
 
-        public MarsRover PerseveranceRover { get; set; }
+        public string SelectedCamera
+        {
+            get => _selectedCamera;
+            set
+            {
+                _selectedCamera = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public bool IsLoading
         {
@@ -136,6 +149,16 @@ namespace NasaDataExplorer.ViewModels
         public void UpdateSelectedDate(DateTimeOffset? date)
         {
             SelectedDate = date;
+        }
+
+        public void UpdateSelectedCamera(string camera)
+        {
+            SelectedCamera = camera;
+        }
+
+        public bool isCameraSelected(string selection)
+        {
+            return selection.Equals("- Select One -");
         }
 
         public string FormatDateString(DateTimeOffset? date)

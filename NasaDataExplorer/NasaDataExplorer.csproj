@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Base\RelayCommand.cs" />
+    <Compile Include="Helpers\ComboBoxSelectionChangedTriggerBehavior.cs" />
     <Compile Include="Helpers\DateChangedTriggerBehavior.cs" />
     <Compile Include="Helpers\NasaAPI\NasaApiHelper.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />

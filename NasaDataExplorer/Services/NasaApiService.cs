@@ -90,7 +90,6 @@ namespace NasaDataExplorer.Services
             {
                 using (var response = await _httpClient.SendAsync(request, cancellationToken))
                 {
-                    await Task.Delay(6000);
                     response.EnsureSuccessStatusCode();
                     var stream = await response.Content.ReadAsStreamAsync();
                     var curiosityRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
@@ -123,7 +122,34 @@ namespace NasaDataExplorer.Services
             {
                 using (var response = await _httpClient.SendAsync(request, cancellationToken))
                 {
-                    await Task.Delay(6000);
+                    response.EnsureSuccessStatusCode();
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    var perseveranceRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
+                    return perseveranceRover.Photos;
+                }
+            }
+            catch (OperationCanceledException ocException)
+            {
+                Console.WriteLine($"Operation cancelled with message {ocException.Message}");
+                return new MarsRoverPhotoData().Photos;
+            }
+        }
+
+        public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(string dateOfPhotos, string camera, CancellationToken cancellationToken)
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                String.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date={0}&api_key={2}&camera={1}",
+                    dateOfPhotos,
+                    camera,
+                    StaticKeys.API_KEY));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                using (var response = await _httpClient.SendAsync(request, cancellationToken))
+                {
                     response.EnsureSuccessStatusCode();
                     var stream = await response.Content.ReadAsStreamAsync();
                     var perseveranceRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
