@@ -13,6 +13,7 @@ namespace NasaDataExplorer.ViewModels
 {
     public class PerseveranceRoverPhotosViewModel : Base.Observable
     {
+        private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private INasaApiService _nasaApiService;
         private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
@@ -35,7 +36,7 @@ namespace NasaDataExplorer.ViewModels
             _roverCameras2 = new ObservableCollection<string>(
                 cameraList.Select(x => x.Item2.ToString())
                 .ToList());
-            _roverCameras2.Insert(0, "- Choose Camera (optional) -");
+            _roverCameras2.Insert(0, DEFAULT_COMBO_OPTION);
 
             SelectedDate = DateTimeOffset.Now.AddDays(1);
 
@@ -102,7 +103,6 @@ namespace NasaDataExplorer.ViewModels
             }
         }
 
-
         public bool IsLoading
         {
             get => _isLoading;
@@ -126,12 +126,26 @@ namespace NasaDataExplorer.ViewModels
                     Console.WriteLine("User requested to cancel.");
                 });
 
-                PerseverancePhotos = 
-                    new ObservableCollection<MarsRoverPhoto>(
-                        await _nasaApiService.GetPerseveranceRoverPhotosAsync(
-                            photosDate, cancellationTokenSource.Token));
+                if (isCameraSelected(SelectedCamera))
+                {
+                    var camera = MarsRoverPhotoData.PerseveranceCameras
+                        .Single(x => x.Item2.Equals(SelectedCamera))
+                        .Item1;
 
-                PerseveranceRover = PerseverancePhotos[0].Rover;
+                    PerseverancePhotos =
+                        new ObservableCollection<MarsRoverPhoto>(
+                            await _nasaApiService.GetPerseveranceRoverPhotosAsync(
+                                photosDate, camera, cancellationTokenSource.Token));
+                }
+                else
+                {
+                    PerseverancePhotos =
+                        new ObservableCollection<MarsRoverPhoto>(
+                            await _nasaApiService.GetPerseveranceRoverPhotosAsync(
+                                photosDate, cancellationTokenSource.Token));
+                }
+
+                //PerseveranceRover = PerseverancePhotos[0].Rover;
             }
             catch (Exception ex)
             {
@@ -158,7 +172,7 @@ namespace NasaDataExplorer.ViewModels
 
         public bool isCameraSelected(string selection)
         {
-            return selection.Equals("- Select One -");
+            return !selection.Equals(DEFAULT_COMBO_OPTION);
         }
 
         public string FormatDateString(DateTimeOffset? date)

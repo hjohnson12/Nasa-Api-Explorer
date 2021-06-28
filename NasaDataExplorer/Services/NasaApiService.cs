@@ -140,7 +140,7 @@ namespace NasaDataExplorer.Services
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
                 String.Format(
-                    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date={0}&api_key={2}&camera={1}",
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?api_key={2}&earth_date={0}&camera={1}",
                     dateOfPhotos,
                     camera,
                     StaticKeys.API_KEY));
