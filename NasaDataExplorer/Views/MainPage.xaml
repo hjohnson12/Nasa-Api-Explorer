@@ -84,9 +84,9 @@
                     Icon="Home"
                     IsSelected="True"
                     Tag="HomePage">
-                    <muxc:NavigationViewItem.MenuItems>
+                    <!--<muxc:NavigationViewItem.MenuItems>
                         <muxc:NavigationViewItem Content="Test" Tag="Test" />
-                    </muxc:NavigationViewItem.MenuItems>
+                    </muxc:NavigationViewItem.MenuItems>-->
                 </muxc:NavigationViewItem>
                 <muxc:NavigationViewItemSeparator />
                 <!--<muxc:NavigationViewItemHeader Content="Earth" />
@@ -112,10 +112,10 @@
                     Content="Opportunity Rover Photos"
                     Icon="BrowsePhotos"
                     Tag="OR_Photos" />
-                <muxc:NavigationViewItem
+                <!--<muxc:NavigationViewItem
                     Content="InSight Mars Lander Weather Data"
                     Icon="Help"
-                    Tag="InsightLander_Weather" />
+                    Tag="InsightLander_Weather" />-->
                 <muxc:NavigationViewItemSeparator />
                 <!--<muxc:NavigationViewItemHeader Content="Space" />
                 <muxc:NavigationViewItem
