@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,17 +16,33 @@ namespace NasaDataExplorer.ViewModels
         private INasaApiService _nasaApiService;
         private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
+        private ObservableCollection<string> _roverCameras;
+        private ObservableCollection<string> _roverCameras2;
+
+
         private CancellationTokenSource cancellationTokenSource;
         private bool _isLoading;
+        private DateTimeOffset? _selectedDate;
 
         public ICommand LoadPhotosCommand { get; set; }
+        public ICommand UpdateDateCommand { get; set; }
 
         public PerseveranceRoverPhotosViewModel(INasaApiService nasaApiService)
         {
             _nasaApiService = nasaApiService;
 
+            var cameraList = MarsRoverPhotoData.PerseveranceCameras;
+            _roverCameras2 = new ObservableCollection<string>(
+                cameraList.Select(x => x.Item2.ToString())
+                .ToList());
+            _roverCameras2.Insert(0, "- Choose Camera (optional) -");
+
+            SelectedDate = DateTimeOffset.Now.AddDays(1);
+
             LoadPhotosCommand =
-                new AsyncRelayCommand<DateTimeOffset?>(LoadPerseveranceRoverPhotos);
+                new AsyncRelayCommand(LoadPerseveranceRoverPhotos);
+            UpdateDateCommand =
+                new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
         }
 
         public ObservableCollection<MarsRoverPhoto> PerseverancePhotos
@@ -34,6 +52,38 @@ namespace NasaDataExplorer.ViewModels
             {
                 if (_perseverancePhotos != value)
                     _perseverancePhotos = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> RoverCameras
+        {
+            get => _roverCameras;
+            set
+            {
+                if (_roverCameras != value)
+                    _roverCameras = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> RoverCameras2
+        {
+            get => _roverCameras2;
+            set
+            {
+                if (_roverCameras2 != value)
+                    _roverCameras2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTimeOffset? SelectedDate
+        {
+            get => _selectedDate;
+            set
+            {
+                _selectedDate = value;
                 OnPropertyChanged();
             }
         }
@@ -51,10 +101,10 @@ namespace NasaDataExplorer.ViewModels
             }
         }
 
-        public async Task LoadPerseveranceRoverPhotos(DateTimeOffset? date)
+        public async Task LoadPerseveranceRoverPhotos()
         {
             IsLoading = true;
-            string photosDate = FormatDateString(date);
+            string photosDate = FormatDateString(SelectedDate);
             try
             {
                 cancellationTokenSource = new CancellationTokenSource();
@@ -81,6 +131,11 @@ namespace NasaDataExplorer.ViewModels
                 IsLoading = false;
                 cancellationTokenSource = null;
             }
+        }
+
+        public void UpdateSelectedDate(DateTimeOffset? date)
+        {
+            SelectedDate = date;
         }
 
         public string FormatDateString(DateTimeOffset? date)

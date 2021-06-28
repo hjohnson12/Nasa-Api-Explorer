@@ -25,8 +25,8 @@ namespace NasaDataExplorer.Helpers
         protected override void OnAttached()
         {
             base.OnAttached();
-            
-            AssociatedObject.Date = DateTimeOffset.Now.AddDays(-1);
+
+            AssociatedObject.Date = DateTimeOffset.Now;
             AssociatedObject.DateChanged += AssociatedObject_DateChanged;
         }
 
