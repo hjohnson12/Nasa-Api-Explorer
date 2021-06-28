@@ -10,27 +10,27 @@ namespace NasaDataExplorer
     public class AstronomyPictureOfTheDay
     {
         [JsonProperty("copyright")]
-        public string copyright { get; set; }
+        public string Copyright { get; set; }
 
         [JsonProperty("date")]
-        public string date { get; set; }
+        public string Date { get; set; }
 
         [JsonProperty("explanation")]
-        public string explanation { get; set; }
+        public string Explanation { get; set; }
 
         [JsonProperty("hdurl")]
-        public string hdurl { get; set; }
+        public string Hdurl { get; set; }
 
         [JsonProperty("media_type")]
-        public string media_type { get; set; }
+        public string MediaType { get; set; }
 
         [JsonProperty("service_version")]
-        public string service_version { get; set; }
+        public string ServiceVersion { get; set; }
 
         [JsonProperty("title")]
-        public string title { get; set; }
+        public string Title { get; set; }
 
         [JsonProperty("url")]
-        public string url { get; set; }
+        public string Url { get; set; }
     }
 }

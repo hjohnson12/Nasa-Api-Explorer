@@ -42,10 +42,10 @@
                     FontSize="24"
                     FontWeight="Bold"
                     Text="Nasa's Astronomy Picture of the Day" />
-                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.title, Mode=OneWay}" />
-                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.date, Mode=OneWay}" TextWrapping="Wrap" />
-                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.explanation, Mode=OneWay}" TextWrapping="Wrap" />
-                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.copyright, Mode=OneWay}" />
+                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Title, Mode=OneWay}" />
+                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Date, Mode=OneWay}" TextWrapping="Wrap" />
+                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Explanation, Mode=OneWay}" TextWrapping="Wrap" />
+                <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Copyright, Mode=OneWay}" />
 
             </StackPanel>
             <Grid Grid.Row="1" HorizontalAlignment="Center">
@@ -53,7 +53,7 @@
                     x:Name="imgPictureOfDay"
                     Height="Auto"
                     HorizontalAlignment="Left"
-                    Source="{x:Bind ViewModel.AstronomyPictureOfTheDay.url, Mode=OneWay}"
+                    Source="{x:Bind ViewModel.AstronomyPictureOfTheDay.Url, Mode=OneWay}"
                     Stretch="Uniform" />
             </Grid>
         </Grid>
