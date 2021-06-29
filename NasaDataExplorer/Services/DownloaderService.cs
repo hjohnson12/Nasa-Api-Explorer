@@ -50,7 +50,7 @@ namespace NasaDataExplorer.Services
         public async Task DownloadFileWithoutPickerAsync(string url, string targetPath)
         {
             // Demo 2 Test - W/o file picker
-            // UWP is sandboxed - might not be able to well without picker
+            // UWP is sandboxed - might not be able to without picker
             var httpClient = _httpClientFactory.CreateClient();
             byte[] buffer = await httpClient.GetByteArrayAsync(url);
             string todaysDate = $"{DateTime.Today.Month}-{DateTime.Today.Day}-{DateTime.Today.Year}";

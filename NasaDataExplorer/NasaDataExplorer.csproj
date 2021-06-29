@@ -132,12 +132,12 @@
     <Compile Include="Models\MarsRoverPhotoData.cs" />
     <Compile Include="Models\MarsRoverCamera.cs" />
     <Compile Include="Models\SolDay.cs" />
-    <Compile Include="RetryDelegatingHandler.cs" />
+    <Compile Include="Helpers\RetryDelegatingHandler.cs" />
     <Compile Include="Services\DownloaderService.cs" />
     <Compile Include="Services\IDownloaderService.cs" />
     <Compile Include="Services\INasaApiService.cs" />
     <Compile Include="Services\NasaApiService.cs" />
-    <Compile Include="TimeoutDelegatingHandler.cs" />
+    <Compile Include="Helpers\TimeoutDelegatingHandler.cs" />
     <Compile Include="ViewModels\CuriosityRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\OpportunityRoverPhotosViewModel.cs" />
@@ -151,9 +151,6 @@
     </Compile>
     <Compile Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml.cs">
       <DependentUpon>InvalidAPIKeyDialogView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EarthClimateView.xaml.cs">
-      <DependentUpon>EarthClimateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Feeds\NasaClimateFeedView.xaml.cs">
       <DependentUpon>NasaClimateFeedView.xaml</DependentUpon>
@@ -212,10 +209,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\InvalidAPIKeyDialogView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EarthClimateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

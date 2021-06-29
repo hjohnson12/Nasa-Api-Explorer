@@ -45,9 +45,6 @@ namespace NasaDataExplorer.Views
                     case "Earth_EventTracker":
                         mainFrame.Navigate(typeof(NaturalEventTrackerView));
                         break;
-                    case "Earth_EarthNow":
-                        mainFrame.Navigate(typeof(EarthClimateView));
-                        break;
                     case "PR_Photos":
                         mainFrame.Navigate(typeof(PerseveranceRoverPhotosView));
                         break;

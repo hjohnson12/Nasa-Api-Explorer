@@ -36,10 +36,10 @@ namespace NasaDataExplorer.Views
             InitializeWeather();
         }
 
+        // Update 06/2021: Insight Weather API currently is down
+        // Info here https://mars.nasa.gov/insight/weather/
         public void InitializeWeather()
         {
-            //curiosityPhotos = new ObservableCollection<CuriosityRover.Photo>();
-
             var webRequest = WebRequest.Create(String.Format("https://api.nasa.gov/insight_weather/?api_key={0}&feedtype=json&ver=1.0", StaticKeys.API_KEY)) as HttpWebRequest;
             if (webRequest == null)
             {

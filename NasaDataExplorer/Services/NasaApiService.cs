@@ -63,7 +63,7 @@ namespace NasaDataExplorer.Services
             string dateOfPhotos,
             CancellationToken cancellationToken)
         {
-            var requestUri =string.Format(
+            var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
                     dateOfPhotos,
                     StaticKeys.API_KEY);
@@ -118,6 +118,7 @@ namespace NasaDataExplorer.Services
             using (var response = await _httpClient.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
+
                 var stream = await response.Content.ReadAsStreamAsync();
                 var roverData = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
                 return roverData.Photos;
@@ -136,6 +137,7 @@ namespace NasaDataExplorer.Services
             using (var response = await _httpClient.SendAsync(request, cancellationToken))
             {
                 response.EnsureSuccessStatusCode();
+
                 var stream = await response.Content.ReadAsStreamAsync();
                 var roverData = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
                 return roverData.Photos;
