@@ -58,8 +58,7 @@ namespace NasaDataExplorer
             var builder = new HostBuilder()
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddHttpClient();
-                services.AddTransient<INasaApiService, NasaApiService>();
+                services.AddHttpClient<INasaApiService, NasaApiService>();
                 services.AddTransient<IDownloaderService, DownloaderService>();
             }).UseConsoleLifetime();
             ServiceHost = builder.Build();
@@ -74,7 +73,6 @@ namespace NasaDataExplorer
             }).UseConsoleLifetime();
             ServiceHost = builder.Build();
         }
-
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

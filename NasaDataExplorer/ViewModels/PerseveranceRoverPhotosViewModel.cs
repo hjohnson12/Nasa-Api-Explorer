@@ -117,15 +117,15 @@ namespace NasaDataExplorer.ViewModels
         public async Task LoadPerseveranceRoverPhotos()
         {
             IsLoading = true;
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.Token.Register(() =>
+            {
+                Console.WriteLine("User requested to cancel.");
+            });
+
             string photosDate = FormatDateString(SelectedDate);
             try
             {
-                cancellationTokenSource = new CancellationTokenSource();
-                cancellationTokenSource.Token.Register(() =>
-                {
-                    Console.WriteLine("User requested to cancel.");
-                });
-
                 if (isCameraSelected(SelectedCamera))
                 {
                     var camera = MarsRoverPhotoData.PerseveranceCameras
@@ -146,6 +146,10 @@ namespace NasaDataExplorer.ViewModels
                 }
 
                 //PerseveranceRover = PerseverancePhotos[0].Rover;
+            }
+            catch (OperationCanceledException ocException)
+            {
+                Console.WriteLine($"Operation cancelled with message {ocException.Message}");
             }
             catch (Exception ex)
             {

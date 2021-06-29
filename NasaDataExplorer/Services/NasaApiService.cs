@@ -12,24 +12,9 @@ namespace NasaDataExplorer.Services
 {
     public class NasaApiService : INasaApiService
     {
-        private static HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
 
-        // Supports direct, named, and typed instances
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        private CancellationTokenSource _cancellationTokenSource =
-            new CancellationTokenSource();
-
-        public NasaApiService()
-        {
-            _httpClient.BaseAddress = new Uri("https://api.nasa.gov/");
-            _httpClient.Timeout = new TimeSpan(0, 0, 30);
-            _httpClient.DefaultRequestHeaders.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-        }
-
-        // Constructor for TypedClient demo
+        // Constructor for a TypedClient 
         public NasaApiService(HttpClient client)
         {
             client.BaseAddress = new Uri("https://api.nasa.gov/");
@@ -40,155 +25,11 @@ namespace NasaDataExplorer.Services
             _httpClient = client;
         }
 
-        public NasaApiService(IHttpClientFactory httpClientFactory)
-        {
-            _httpClientFactory = httpClientFactory;
-
-            // Ex use: var client = _httpClientFactory.CreateClient();
-        }
-  
-        public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(string dateOfPhotos)
-        {
-            // Another way with http CLient: helps avoid the middle memory stream
-            // Using streams to reduce memory and improve performance with reads
-            // Helps avoid socket exhaustion when not having a "using" with httpclient
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                String.Format(
-                    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
-                    dateOfPhotos,
-                    StaticKeys.API_KEY));
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            using (var response = await _httpClient.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-
-                var stream = await response.Content.ReadAsStreamAsync();
-                var curiosityRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
-
-                return curiosityRover.Photos;
-            }
-        }
-
-        public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(
-            string dateOfPhotos,
-            CancellationToken cancellationToken)
-        {
-            // Another way with http CLient: helps avoid the middle memory stream
-            // Using streams to reduce memory and improve performance with reads
-            // Helps avoid socket exhaustion when not having a "using" with httpclient
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                String.Format(
-                    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
-                    dateOfPhotos,
-                    StaticKeys.API_KEY));
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            try
-            {
-                using (var response = await _httpClient.SendAsync(request, cancellationToken))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    var curiosityRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
-                    return curiosityRover.Photos;
-                }
-            }
-            catch (OperationCanceledException ocException)
-            {
-                Console.WriteLine($"Operation cancelled with message {ocException.Message}");
-                return new MarsRoverPhotoData().Photos;
-            }
-        }
-
-        public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
-            string dateOfPhotos,
-            CancellationToken cancellationToken)
-        {
-            // Another way with http CLient: helps avoid the middle memory stream
-            // Using streams to reduce memory and improve performance with reads
-            // Helps avoid socket exhaustion when not having a "using" with httpclient
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                String.Format(
-                    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date={0}&api_key={1}",
-                    dateOfPhotos,
-                    StaticKeys.API_KEY));
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            try
-            {
-                using (var response = await _httpClient.SendAsync(request, cancellationToken))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    var perseveranceRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
-                    return perseveranceRover.Photos;
-                }
-            }
-            catch (OperationCanceledException ocException)
-            {
-                Console.WriteLine($"Operation cancelled with message {ocException.Message}");
-                return new MarsRoverPhotoData().Photos;
-            }
-        }
-
-        public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(string dateOfPhotos, string camera, CancellationToken cancellationToken)
-        {
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                String.Format(
-                    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?api_key={2}&earth_date={0}&camera={1}",
-                    dateOfPhotos,
-                    camera,
-                    StaticKeys.API_KEY));
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            try
-            {
-                using (var response = await _httpClient.SendAsync(request, cancellationToken))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    var perseveranceRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
-                    return perseveranceRover.Photos;
-                }
-            }
-            catch (OperationCanceledException ocException)
-            {
-                Console.WriteLine($"Operation cancelled with message {ocException.Message}");
-                return new MarsRoverPhotoData().Photos;
-            }
-        }
-
-        public async Task<IEnumerable<MarsRoverPhoto>> GetOpportunityRoverPhotosAsync(string dateOfPhotos)
-        {
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                String.Format(
-                    "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date={0}&api_key={1}",
-                    dateOfPhotos,
-                    StaticKeys.API_KEY));
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            using (var response = await _httpClient.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-
-                var stream = await response.Content.ReadAsStreamAsync();
-                var opportunityRover = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
-
-                return opportunityRover.Photos;
-            }
-        }
-
         public async Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync()
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
-                String.Format(
+                string.Format(
                     "https://api.nasa.gov/planetary/apod?api_key={0}",
                     StaticKeys.API_KEY));
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -196,40 +37,110 @@ namespace NasaDataExplorer.Services
             using (var response = await _httpClient.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
-
                 var stream = await response.Content.ReadAsStreamAsync();
                 var astronomyPictureOfTheDay = stream.ReadAndDeserializeFromJson<AstronomyPictureOfTheDay>();
-
                 return astronomyPictureOfTheDay;
             }
         }
 
-        private async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosWithoutStreamAsync(string dateOfPhotos)
+        public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(string dateOfPhotos)
         {
-            // Test 2 - Through HttpRequest Message
-            var request = new HttpRequestMessage(HttpMethod.Get,
-                String.Format("mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}", dateOfPhotos, StaticKeys.API_KEY));
+            var apiString = string.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
+                    dateOfPhotos,
+                    StaticKeys.API_KEY);
+
+            return await GetRoverPhotosAsync(apiString);
+        }
+
+        public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(
+            string dateOfPhotos,
+            CancellationToken cancellationToken)
+        {
+            var apiString =string.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
+                    dateOfPhotos,
+                    StaticKeys.API_KEY);
+
+            return await GetRoverPhotosAsync(apiString, cancellationToken);
+        }
+
+        public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
+            string dateOfPhotos,
+            CancellationToken cancellationToken)
+        {
+            var apiString = string.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date={0}&api_key={1}",
+                    dateOfPhotos,
+                    StaticKeys.API_KEY);
+
+            return await GetRoverPhotosAsync(apiString, cancellationToken);
+        }
+
+        public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
+            string dateOfPhotos,
+            string camera,
+            CancellationToken cancellationToken)
+        {
+            var apiString = string.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?api_key={2}&earth_date={0}&camera={1}",
+                    dateOfPhotos,
+                    camera,
+                    StaticKeys.API_KEY);
+
+            return await GetRoverPhotosAsync(apiString, cancellationToken);
+        }
+
+        public async Task<IEnumerable<MarsRoverPhoto>> GetOpportunityRoverPhotosAsync(string dateOfPhotos)
+        {
+            var apiString =
+                string.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date={0}&api_key={1}",
+                    dateOfPhotos,
+                    StaticKeys.API_KEY);
+
+            return await GetRoverPhotosAsync(apiString);
+        }
+
+        public async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(string uriAddress)
+        {
+            // Another way with http CLient: helps avoid the middle memory stream
+            // Using streams to reduce memory and improve performance with reads
+            // Helps avoid socket exhaustion when not having a "using" with httpclient
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                uriAddress);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var response = await _httpClient.SendAsync(request);
 
-            response.EnsureSuccessStatusCode();
-
-            var content = await response.Content.ReadAsStringAsync();
-            var curiosityRover = JsonConvert.DeserializeObject<MarsRoverPhotoData>(content);
-            return curiosityRover.Photos;
+            using (var response = await _httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var stream = await response.Content.ReadAsStreamAsync();
+                var roverData = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
+                return roverData.Photos;
+            }
         }
 
-        private async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosBasicTest(string dateOfPhotos)
+        public async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(
+            string uriAddress,
+            CancellationToken cancellationToken)
         {
-            // Test 1 
-            var response = await _httpClient.GetAsync(
-                String.Format("mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}", dateOfPhotos, StaticKeys.API_KEY));
-            response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            var rover = JsonConvert.DeserializeObject<MarsRoverPhotoData>(content);
-            return rover.Photos;
-        }
+            // Another way with http CLient: helps avoid the middle memory stream
+            // Using streams to reduce memory and improve performance with reads
+            // Helps avoid socket exhaustion when not having a "using" with httpclient
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                uriAddress);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            using (var response = await _httpClient.SendAsync(request, cancellationToken))
+            {
+                response.EnsureSuccessStatusCode();
+                var stream = await response.Content.ReadAsStreamAsync();
+                var roverData = stream.ReadAndDeserializeFromJson<MarsRoverPhotoData>();
+                return roverData.Photos;
+            }
+        }
 
         //===========================================
         // Debugging functions
@@ -237,6 +148,7 @@ namespace NasaDataExplorer.Services
 
         public async Task RunCancelTest()
         {
+            var _cancellationTokenSource = new CancellationTokenSource();
             _cancellationTokenSource.CancelAfter(2000);
             await GetCuriosityRoverPhotosAsync("6/04/2021", _cancellationTokenSource.Token);
         }
