@@ -1,5 +1,5 @@
 # Nasa Data Explorer
-A windows application using NASA's Open API's to explore their different sets of data.
+A windows application demo using some of Nasa's Open APIs.
 
 # Details
-Uses C# .NET and Universal Windows Platform (UWP) with NASA's Open API's to explore their different sets of data. Various API's are planned to be used from the following page: https://api.nasa.gov/
+Uses C# .NET and Universal Windows Platform (UWP) with NASA's Open API's to view different data from the APIs. The following page has the full set of APIs available: https://api.nasa.gov/
