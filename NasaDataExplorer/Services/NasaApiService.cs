@@ -10,11 +10,17 @@ using System.Threading.Tasks;
 
 namespace NasaDataExplorer.Services
 {
+    /// <summary>
+    /// Class for interacting with Nasa's Open APIs.
+    /// </summary>
     public class NasaApiService : INasaApiService
     {
         private readonly HttpClient _httpClient;
 
-        // Constructor for a TypedClient 
+        /// <summary>
+        /// Creates a new NasaApiService instance as a typed client.
+        /// </summary>
+        /// <param name="client"></param>
         public NasaApiService(HttpClient client)
         {
             client.BaseAddress = new Uri("https://api.nasa.gov/");
@@ -27,11 +33,11 @@ namespace NasaDataExplorer.Services
 
         public async Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync()
         {
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                string.Format(
+            var requestUri = string.Format(
                     "https://api.nasa.gov/planetary/apod?api_key={0}",
-                    StaticKeys.API_KEY));
+                    StaticKeys.API_KEY);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             using (var response = await _httpClient.SendAsync(request))
@@ -45,36 +51,36 @@ namespace NasaDataExplorer.Services
 
         public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(string dateOfPhotos)
         {
-            var apiString = string.Format(
+            var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
                     dateOfPhotos,
                     StaticKeys.API_KEY);
 
-            return await GetRoverPhotosAsync(apiString);
+            return await GetRoverPhotosAsync(requestUri);
         }
 
         public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(
             string dateOfPhotos,
             CancellationToken cancellationToken)
         {
-            var apiString =string.Format(
+            var requestUri =string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
                     dateOfPhotos,
                     StaticKeys.API_KEY);
 
-            return await GetRoverPhotosAsync(apiString, cancellationToken);
+            return await GetRoverPhotosAsync(requestUri, cancellationToken);
         }
 
         public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
             string dateOfPhotos,
             CancellationToken cancellationToken)
         {
-            var apiString = string.Format(
+            var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date={0}&api_key={1}",
                     dateOfPhotos,
                     StaticKeys.API_KEY);
 
-            return await GetRoverPhotosAsync(apiString, cancellationToken);
+            return await GetRoverPhotosAsync(requestUri, cancellationToken);
         }
 
         public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
@@ -82,31 +88,28 @@ namespace NasaDataExplorer.Services
             string camera,
             CancellationToken cancellationToken)
         {
-            var apiString = string.Format(
+            var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?api_key={2}&earth_date={0}&camera={1}",
                     dateOfPhotos,
                     camera,
                     StaticKeys.API_KEY);
 
-            return await GetRoverPhotosAsync(apiString, cancellationToken);
+            return await GetRoverPhotosAsync(requestUri, cancellationToken);
         }
 
         public async Task<IEnumerable<MarsRoverPhoto>> GetOpportunityRoverPhotosAsync(string dateOfPhotos)
         {
-            var apiString =
+            var requestUri =
                 string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date={0}&api_key={1}",
                     dateOfPhotos,
                     StaticKeys.API_KEY);
 
-            return await GetRoverPhotosAsync(apiString);
+            return await GetRoverPhotosAsync(requestUri);
         }
 
         public async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(string uriAddress)
         {
-            // Another way with http CLient: helps avoid the middle memory stream
-            // Using streams to reduce memory and improve performance with reads
-            // Helps avoid socket exhaustion when not having a "using" with httpclient
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
                 uriAddress);
@@ -125,9 +128,6 @@ namespace NasaDataExplorer.Services
             string uriAddress,
             CancellationToken cancellationToken)
         {
-            // Another way with http CLient: helps avoid the middle memory stream
-            // Using streams to reduce memory and improve performance with reads
-            // Helps avoid socket exhaustion when not having a "using" with httpclient
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
                 uriAddress);
@@ -141,38 +141,5 @@ namespace NasaDataExplorer.Services
                 return roverData.Photos;
             }
         }
-
-        //===========================================
-        // Debugging functions
-        //===========================================
-
-        public async Task RunCancelTest()
-        {
-            var _cancellationTokenSource = new CancellationTokenSource();
-            _cancellationTokenSource.CancelAfter(2000);
-            await GetCuriosityRoverPhotosAsync("6/04/2021", _cancellationTokenSource.Token);
-        }
-
-        private async Task DeleteResource()
-        {
-            var request = new HttpRequestMessage(HttpMethod.Delete,
-                "StringHere");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            var content = await response.Content.ReadAsStringAsync();
-        }
-
-        private async Task DeleteResourceShortcut()
-        {
-            var response = await _httpClient.DeleteAsync(
-                "StringHere");
-            response.EnsureSuccessStatusCode();
-
-            var content = await response.Content.ReadAsStringAsync();
-        }
-
     }
 }
