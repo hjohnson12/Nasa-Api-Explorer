@@ -36,7 +36,7 @@ namespace NasaDataExplorer.ViewModels
             _roverCameras2 = new ObservableCollection<string>(
                 cameraList.Select(x => x.Item2.ToString())
                 .ToList());
-            _roverCameras2.Insert(0, DEFAULT_COMBO_OPTION);
+            //_roverCameras2.Insert(0, DEFAULT_COMBO_OPTION);
 
             SelectedDate = DateTimeOffset.Now.AddDays(1);
 
@@ -126,7 +126,7 @@ namespace NasaDataExplorer.ViewModels
             string photosDate = FormatDateString(SelectedDate);
             try
             {
-                if (isCameraSelected(SelectedCamera))
+                if (IsCameraSelected(SelectedCamera))
                 {
                     var camera = MarsRoverPhotoData.PerseveranceCameras
                         .Single(x => x.Item2.Equals(SelectedCamera))
@@ -174,9 +174,9 @@ namespace NasaDataExplorer.ViewModels
             SelectedCamera = camera;
         }
 
-        public bool isCameraSelected(string selection)
+        public bool IsCameraSelected(string selection)
         {
-            return !selection.Equals(DEFAULT_COMBO_OPTION);
+            return !string.IsNullOrEmpty(selection);
         }
 
         public string FormatDateString(DateTimeOffset? date)
