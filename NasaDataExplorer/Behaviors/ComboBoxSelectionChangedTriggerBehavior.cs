@@ -8,9 +8,9 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace NasaDataExplorer.Helpers
+namespace NasaDataExplorer.Behaviors
 {
-    public class DateChangedTriggerBehavior : Trigger<CalendarDatePicker>
+    public class ComboBoxSelectionChangedTriggerBehavior : Trigger<ComboBox>
     {
         public ICommand Command
         {
@@ -20,28 +20,26 @@ namespace NasaDataExplorer.Helpers
 
         // Using a DependencyProperty as the backing store for Command.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommandProperty =
-            DependencyProperty.Register("Command", typeof(ICommand), typeof(CalendarDatePicker), new PropertyMetadata(0));
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(ComboBox), new PropertyMetadata(0));
 
         protected override void OnAttached()
         {
             base.OnAttached();
 
-            AssociatedObject.Date = DateTimeOffset.Now;
-            AssociatedObject.DateChanged += AssociatedObject_DateChanged;
+            AssociatedObject.SelectionChanged += AssociatedObject_SelectionChanged; ;
         }
 
-        private void AssociatedObject_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        private void AssociatedObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Invoke the command with the new chosen date
             if (Command != null)
-                Command.Execute(args.NewDate);
+                Command.Execute(e.AddedItems[0].ToString());
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
 
-            AssociatedObject.DateChanged -= AssociatedObject_DateChanged;
+            AssociatedObject.SelectionChanged -= AssociatedObject_SelectionChanged;
         }
     }
 }

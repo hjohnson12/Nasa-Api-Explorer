@@ -2,10 +2,10 @@
     x:Class="NasaDataExplorer.Views.PerseveranceRoverPhotosView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:behaviors="using:NasaDataExplorer.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:helpers="using:NasaDataExplorer.Helpers"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:NasaDataExplorer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -30,7 +30,7 @@
                     CornerRadius="2"
                     Header="Date:">
                     <interactivity:Interaction.Behaviors>
-                        <helpers:DateChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateDateCommand}" />
+                        <behaviors:DateChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateDateCommand}" />
                     </interactivity:Interaction.Behaviors>
                 </muxc:CalendarDatePicker>
                 <muxc:ComboBox
@@ -39,7 +39,7 @@
                     Header="Cameras:"
                     ItemsSource="{x:Bind ViewModel.RoverCameras2, Mode=OneWay}">
                     <interactivity:Interaction.Behaviors>
-                        <helpers:ComboBoxSelectionChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateSelectedCameraCommand}" />
+                        <behaviors:ComboBoxSelectionChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateSelectedCameraCommand}" />
                     </interactivity:Interaction.Behaviors>
                 </muxc:ComboBox>
             </StackPanel>
