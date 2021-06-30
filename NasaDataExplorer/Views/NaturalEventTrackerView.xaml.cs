@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Extensions.DependencyInjection;
+using NasaDataExplorer.Services;
+using NasaDataExplorer.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,9 +33,15 @@ namespace NasaDataExplorer.Views
         ObservableCollection<NaturalEventTracker.Event> events;
         ObservableCollection<NaturalEventTracker.Category> categories;
 
+        public NaturalEventTrackerViewModel ViewModel => (NaturalEventTrackerViewModel)DataContext;
+
         public NaturalEventTrackerView()
         {
             this.InitializeComponent();
+
+            this.DataContext =
+                new NaturalEventTrackerViewModel(
+                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
 
             InitializeEventTrackerCategories();
             InitializeEventTrackerEvents();

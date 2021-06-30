@@ -23,6 +23,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using NasaDataExplorer.Services.Nasa;
+using NasaDataExplorer.Services.Nasa.MarsRoverPhotos;
+using NasaDataExplorer.Services.Nasa.Apod;
 
 namespace NasaDataExplorer
 {
@@ -47,29 +50,21 @@ namespace NasaDataExplorer
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            configureAndBuildServices();
+            ConfigureAndBuildServices();
         }
 
         /// <summary>
         /// Configures and builds the Nasa API service
         /// </summary>
-        public void configureAndBuildServices()
+        public void ConfigureAndBuildServices()
         {
             var builder = new HostBuilder()
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddHttpClient<INasaApiService, NasaApiService>();
+                services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
+                services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
+                services.AddTransient<INasaApiService, NasaApiService>();
                 services.AddTransient<IDownloaderService, DownloaderService>();
-            }).UseConsoleLifetime();
-            ServiceHost = builder.Build();
-        }
-
-        public void configureAndBuildServices2()
-        {
-            var builder = new HostBuilder()
-            .ConfigureServices((hostContext, services) =>
-            {
-                services.AddHttpClient<INasaApiService, NasaApiService>();
             }).UseConsoleLifetime();
             ServiceHost = builder.Build();
         }

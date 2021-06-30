@@ -89,12 +89,8 @@
                     </muxc:NavigationViewItem.MenuItems>-->
                 </muxc:NavigationViewItem>
                 <muxc:NavigationViewItemSeparator />
-                <!--<muxc:NavigationViewItemHeader Content="Earth" />
-                <muxc:NavigationViewItem
-                    Content="Earth Natrual Event Tracker Data"
-                    Icon="Help"
-                    Tag="Earth_EventTracker" />
-                <muxc:NavigationViewItem
+
+                <!--<muxc:NavigationViewItem
                     Content="Earth Now Poineer Observer"
                     Icon="Help"
                     Tag="Earth_EarthNow" />
@@ -117,6 +113,11 @@
                     Icon="Help"
                     Tag="InsightLander_Weather" />-->
                 <muxc:NavigationViewItemSeparator />
+                <muxc:NavigationViewItemHeader Content="EONET" />
+                <muxc:NavigationViewItem
+                    Content="Earth Natrual Event Tracker Data"
+                    Icon="Help"
+                    Tag="Earth_EventTracker" />
                 <!--<muxc:NavigationViewItemHeader Content="Space" />
                 <muxc:NavigationViewItem
                     Content="Exoplanets"

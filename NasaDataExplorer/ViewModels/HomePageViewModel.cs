@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.Services.Nasa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace NasaDataExplorer.ViewModels
             IsLoading = true;
             try
             {
-                AstronomyPictureOfTheDay = await _nasaApiService.GetAstronomyPictureOfTheDayAsync();
+                AstronomyPictureOfTheDay = await _nasaApiService.Apod.GetAstronomyPictureOfTheDayAsync();
             }
             catch (Exception ex)
             {

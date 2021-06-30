@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.Services.Nasa;
 using NasaDataExplorer.ViewModels;
 using NasaDataExplorer.Views.Dialogs;
 using System;

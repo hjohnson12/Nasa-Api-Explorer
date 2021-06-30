@@ -1,19 +1,17 @@
 ﻿using NasaDataExplorer.Extensions;
 using NasaDataExplorer.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NasaDataExplorer.Services
+namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
 {
-    /// <summary>
-    /// Class for interacting with Nasa's Open APIs.
-    /// </summary>
-    public class NasaApiService : INasaApiService
+    public class RoverPhotoService : IRoverPhotoService
     {
         private readonly HttpClient _httpClient;
 
@@ -21,7 +19,7 @@ namespace NasaDataExplorer.Services
         /// Creates a new NasaApiService instance as a typed client.
         /// </summary>
         /// <param name="client"></param>
-        public NasaApiService(HttpClient client)
+        public RoverPhotoService(HttpClient client)
         {
             client.BaseAddress = new Uri("https://api.nasa.gov/");
             client.Timeout = new TimeSpan(0, 0, 30);
@@ -29,24 +27,6 @@ namespace NasaDataExplorer.Services
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
             _httpClient = client;
-        }
-
-        public async Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync()
-        {
-            var requestUri = string.Format(
-                    "https://api.nasa.gov/planetary/apod?api_key={0}",
-                    StaticKeys.API_KEY);
-
-            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            using (var response = await _httpClient.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var stream = await response.Content.ReadAsStreamAsync();
-                var astronomyPictureOfTheDay = stream.ReadAndDeserializeFromJson<AstronomyPictureOfTheDay>();
-                return astronomyPictureOfTheDay;
-            }
         }
 
         public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(string dateOfPhotos)

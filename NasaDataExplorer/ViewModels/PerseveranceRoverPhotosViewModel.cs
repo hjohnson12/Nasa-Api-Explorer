@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.Services.Nasa;
 
 namespace NasaDataExplorer.ViewModels
 {
@@ -134,14 +135,14 @@ namespace NasaDataExplorer.ViewModels
 
                     PerseverancePhotos =
                         new ObservableCollection<MarsRoverPhoto>(
-                            await _nasaApiService.GetPerseveranceRoverPhotosAsync(
+                            await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
                                 photosDate, camera, cancellationTokenSource.Token));
                 }
                 else
                 {
                     PerseverancePhotos =
                         new ObservableCollection<MarsRoverPhoto>(
-                            await _nasaApiService.GetPerseveranceRoverPhotosAsync(
+                            await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
                                 photosDate, cancellationTokenSource.Token));
                 }
 
