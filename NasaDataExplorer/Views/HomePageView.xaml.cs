@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.Services.Nasa;
 using NasaDataExplorer.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -35,10 +36,9 @@ namespace NasaDataExplorer.Views
         {
             this.InitializeComponent();
 
-            ViewModel = 
-                new HomePageViewModel(
-                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
-            
+            ViewModel =
+                App.Current.ServiceHost.Services.GetRequiredService<HomePageViewModel>();
+
             this.DataContext = ViewModel;
         }
     }

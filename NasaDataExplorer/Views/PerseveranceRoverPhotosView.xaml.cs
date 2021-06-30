@@ -41,8 +41,7 @@ namespace NasaDataExplorer.Views
             this.InitializeComponent();
 
             this.DataContext =
-                new PerseveranceRoverPhotosViewModel(
-                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
+                    App.Current.ServiceHost.Services.GetService<PerseveranceRoverPhotosViewModel>();
 
             // Current day since mission is still active
             RoverPhotosDatePicker.MaxDate = DateTime.Today;

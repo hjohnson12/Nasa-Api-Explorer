@@ -10,6 +10,7 @@ using NasaDataExplorer.Services;
 using System.Threading;
 using NasaDataExplorer.ViewModels;
 using NasaDataExplorer.Models;
+using NasaDataExplorer.Services.Nasa;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,19 +23,16 @@ namespace NasaDataExplorer.Views
     {
         private ObservableCollection<MarsRoverPhoto> curiosityPhotos = 
             new ObservableCollection<MarsRoverPhoto>();
-
         private CancellationTokenSource cancellationTokenSource;
 
-        public CuriosityRoverPhotosViewModel ViewModel { get; set; }
+        public CuriosityRoverPhotosViewModel ViewModel => (CuriosityRoverPhotosViewModel)DataContext;
 
         public CuriosityRoverPhotosView()
         {
             this.InitializeComponent();
 
-            ViewModel = 
-                new CuriosityRoverPhotosViewModel(
-                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
-            this.DataContext = ViewModel;
+            this.DataContext =
+                App.Current.ServiceHost.Services.GetRequiredService<CuriosityRoverPhotosViewModel>();
             
             // Mission hasn't ended so can just set a previous date
             RoverPhotosDatePicker.Date = DateTimeOffset.Now.AddDays(-1);

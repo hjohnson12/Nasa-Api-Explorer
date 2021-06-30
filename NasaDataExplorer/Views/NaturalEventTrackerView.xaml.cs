@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using NasaDataExplorer.Models;
+using NasaDataExplorer.Services.Nasa;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;

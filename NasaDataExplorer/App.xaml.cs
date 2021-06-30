@@ -26,6 +26,7 @@ using Windows.UI.Xaml.Navigation;
 using NasaDataExplorer.Services.Nasa;
 using NasaDataExplorer.Services.Nasa.MarsRoverPhotos;
 using NasaDataExplorer.Services.Nasa.Apod;
+using NasaDataExplorer.ViewModels;
 
 namespace NasaDataExplorer
 {
@@ -39,8 +40,6 @@ namespace NasaDataExplorer
     /// </summary>
     sealed partial class App : Application
     {
-        public IHost ServiceHost { get; set; }
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -53,20 +52,58 @@ namespace NasaDataExplorer
             ConfigureAndBuildServices();
         }
 
+        public IHost ServiceHost { get; set; }
+
+        /// <summary>
+        /// Gets the current application instance
+        /// </summary>
+        public new static App Current => (App)Application.Current;
+
+        /// <summary>
+        /// Gets the IServiceProvider instance to resolve application services
+        /// </summary>
+        public IServiceProvider Services { get; }
+
         /// <summary>
         /// Configures and builds the Nasa API service
         /// </summary>
-        public void ConfigureAndBuildServices()
+        private void ConfigureAndBuildServices()
         {
             var builder = new HostBuilder()
             .ConfigureServices((hostContext, services) =>
             {
+                // Services
                 services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
                 services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
-                services.AddTransient<INasaApiService, NasaApiService>();
                 services.AddTransient<IDownloaderService, DownloaderService>();
+                services.AddSingleton<INasaApiService, NasaApiService>();
+
+                // View Models
+                services.AddTransient<HomePageViewModel>();
+                services.AddTransient<PerseveranceRoverPhotosViewModel>();
+                services.AddTransient<CuriosityRoverPhotosViewModel>();
+                services.AddTransient<OpportunityRoverPhotosViewModel>();
             }).UseConsoleLifetime();
             ServiceHost = builder.Build();
+        }
+
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            // Services
+            services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
+            services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
+            services.AddTransient<IDownloaderService, DownloaderService>();
+            services.AddSingleton<INasaApiService, NasaApiService>();
+
+            // View Models
+            services.AddTransient<HomePageViewModel>();
+            services.AddTransient<PerseveranceRoverPhotosViewModel>();
+            services.AddTransient<CuriosityRoverPhotosViewModel>();
+            services.AddTransient<OpportunityRoverPhotosViewModel>();
+
+            return services.BuildServiceProvider();
         }
 
         /// <summary>

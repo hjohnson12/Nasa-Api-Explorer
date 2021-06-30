@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
 {
+    /// <summary>
+    /// Class for interacting with Nasa's Mars Rover Photos API
+    /// </summary>
     public class RoverPhotoService : IRoverPhotoService
     {
         private readonly HttpClient _httpClient;

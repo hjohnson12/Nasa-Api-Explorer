@@ -1,5 +1,6 @@
 ﻿using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.Services.Nasa;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,7 +41,7 @@ namespace NasaDataExplorer.ViewModels
             try
             {
                 CuriosityPhotos = new ObservableCollection<MarsRoverPhoto>(
-                        await _nasaApiService.GetCuriosityRoverPhotosAsync(date));
+                        await _nasaApiService.MarsRoverPhotos.GetCuriosityRoverPhotosAsync(date));
                 return CuriosityPhotos;
             }
             catch (Exception ex)

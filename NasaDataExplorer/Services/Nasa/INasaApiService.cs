@@ -12,11 +12,10 @@ using System.Threading.Tasks;
 namespace NasaDataExplorer.Services.Nasa
 {
     /// <summary>
-    /// Interface for a service interacting with Nasa's Open APIs.
+    /// Interface for a service interacting with some of Nasa's Open APIs.
     /// </summary>
     public interface INasaApiService
     {
-
         IRoverPhotoService MarsRoverPhotos { get; set; }
         IAstronomyPictureOfTheDayService Apod { get; set; }
     }

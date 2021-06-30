@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace NasaDataExplorer.Services.Nasa.Apod
 {
+    /// <summary>
+    /// Class for interacting with the Astronomy Picture of the Day API
+    /// </summary>
     public class AstronomyPictureOfTheDayService : IAstronomyPictureOfTheDayService
     {
         private readonly HttpClient _httpClient;

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Models;
 using NasaDataExplorer.Services;
+using NasaDataExplorer.Services.Nasa;
 using NasaDataExplorer.ViewModels;
 using System;
 using System.Collections.ObjectModel;
@@ -20,20 +21,20 @@ namespace NasaDataExplorer.Views
     {
         public ObservableCollection<MarsRoverPhoto> OpportunityPhotos =
             new ObservableCollection<MarsRoverPhoto>();
-        public OpportunityRoverPhotosViewModel ViewModel { get; set; }    
+
+        public OpportunityRoverPhotosViewModel ViewModel => (OpportunityRoverPhotosViewModel)DataContext;
 
         public OpportunityRoverPhotosView()
         {
             this.InitializeComponent();
 
+            this.DataContext =
+                App.Current.ServiceHost.Services.GetRequiredService<OpportunityRoverPhotosViewModel>();
+
             var missionStartDate = new DateTimeOffset(2004, 1, 25, default, default, default, default);
             var missionEndDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);
             RoverPhotosDatePicker.MinDate = missionStartDate;
             RoverPhotosDatePicker.MaxDate = missionEndDate;
-
-            ViewModel =
-                new OpportunityRoverPhotosViewModel(
-                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<INasaApiService>());
         }
 
         private async Task InitializePhotos_Opportunity(string date)

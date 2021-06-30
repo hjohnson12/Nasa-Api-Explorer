@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using NasaDataExplorer.Services.Nasa;
 
 namespace NasaDataExplorer.ViewModels
 {
@@ -36,7 +37,7 @@ namespace NasaDataExplorer.ViewModels
             string date)
         {
             OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(
-                await _nasaApiService.GetOpportunityRoverPhotosAsync(date));
+                await _nasaApiService.MarsRoverPhotos.GetOpportunityRoverPhotosAsync(date));
             return OpportunityPhotos;
         }
 
@@ -45,7 +46,7 @@ namespace NasaDataExplorer.ViewModels
             CancellationToken cancellationToken)
         {
             OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(
-                await _nasaApiService.GetOpportunityRoverPhotosAsync(date));
+                await _nasaApiService.MarsRoverPhotos.GetOpportunityRoverPhotosAsync(date));
             return OpportunityPhotos;
         }
     }
