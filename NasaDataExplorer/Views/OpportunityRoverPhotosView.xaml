@@ -88,6 +88,12 @@
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
             </GridView>
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Text="No photos availble for this date. Please select another date or check again later."
+                Visibility="{x:Bind ViewModel.IsPhotosAvailable, Mode=OneWay}" />
         </Grid>
         <muxc:ProgressRing
             x:Name="progressRing"

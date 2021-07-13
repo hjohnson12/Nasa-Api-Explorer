@@ -30,6 +30,7 @@ namespace NasaDataExplorer.ViewModels
             _nasaApiService = nasaApiService;
 
             SelectedDate = DateTimeOffset.Now.AddDays(1);
+            CuriosityPhotos = new ObservableCollection<MarsRoverPhoto>();
 
             LoadPhotosCommand =
                new AsyncRelayCommand(LoadCuriosityRoverPhotos);
@@ -44,10 +45,14 @@ namespace NasaDataExplorer.ViewModels
             get { return _curiosityPhotos; }
             set
             {
-                if (_curiosityPhotos != value)
-                    _curiosityPhotos = value;
-                OnPropertyChanged();
+                SetProperty(ref _curiosityPhotos, value);
+                OnPropertyChanged("IsPhotosAvailable");
             }
+        }
+
+        public bool IsPhotosAvailable
+        {
+            get => CuriosityPhotos.Count == 0;
         }
 
         public bool IsLoading

@@ -20,6 +20,7 @@ namespace NasaDataExplorer.ViewModels
         private bool _isLoading;
         private DateTimeOffset? _selectedDate;
         private CancellationTokenSource _cancellationTokenSource;
+        private DateTimeOffset? _missionEndDate;
 
         public ICommand LoadPhotosCommand { get; set; }
         public ICommand UpdateDateCommand { get; set; }
@@ -29,6 +30,11 @@ namespace NasaDataExplorer.ViewModels
         {
             _nasaApiService = nasaApiService;
 
+            OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>();
+
+            _missionEndDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);
+            SelectedDate = _missionEndDate;
+
             LoadPhotosCommand =
                new AsyncRelayCommand(LoadOpportunityRoverPhotos);
             UpdateDateCommand =
@@ -37,14 +43,19 @@ namespace NasaDataExplorer.ViewModels
                 new Base.RelayCommand(CancelRequest);
         }
 
-        public DateTimeOffset? SelectedDate
+        public ObservableCollection<MarsRoverPhoto> OpportunityPhotos
         {
-            get => _selectedDate;
+            get => _opportunityPhotos;
             set
             {
-                _selectedDate = value;
-                OnPropertyChanged();
+                SetProperty(ref _opportunityPhotos, value);
+                OnPropertyChanged("IsPhotosAvailable");
             }
+        }
+
+        public bool IsPhotosAvailable
+        {
+            get => OpportunityPhotos.Count == 0;
         }
 
         public bool IsLoading
@@ -58,16 +69,16 @@ namespace NasaDataExplorer.ViewModels
             }
         }
 
-        public ObservableCollection<MarsRoverPhoto> OpportunityPhotos
+        public DateTimeOffset? SelectedDate
         {
-            get => _opportunityPhotos;
+            get => _selectedDate;
             set
             {
-                if (_opportunityPhotos != value)
-                    _opportunityPhotos = value;
+                _selectedDate = value;
                 OnPropertyChanged();
             }
         }
+
         public ObservableCollection<MarsRoverPhoto> OpportunityRover { get; set; }
 
         public async Task LoadOpportunityRoverPhotos()

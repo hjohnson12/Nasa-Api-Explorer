@@ -16,7 +16,7 @@ namespace NasaDataExplorer.ViewModels
     {
         private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private INasaApiService _nasaApiService;
-        private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
+        private ObservableCollection<MarsRoverPhoto> _perseverancePhotos = new ObservableCollection<MarsRoverPhoto>();
         private MarsRover _perseveranceRover;
         private ObservableCollection<string> _roverCameras;
         private ObservableCollection<string> _roverCameras2;
@@ -40,6 +40,7 @@ namespace NasaDataExplorer.ViewModels
             //_roverCameras2.Insert(0, DEFAULT_COMBO_OPTION);
 
             SelectedDate = DateTimeOffset.Now.AddDays(1);
+            PerseverancePhotos = new ObservableCollection<MarsRoverPhoto>();
 
             LoadPhotosCommand =
                 new AsyncRelayCommand(LoadPerseveranceRoverPhotos);
@@ -56,32 +57,32 @@ namespace NasaDataExplorer.ViewModels
             get => _perseverancePhotos;
             set
             {
-                if (_perseverancePhotos != value)
-                    _perseverancePhotos = value;
-                OnPropertyChanged();
+                SetProperty(ref _perseverancePhotos, value);
+                OnPropertyChanged("IsPhotosAvailable");
             }
+        }
+
+        public bool IsPhotosAvailable
+        {
+            get => PerseverancePhotos.Count == 0;
+        }
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => SetProperty(ref _isLoading, value);
         }
 
         public ObservableCollection<string> RoverCameras
         {
             get => _roverCameras;
-            set
-            {
-                if (_roverCameras != value)
-                    _roverCameras = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _roverCameras, value);
         }
 
         public ObservableCollection<string> RoverCameras2
         {
             get => _roverCameras2;
-            set
-            {
-                if (_roverCameras2 != value)
-                    _roverCameras2 = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _roverCameras2, value);
         }
 
         public DateTimeOffset? SelectedDate
@@ -100,17 +101,6 @@ namespace NasaDataExplorer.ViewModels
             set
             {
                 _selectedCamera = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set
-            {
-                if (_isLoading != value)
-                    _isLoading = value;
                 OnPropertyChanged();
             }
         }
