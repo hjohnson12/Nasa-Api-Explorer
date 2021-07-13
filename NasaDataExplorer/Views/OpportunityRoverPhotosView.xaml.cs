@@ -1,16 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NasaDataExplorer.Models;
-using NasaDataExplorer.Services;
-using NasaDataExplorer.Services.Nasa;
 using NasaDataExplorer.ViewModels;
+using NasaDataExplorer.Views.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace NasaDataExplorer.Views
 {
@@ -19,9 +16,6 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class OpportunityRoverPhotosView : Page
     {
-        public ObservableCollection<MarsRoverPhoto> OpportunityPhotos =
-            new ObservableCollection<MarsRoverPhoto>();
-
         public OpportunityRoverPhotosViewModel ViewModel => (OpportunityRoverPhotosViewModel)DataContext;
 
         public OpportunityRoverPhotosView()
@@ -37,38 +31,13 @@ namespace NasaDataExplorer.Views
             RoverPhotosDatePicker.MaxDate = missionEndDate;
         }
 
-        private async Task InitializePhotos_Opportunity(string date)
-        {
-            try
-            {
-                OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(
-                    await ViewModel.LoadOpportunityRoverPhotos(date));
-            }
-            catch (Exception ex)
-            {
-                var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
-                logger.LogError(ex, "An error occurred.");
-            }
-        }
-
-        private async void RoverPhotosDatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
-        {
-            var calendarName = sender.Name.ToString();
-            if (string.IsNullOrEmpty(args.NewDate.ToString()))
-                return;
-            else
-            {
-                var datePicked = args.NewDate;
-                var photoDate = datePicked.Value.Year.ToString() + "-" + datePicked.Value.Month.ToString() + "-" + datePicked.Value.Day.ToString();
-                await InitializePhotos_Opportunity(photoDate);
-            }
-        }
-
         private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //Frame.Navigate(typeof(PhotoDetailsView), e.ClickedItem);
-            //CuriosityPhotoDetailsDialogView diag = new CuriosityPhotoDetailsDialogView(e.ClickedItem as MarsRoverPhoto, OpportunityPhotos);
-            //await diag.ShowAsync();
+            RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
+               e.ClickedItem as MarsRoverPhoto,
+               ViewModel.OpportunityPhotos);
+
+            await photoDialog.ShowAsync();
         }
     }
 }
