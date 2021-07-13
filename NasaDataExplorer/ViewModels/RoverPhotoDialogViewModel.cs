@@ -21,7 +21,8 @@ namespace NasaDataExplorer.ViewModels
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand DownloadImageCommand { get; set; }
         
-        public RoverPhotoDialogViewModel(IDownloaderService downloaderService,
+        public RoverPhotoDialogViewModel(
+            IDownloaderService downloaderService,
             ObservableCollection<MarsRoverPhoto> roverPhotos,
             MarsRoverPhoto selectedPhoto)
         {
@@ -38,23 +39,13 @@ namespace NasaDataExplorer.ViewModels
         public ObservableCollection<MarsRoverPhoto> RoverPhotos
         {
             get => _roverPhotos;
-            set
-            {
-                if (_roverPhotos != value)
-                    _roverPhotos = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _roverPhotos, value);
         }
 
         public MarsRoverPhoto CurrentPhoto
         {
             get => _currentPhoto;
-            set
-            {
-                if (_currentPhoto != value)
-                    _currentPhoto = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _currentPhoto, value);
         }
 
         public void ChangeSelection(MarsRoverPhoto updatedSelection)

@@ -29,23 +29,13 @@ namespace NasaDataExplorer.ViewModels
         public AstronomyPictureOfTheDay AstronomyPictureOfTheDay
         {
             get => _astronomyPictureOfTheDay;
-            set
-            {
-                if (_astronomyPictureOfTheDay != value)
-                    _astronomyPictureOfTheDay = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _astronomyPictureOfTheDay, value);
         } 
 
         public bool IsLoading
         {
             get => _isLoading;
-            set
-            {
-                if (_isLoading != value)
-                    _isLoading = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _isLoading, value);
         }
 
         public async Task LoadAstronomyPictureOfTheDayAsync()

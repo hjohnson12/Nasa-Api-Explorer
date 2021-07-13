@@ -58,12 +58,7 @@ namespace NasaDataExplorer.ViewModels
         public bool IsLoading
         {
             get => _isLoading;
-            set
-            {
-                if (_isLoading != value)
-                    _isLoading = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _isLoading, value);
         }
 
         public DateTimeOffset? SelectedDate
