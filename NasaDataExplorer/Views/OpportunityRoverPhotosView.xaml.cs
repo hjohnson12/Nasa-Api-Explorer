@@ -1,13 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using NasaDataExplorer.Models;
-using NasaDataExplorer.ViewModels;
-using NasaDataExplorer.Views.Dialogs;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NasaDataExplorer.Models;
+using NasaDataExplorer.ViewModels;
+using NasaDataExplorer.Views.Dialogs;
 
 namespace NasaDataExplorer.Views
 {

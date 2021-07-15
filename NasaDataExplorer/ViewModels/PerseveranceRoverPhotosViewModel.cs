@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaDataExplorer.Models;
-using NasaDataExplorer.Services;
 using NasaDataExplorer.Services.Nasa;
 
 namespace NasaDataExplorer.ViewModels

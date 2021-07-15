@@ -1,8 +1,4 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
-using NasaDataExplorer.Models;
-using NasaDataExplorer.Services;
-using NasaDataExplorer.Services.Nasa;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,6 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.Input;
+using NasaDataExplorer.Models;
+using NasaDataExplorer.Services.Nasa;
 
 namespace NasaDataExplorer.ViewModels
 {

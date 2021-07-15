@@ -71,7 +71,7 @@
                             <Grid.Background>
                                 <SolidColorBrush Color="{Binding Color}" />
                             </Grid.Background>
-                            <Image Source="{Binding Img_src}" Stretch="Uniform" />
+                            <Image Source="{Binding ImageSourceUrl}" Stretch="Uniform" />
                             <Border
                                 VerticalAlignment="Bottom"
                                 Background="#44000000"
@@ -81,7 +81,7 @@
                                     Foreground="White"
                                     TextWrapping="Wrap">
                                     <Run Text="{Binding Id}" /><Run Text="." />
-                                    <Run Text="{Binding Camera.Full_name}" />
+                                    <Run Text="{Binding Camera.FullName}" />
                                 </TextBlock>
                             </Border>
                         </Grid>

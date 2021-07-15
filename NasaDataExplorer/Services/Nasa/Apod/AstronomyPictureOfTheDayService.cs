@@ -1,11 +1,11 @@
-﻿using NasaDataExplorer.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using NasaDataExplorer.Extensions;
 
 namespace NasaDataExplorer.Services.Nasa.Apod
 {

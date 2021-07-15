@@ -1,7 +1,4 @@
-﻿using NasaDataExplorer.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -17,11 +14,15 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using NasaDataExplorer.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace NasaDataExplorer.Views
 {
+    // Update 07/2021: Insight Weather API currently is down
+    // Info here https://mars.nasa.gov/insight/weather/
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -36,7 +37,7 @@ namespace NasaDataExplorer.Views
             InitializeWeather();
         }
 
-        // Update 06/2021: Insight Weather API currently is down
+        // Update 07/2021: Insight Weather API currently is down
         // Info here https://mars.nasa.gov/insight/weather/
         public void InitializeWeather()
         {

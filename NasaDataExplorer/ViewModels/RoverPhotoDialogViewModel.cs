@@ -1,14 +1,14 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
-using NasaDataExplorer.Base;
-using NasaDataExplorer.Models;
-using NasaDataExplorer.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.Input;
+using NasaDataExplorer.Base;
+using NasaDataExplorer.Models;
+using NasaDataExplorer.Services;
 
 namespace NasaDataExplorer.ViewModels
 {
@@ -33,7 +33,7 @@ namespace NasaDataExplorer.ViewModels
             ChangeSelectionCommand = 
                 new Base.RelayCommand<MarsRoverPhoto>(ChangeSelection, () => true);
             DownloadImageCommand =
-                new AsyncRelayCommand(DownloadImage, () => !CurrentPhoto.Img_src.Equals(""));
+                new AsyncRelayCommand(DownloadImage, () => !CurrentPhoto.ImageSourceUrl.Equals(""));
         }
 
         public ObservableCollection<MarsRoverPhoto> RoverPhotos
@@ -57,7 +57,7 @@ namespace NasaDataExplorer.ViewModels
         {
             try
             {
-                await _downloaderService.DownloadFileAsync(CurrentPhoto.Img_src, @"C:\users\hlj51\desktop\");
+                await _downloaderService.DownloadFileAsync(CurrentPhoto.ImageSourceUrl, @"C:\users\hlj51\desktop\");
             }
             catch (Exception ex)
             {

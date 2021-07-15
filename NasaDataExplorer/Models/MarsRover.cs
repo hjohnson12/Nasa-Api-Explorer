@@ -6,15 +6,20 @@ namespace NasaDataExplorer.Models
     {
         [JsonProperty("id")]
         public int Id { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }
+
         [JsonProperty("landing_date")]
-        public string Landing_date { get; set; }
+        public string LandingDate { get; set; }
+
         [JsonProperty("launch_date")]
-        public string Launch_date { get; set; }
+        public string LaunchDate { get; set; }
+
         [JsonProperty("status")]
         public string Status { get; set; }
+
         [JsonProperty("total_photos")]
-        public int Total_photos { get; set; }
+        public int TotalPhotos { get; set; }
     }
 }

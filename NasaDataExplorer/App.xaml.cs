@@ -27,6 +27,7 @@ using NasaDataExplorer.Services.Nasa;
 using NasaDataExplorer.Services.Nasa.MarsRoverPhotos;
 using NasaDataExplorer.Services.Nasa.Apod;
 using NasaDataExplorer.ViewModels;
+using NasaDataExplorer.Helpers;
 
 namespace NasaDataExplorer
 {
@@ -158,27 +159,15 @@ namespace NasaDataExplorer
                 // Ensure the current window is active
                 Window.Current.Activate();
 
-                // Hide default title bar and extend your content into the title bar area
-                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-
-                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-
-                // Set active window colors
-                titleBar.ForegroundColor = Windows.UI.Colors.White;
-                titleBar.BackgroundColor = Windows.UI.Colors.Transparent;
-                titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
-                titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
-                titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
-                titleBar.ButtonHoverBackgroundColor = Windows.UI.Colors.SlateGray;
-                titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.White;
-                titleBar.ButtonPressedBackgroundColor = Windows.UI.Colors.DimGray;
-
-                // Set inactive window colors
-                titleBar.InactiveForegroundColor = Windows.UI.Colors.White;
-                titleBar.InactiveBackgroundColor = Windows.UI.Colors.Transparent;
-                titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.White;
-                titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
+                // Configure application title bar to application theme
+                ConfigureTitleBar();
             }
+        }
+
+        void ConfigureTitleBar()
+        {
+            TitleBarHelper.ExpandViewIntoTitleBar();
+            TitleBarHelper.SetupTitleBar();
         }
 
         /// <summary>

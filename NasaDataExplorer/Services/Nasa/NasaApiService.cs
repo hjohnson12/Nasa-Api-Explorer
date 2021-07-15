@@ -1,19 +1,12 @@
-﻿using NasaDataExplorer.Extensions;
-using NasaDataExplorer.Models;
+﻿using System;
 using NasaDataExplorer.Services.Nasa.Apod;
 using NasaDataExplorer.Services.Nasa.MarsRoverPhotos;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NasaDataExplorer.Services.Nasa
 {
     /// <summary>
-    /// Class for interacting with some of Nasa's Open APIs
+    /// Class for interacting with other api services from a
+    /// single location
     /// </summary>
     public class NasaApiService : INasaApiService
     {
