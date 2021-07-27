@@ -38,6 +38,7 @@ namespace NasaDataExplorer.Services.Nasa.Apod
             using (var response = await _httpClient.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
+
                 var stream = await response.Content.ReadAsStreamAsync();
                 var astronomyPictureOfTheDay = stream.ReadAndDeserializeFromJson<AstronomyPictureOfTheDay>();
                 return astronomyPictureOfTheDay;

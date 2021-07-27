@@ -1,5 +1,4 @@
-﻿using System;
-using NasaDataExplorer.Services.Nasa.Apod;
+﻿using NasaDataExplorer.Services.Nasa.Apod;
 using NasaDataExplorer.Services.Nasa.MarsRoverPhotos;
 
 namespace NasaDataExplorer.Services.Nasa

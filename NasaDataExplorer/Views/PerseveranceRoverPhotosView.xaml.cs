@@ -26,8 +26,6 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class PerseveranceRoverPhotosView : Page
     {
-        private ObservableCollection<MarsRoverPhoto> perseverancePhotos =
-            new ObservableCollection<MarsRoverPhoto>();
         public PerseveranceRoverPhotosViewModel ViewModel => (PerseveranceRoverPhotosViewModel)DataContext;
 
         public PerseveranceRoverPhotosView()

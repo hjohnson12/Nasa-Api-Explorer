@@ -15,11 +15,11 @@ namespace NasaDataExplorer.ViewModels
     {
         private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private INasaApiService _nasaApiService;
-        private ObservableCollection<MarsRoverPhoto> _perseverancePhotos = new ObservableCollection<MarsRoverPhoto>();
+        private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
         private ObservableCollection<string> _roverCameras;
         private ObservableCollection<string> _roverCameras2;
-        private CancellationTokenSource cancellationTokenSource;
+        private CancellationTokenSource _cancellationTokenSource;
         private bool _isLoading;
         private DateTimeOffset? _selectedDate;
         private string _selectedCamera;
@@ -107,8 +107,8 @@ namespace NasaDataExplorer.ViewModels
         public async Task LoadPerseveranceRoverPhotos()
         {
             IsLoading = true;
-            cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.Token.Register(() =>
+            _cancellationTokenSource = new CancellationTokenSource();
+            _cancellationTokenSource.Token.Register(() =>
             {
                 Console.WriteLine("User requested to cancel.");
             });
@@ -125,14 +125,14 @@ namespace NasaDataExplorer.ViewModels
                     PerseverancePhotos =
                         new ObservableCollection<MarsRoverPhoto>(
                             await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
-                                photosDate, camera, cancellationTokenSource.Token));
+                                photosDate, camera, _cancellationTokenSource.Token));
                 }
                 else
                 {
                     PerseverancePhotos =
                         new ObservableCollection<MarsRoverPhoto>(
                             await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
-                                photosDate, cancellationTokenSource.Token));
+                                photosDate, _cancellationTokenSource.Token));
                 }
 
                 //PerseveranceRover = PerseverancePhotos[0].Rover;
@@ -150,7 +150,7 @@ namespace NasaDataExplorer.ViewModels
             finally
             {
                 IsLoading = false;
-                cancellationTokenSource = null;
+                _cancellationTokenSource = null;
             }
         }
 

@@ -8,12 +8,17 @@ namespace NasaDataExplorer.Helpers
     /// </summary>
     public static class TitleBarHelper
     {
+        /// <summary>
+        /// Hides the default title bar and extends content into the title bar area
+        /// </summary>
         public static void ExpandViewIntoTitleBar()
         {
-            // Hide default title bar and extend your content into the title bar area
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
         }
 
+        /// <summary>
+        /// Configures the title bar active/inactive window colors
+        /// </summary>
         public static void SetupTitleBar()
         {
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;

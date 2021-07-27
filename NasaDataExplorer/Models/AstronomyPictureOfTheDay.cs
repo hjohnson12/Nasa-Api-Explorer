@@ -14,7 +14,7 @@ namespace NasaDataExplorer
         public string Explanation { get; set; }
 
         [JsonProperty("hdurl")]
-        public string Hdurl { get; set; }
+        public string HdUrl { get; set; }
 
         [JsonProperty("media_type")]
         public string MediaType { get; set; }

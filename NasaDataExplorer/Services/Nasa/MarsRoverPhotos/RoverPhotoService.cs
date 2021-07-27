@@ -19,7 +19,7 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
         private readonly HttpClient _httpClient;
 
         /// <summary>
-        /// Creates a new NasaApiService instance as a typed client.
+        /// Creates a new RoverPhotoService instance as a typed client.
         /// </summary>
         /// <param name="client"></param>
         public RoverPhotoService(HttpClient client)
