@@ -1,6 +1,4 @@
-﻿using NasaDataExplorer.Extensions;
-using NasaDataExplorer.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -8,6 +6,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NasaDataExplorer.Extensions;
+using NasaDataExplorer.Models;
 
 namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
 {
@@ -21,7 +21,7 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
         /// <summary>
         /// Creates a new RoverPhotoService instance as a typed client.
         /// </summary>
-        /// <param name="client"></param>
+        /// <param name="client">An instance of HttpClient</param>
         public RoverPhotoService(HttpClient client)
         {
             client.BaseAddress = new Uri("https://api.nasa.gov/");
@@ -32,6 +32,11 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
             _httpClient = client;
         }
 
+        /// <summary>
+        /// Gets photos from the Mars Curiosity Rover
+        /// </summary>
+        /// <param name="dateOfPhotos"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(string dateOfPhotos)
         {
             var requestUri = string.Format(
@@ -42,6 +47,12 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
             return await GetRoverPhotosAsync(requestUri);
         }
 
+        /// <summary>
+        /// Gets photos from the Mars Curiosity Rover
+        /// </summary>
+        /// <param name="dateOfPhotos"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(
             string dateOfPhotos,
             CancellationToken cancellationToken)
@@ -54,6 +65,12 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
             return await GetRoverPhotosAsync(requestUri, cancellationToken);
         }
 
+        /// <summary>
+        /// Gets photos from the Mars Perseverance Rover
+        /// </summary>
+        /// <param name="dateOfPhotos"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
             string dateOfPhotos,
             CancellationToken cancellationToken)
@@ -66,6 +83,13 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
             return await GetRoverPhotosAsync(requestUri, cancellationToken);
         }
 
+        /// <summary>
+        /// Gets photos from the Mars Perseverance Rover
+        /// </summary>
+        /// <param name="dateOfPhotos">Date of photos to retrieve</param>
+        /// <param name="camera">Specific camera</param>
+        /// <param name="cancellationToken">Token to process canellations</param>
+        /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
             string dateOfPhotos,
             string camera,
@@ -80,6 +104,11 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
             return await GetRoverPhotosAsync(requestUri, cancellationToken);
         }
 
+        /// <summary>
+        /// Gets photos from the Mars Opportunity Rover
+        /// </summary>
+        /// <param name="dateOfPhotos"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetOpportunityRoverPhotosAsync(string dateOfPhotos)
         {
             var requestUri =
@@ -91,7 +120,12 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
             return await GetRoverPhotosAsync(requestUri);
         }
 
-        public async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(string uriAddress)
+        /// <summary>
+        /// Retrieves photos for a rover according to its uriAddress
+        /// </summary>
+        /// <param name="uriAddress"></param>
+        /// <returns></returns>
+        private async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(string uriAddress)
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
@@ -108,7 +142,13 @@ namespace NasaDataExplorer.Services.Nasa.MarsRoverPhotos
             }
         }
 
-        public async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(
+        /// <summary>
+        /// Retrieves photos for a rover according to its uriAddress
+        /// </summary>
+        /// <param name="uriAddress"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        private async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(
             string uriAddress,
             CancellationToken cancellationToken)
         {

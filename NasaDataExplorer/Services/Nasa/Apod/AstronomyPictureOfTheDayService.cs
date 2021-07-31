@@ -26,6 +26,11 @@ namespace NasaDataExplorer.Services.Nasa.Apod
             _httpClient = client;
         }
 
+        /// <summary>
+        /// Retrieves the Nasa Astronomy Picture of the Day
+        /// <para>See the <see href="https://apod.nasa.gov/apod/astropix.html">website</see>.</para>
+        /// </summary>
+        /// <returns></returns>
         public async Task<AstronomyPictureOfTheDay> GetAstronomyPictureOfTheDayAsync()
         {
             var requestUri = string.Format(

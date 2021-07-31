@@ -80,21 +80,15 @@
             </muxc:NavigationView.AutoSuggestBox>-->
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem
-                    Content="Home"
+                    Content="Astronomy Picture of the Day"
                     Icon="Home"
                     IsSelected="True"
-                    Tag="HomePage">
+                    Tag="APOD">
                     <!--<muxc:NavigationViewItem.MenuItems>
                         <muxc:NavigationViewItem Content="Test" Tag="Test" />
                     </muxc:NavigationViewItem.MenuItems>-->
                 </muxc:NavigationViewItem>
                 <muxc:NavigationViewItemSeparator />
-
-                <!--<muxc:NavigationViewItem
-                    Content="Earth Now Poineer Observer"
-                    Icon="Help"
-                    Tag="Earth_EarthNow" />
-                <muxc:NavigationViewItemSeparator />-->
                 <muxc:NavigationViewItemHeader Content="Mars Rover Photos" />
                 <muxc:NavigationViewItem
                     Content="Perseverance Rover Photos"
@@ -119,11 +113,6 @@
                     Icon="Help"
                     Tag="Earth_EventTracker" />
                 <!--<muxc:NavigationViewItemHeader Content="Space" />
-                <muxc:NavigationViewItem
-                    Content="Exoplanets"
-                    Icon="Home"
-                    IsSelected="True"
-                    Tag="Exoplanets" />
                 <muxc:NavigationViewItem Content="News Feeds" SelectsOnInvoked="False">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE14C;" />
@@ -136,12 +125,6 @@
             </muxc:NavigationView.MenuItems>
             <Grid>
                 <Frame x:Name="mainFrame" />
-                <!--  KEEP: Use for when pages are sending out HTTP Request and loading  -->
-                <!--<muxc:ProgressRing
-                    Width="100"
-                    Height="100"
-                    IsActive="True" />-->
-
             </Grid>
         </muxc:NavigationView>
     </Grid>

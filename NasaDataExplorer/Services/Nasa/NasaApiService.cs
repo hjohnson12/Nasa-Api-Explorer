@@ -19,14 +19,14 @@ namespace NasaDataExplorer.Services.Nasa
         }
 
         /// <summary>
-        /// Interface instance to interact with the Mars Rover 
-        /// Photos service.
+        /// Interact with the Mars Rover Photos service with an injected
+        /// instance of its interface
         /// </summary>
         public IRoverPhotoService MarsRoverPhotos { get; set; }
 
         /// <summary>
-        /// Interface instance to interact with the Astronomy Picture
-        /// of the Day service.
+        /// Interact with the Astronomy Picture of the Day service with 
+        /// an injected instance of its interface
         /// </summary>
         public IAstronomyPictureOfTheDayService Apod { get; set; }
     }

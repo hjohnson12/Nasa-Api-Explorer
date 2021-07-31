@@ -29,15 +29,20 @@ namespace NasaDataExplorer.Views
             navMenu.SelectedItem = navMenu.MenuItems.ElementAt(0);
         }
 
-        private void navMenu_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
+        /// <summary>
+        /// Updates the page witin the frame with the selected item on the menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void navMenu_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            var selectedItem = navMenu.SelectedItem as Microsoft.UI.Xaml.Controls.NavigationViewItem;
+            var selectedItem = navMenu.SelectedItem as NavigationViewItem;
             if (selectedItem != null)
             {
                 switch (selectedItem.Tag)
                 {
-                    case "HomePage":
-                        mainFrame.Navigate(typeof(HomePageView));
+                    case "APOD":
+                        mainFrame.Navigate(typeof(AstronomyPictureView));
                         break;
                     case "Earth_EventTracker":
                         mainFrame.Navigate(typeof(NaturalEventTrackerView));
@@ -59,6 +64,9 @@ namespace NasaDataExplorer.Views
                         break;
                     case "NASAEarthObserv_Feed":
                         mainFrame.Navigate(typeof(NasaEarthObservatoryFeedView));
+                        break;
+                    default:
+                        mainFrame.Navigate(typeof(AstronomyPictureView));
                         break;
                 }
             }

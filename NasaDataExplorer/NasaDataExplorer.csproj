@@ -163,8 +163,8 @@
     <Compile Include="Views\Feeds\NasaEarthObservatoryFeedView.xaml.cs">
       <DependentUpon>NasaEarthObservatoryFeedView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomePageView.xaml.cs">
-      <DependentUpon>HomePageView.xaml</DependentUpon>
+    <Compile Include="Views\AstronomyPictureView.xaml.cs">
+      <DependentUpon>AstronomyPictureView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InSightLanderWeatherView.xaml.cs">
       <DependentUpon>InSightLanderWeatherView.xaml</DependentUpon>
@@ -225,7 +225,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HomePageView.xaml">
+    <Page Include="Views\AstronomyPictureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

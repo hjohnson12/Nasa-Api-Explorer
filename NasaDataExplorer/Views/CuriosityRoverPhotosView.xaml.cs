@@ -29,6 +29,7 @@ namespace NasaDataExplorer.Views
 
         private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
         {
+            // Display photo in dialog on selection
             RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
                 e.ClickedItem as MarsRoverPhoto,
                 ViewModel.CuriosityPhotos);

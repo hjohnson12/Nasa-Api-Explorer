@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace NasaDataExplorer.Services
 {
     /// <summary>
-    /// Interface for downloading files from web urls
+    /// Interface for downloading files from a web url
     /// </summary>
     public interface IDownloaderService
     {

@@ -1,21 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Http;
-using Microsoft.Extensions.Hosting;
-using NasaDataExplorer.Services;
-using NasaDataExplorer.Views;
-using NasaDataExplorer.Views.Dialogs;
-using System;
-using System.Net.Http;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,6 +13,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using NasaDataExplorer.Services;
+using NasaDataExplorer.Views;
+using NasaDataExplorer.Views.Dialogs;
 using NasaDataExplorer.Services.Nasa;
 using NasaDataExplorer.Services.Nasa.MarsRoverPhotos;
 using NasaDataExplorer.Services.Nasa.Apod;
@@ -71,20 +66,22 @@ namespace NasaDataExplorer
         private void ConfigureAndBuildServices()
         {
             var builder = new HostBuilder()
-            .ConfigureServices((hostContext, services) =>
-            {
-                // Services
-                services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
-                services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
-                services.AddTransient<IDownloaderService, DownloaderService>();
-                services.AddSingleton<INasaApiService, NasaApiService>();
+                .ConfigureServices((hostContext, services) =>
+                {
+                    // Services
+                    services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
+                    services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
+                    services.AddTransient<IDownloaderService, DownloaderService>();
+                    services.AddSingleton<INasaApiService, NasaApiService>();
 
-                // View Models
-                services.AddTransient<HomePageViewModel>();
-                services.AddTransient<PerseveranceRoverPhotosViewModel>();
-                services.AddTransient<CuriosityRoverPhotosViewModel>();
-                services.AddTransient<OpportunityRoverPhotosViewModel>();
-            }).UseConsoleLifetime();
+                    // View Models
+                    services.AddTransient<HomePageViewModel>();
+                    services.AddTransient<PerseveranceRoverPhotosViewModel>();
+                    services.AddTransient<CuriosityRoverPhotosViewModel>();
+                    services.AddTransient<OpportunityRoverPhotosViewModel>();
+
+                }).UseConsoleLifetime();
+
             ServiceHost = builder.Build();
         }
 

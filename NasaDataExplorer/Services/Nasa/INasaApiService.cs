@@ -8,7 +8,16 @@ namespace NasaDataExplorer.Services.Nasa
     /// </summary>
     public interface INasaApiService
     {
+        /// <summary>
+        /// Property to interact with the Mars Rover 
+        /// Photos service.
+        /// </summary>
         IRoverPhotoService MarsRoverPhotos { get; set; }
+
+        /// <summary>
+        /// Property to interact with the Astronomy Picture
+        /// of the Day service.
+        /// </summary>
         IAstronomyPictureOfTheDayService Apod { get; set; }
     }
 }
