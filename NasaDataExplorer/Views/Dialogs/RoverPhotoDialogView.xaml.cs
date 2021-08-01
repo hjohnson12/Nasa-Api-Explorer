@@ -24,7 +24,7 @@ namespace NasaDataExplorer.Views.Dialogs
 
             ViewModel =
                 new RoverPhotoDialogViewModel(
-                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<IDownloaderService>(),
+                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<IFileDownloadService>(),
                     roverPhotos,
                     currentPhoto);
 

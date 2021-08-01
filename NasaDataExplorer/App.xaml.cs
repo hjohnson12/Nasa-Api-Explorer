@@ -71,7 +71,8 @@ namespace NasaDataExplorer
                     // Services
                     services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
                     services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
-                    services.AddTransient<IDownloaderService, DownloaderService>();
+                    services.AddSingleton<IFolderService, FolderService>();
+                    services.AddHttpClient<IFileDownloadService, FileDownloadService>();
                     services.AddSingleton<INasaApiService, NasaApiService>();
 
                     // View Models
@@ -79,7 +80,6 @@ namespace NasaDataExplorer
                     services.AddTransient<PerseveranceRoverPhotosViewModel>();
                     services.AddTransient<CuriosityRoverPhotosViewModel>();
                     services.AddTransient<OpportunityRoverPhotosViewModel>();
-
                 }).UseConsoleLifetime();
 
             ServiceHost = builder.Build();
@@ -92,7 +92,8 @@ namespace NasaDataExplorer
             // Services
             services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
             services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
-            services.AddTransient<IDownloaderService, DownloaderService>();
+            services.AddSingleton<IFolderService, FolderService>();
+            services.AddHttpClient<IFileDownloadService, FileDownloadService>();
             services.AddSingleton<INasaApiService, NasaApiService>();
 
             // View Models

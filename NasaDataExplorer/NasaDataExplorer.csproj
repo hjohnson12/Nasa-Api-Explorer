@@ -133,8 +133,10 @@
     <Compile Include="Models\MarsRoverCamera.cs" />
     <Compile Include="Models\SolDay.cs" />
     <Compile Include="Helpers\RetryDelegatingHandler.cs" />
-    <Compile Include="Services\DownloaderService.cs" />
-    <Compile Include="Services\IDownloaderService.cs" />
+    <Compile Include="Services\FileDownloadService.cs" />
+    <Compile Include="Services\FolderService.cs" />
+    <Compile Include="Services\IFileDownloadService.cs" />
+    <Compile Include="Services\IFolderService.cs" />
     <Compile Include="Services\Nasa\Apod\AstronomyPictureOfTheDayService.cs" />
     <Compile Include="Services\Nasa\Apod\IAstronomyPictureOfTheDayService.cs" />
     <Compile Include="Services\Nasa\INasaApiService.cs" />

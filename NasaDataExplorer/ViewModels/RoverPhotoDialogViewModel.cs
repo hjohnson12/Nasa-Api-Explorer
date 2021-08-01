@@ -14,7 +14,7 @@ namespace NasaDataExplorer.ViewModels
 {
     public class RoverPhotoDialogViewModel : Base.Observable
     {
-        private IDownloaderService _downloaderService;
+        private IFileDownloadService _fileDownloadService;
         private MarsRoverPhoto _currentPhoto;
         private ObservableCollection<MarsRoverPhoto> _roverPhotos;
 
@@ -22,11 +22,11 @@ namespace NasaDataExplorer.ViewModels
         public ICommand DownloadImageCommand { get; set; }
         
         public RoverPhotoDialogViewModel(
-            IDownloaderService downloaderService,
+            IFileDownloadService downloaderService,
             ObservableCollection<MarsRoverPhoto> roverPhotos,
             MarsRoverPhoto selectedPhoto)
         {
-            _downloaderService = downloaderService;
+            _fileDownloadService = downloaderService;
             _roverPhotos = roverPhotos;
             _currentPhoto = selectedPhoto;
 
@@ -57,7 +57,7 @@ namespace NasaDataExplorer.ViewModels
         {
             try
             {
-                await _downloaderService.DownloadFileAsync(CurrentPhoto.ImageSourceUrl, @"C:\users\hlj51\desktop\");
+                await _fileDownloadService.DownloadFileAsync(CurrentPhoto.ImageSourceUrl);
             }
             catch (Exception ex)
             {
