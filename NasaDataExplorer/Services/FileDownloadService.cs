@@ -40,9 +40,18 @@ namespace NasaDataExplorer.Services
             }
         }
 
-        public Task DownloadFiles(string[] imageUrls)
+        public async Task DownloadFiles(string[] imageUrls)
         {
-            throw new NotImplementedException();
+            var pickedFolder = await _folderService.OpenFolderPickerAsync();
+            var photoFolder = await _folderService.CreateFolderByNameAsync(pickedFolder, "Mars Rover Photos");
+
+            if (photoFolder != null)
+            {
+                foreach (var url in imageUrls)
+                {
+                    await WriteToFile(photoFolder, url);
+                }
+            }
         }
 
         /// <summary>

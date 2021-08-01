@@ -11,7 +11,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using NasaDataExplorer.Views.Feeds;
 using NasaDataExplorer.Views;
 using Newtonsoft.Json;
 
@@ -58,12 +57,6 @@ namespace NasaDataExplorer.Views
                         break;
                     case "InsightLander_Weather":
                         mainFrame.Navigate(typeof(InSightLanderWeatherView));
-                        break;
-                    case "NASAClimate_Feed":
-                        mainFrame.Navigate(typeof(NasaClimateFeedView));
-                        break;
-                    case "NASAEarthObserv_Feed":
-                        mainFrame.Navigate(typeof(NasaEarthObservatoryFeedView));
                         break;
                     default:
                         mainFrame.Navigate(typeof(AstronomyPictureView));

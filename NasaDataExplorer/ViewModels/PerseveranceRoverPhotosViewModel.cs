@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaDataExplorer.Models;
+using NasaDataExplorer.Services;
 using NasaDataExplorer.Services.Nasa;
 
 namespace NasaDataExplorer.ViewModels
@@ -15,6 +16,7 @@ namespace NasaDataExplorer.ViewModels
     {
         private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private INasaApiService _nasaApiService;
+        private IFileDownloadService _fileDownloadService;
         private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
         private ObservableCollection<string> _roverCameras;
@@ -25,12 +27,14 @@ namespace NasaDataExplorer.ViewModels
         private string _selectedCamera;
 
         public ICommand LoadPhotosCommand { get; set; }
+        public ICommand DownloadPhotosCommand { get; set; }
         public ICommand UpdateDateCommand { get; set; }
         public ICommand UpdateSelectedCameraCommand { get; set; }
 
-        public PerseveranceRoverPhotosViewModel(INasaApiService nasaApiService)
+        public PerseveranceRoverPhotosViewModel(INasaApiService nasaApiService, IFileDownloadService fileDownloadService)
         {
             _nasaApiService = nasaApiService;
+            _fileDownloadService = fileDownloadService;
 
             var cameraList = MarsRoverPhotoData.PerseveranceCameras;
             _roverCameras2 = new ObservableCollection<string>(
@@ -47,6 +51,8 @@ namespace NasaDataExplorer.ViewModels
                 new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
             UpdateSelectedCameraCommand =
                 new Base.RelayCommand<string>(UpdateSelectedCamera);
+            DownloadPhotosCommand =
+                new AsyncRelayCommand(DownloadPhotos);
         }
 
         public MarsRover PerseveranceRover { get; set; }
@@ -151,6 +157,20 @@ namespace NasaDataExplorer.ViewModels
             {
                 IsLoading = false;
                 _cancellationTokenSource = null;
+            }
+        }
+
+        public async Task DownloadPhotos()
+        {
+            string[] urls = PerseverancePhotos.Select(x => x.ImageSourceUrl).ToArray();
+
+            try
+            {
+                await _fileDownloadService.DownloadFiles(urls);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 

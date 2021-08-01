@@ -53,6 +53,11 @@
                     x:Name="btnCancelRequest"
                     Margin="0,4,4,4"
                     Content="Cancel Search" />
+                <Button
+                    x:Name="btnDownloadPhotos"
+                    Margin="0,4,4,4"
+                    Command="{x:Bind ViewModel.DownloadPhotosCommand}"
+                    Content="Download All Photos" />
             </StackPanel>
             <!--<Button Content="Next" Click="BtnNext_Click" />
             <Button Content="Previous" Click="BtnPrev_Click" />-->
