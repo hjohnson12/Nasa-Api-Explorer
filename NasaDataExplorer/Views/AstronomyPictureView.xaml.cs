@@ -18,16 +18,14 @@ namespace NasaDataExplorer.Views
     /// </summary>
     public sealed partial class AstronomyPictureView : Page
     {
-        public HomePageViewModel ViewModel { get; set;  }
+        public AstronomyPictureViewModel ViewModel => (AstronomyPictureViewModel)DataContext;
 
         public AstronomyPictureView()
         {
             this.InitializeComponent();
 
-            ViewModel =
-                App.Current.ServiceHost.Services.GetRequiredService<HomePageViewModel>();
-
-            this.DataContext = ViewModel;
+            this.DataContext =
+                App.Current.ServiceHost.Services.GetRequiredService<AstronomyPictureViewModel>();
         }
     }
 }

@@ -76,7 +76,7 @@ namespace NasaDataExplorer
                     services.AddSingleton<INasaApiService, NasaApiService>();
 
                     // View Models
-                    services.AddTransient<HomePageViewModel>();
+                    services.AddTransient<AstronomyPictureViewModel>();
                     services.AddTransient<PerseveranceRoverPhotosViewModel>();
                     services.AddTransient<CuriosityRoverPhotosViewModel>();
                     services.AddTransient<OpportunityRoverPhotosViewModel>();
@@ -97,7 +97,7 @@ namespace NasaDataExplorer
             services.AddSingleton<INasaApiService, NasaApiService>();
 
             // View Models
-            services.AddTransient<HomePageViewModel>();
+            services.AddTransient<AstronomyPictureViewModel>();
             services.AddTransient<PerseveranceRoverPhotosViewModel>();
             services.AddTransient<CuriosityRoverPhotosViewModel>();
             services.AddTransient<OpportunityRoverPhotosViewModel>();
@@ -157,11 +157,13 @@ namespace NasaDataExplorer
                 // Ensure the current window is active
                 Window.Current.Activate();
 
-                // Configure application title bar to application theme
                 ConfigureTitleBar();
             }
         }
 
+        /// <summary>
+        /// Configure application title bar to application theme
+        /// </summary>
         void ConfigureTitleBar()
         {
             TitleBarHelper.ExpandViewIntoTitleBar();

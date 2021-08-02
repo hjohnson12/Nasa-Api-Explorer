@@ -29,7 +29,7 @@ namespace NasaDataExplorer.Views
         }
 
         /// <summary>
-        /// Updates the page witin the frame with the selected item on the menu
+        /// Updates the frame with the selected view.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>

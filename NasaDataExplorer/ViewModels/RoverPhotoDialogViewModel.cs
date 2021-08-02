@@ -22,9 +22,9 @@ namespace NasaDataExplorer.ViewModels
         public ICommand DownloadImageCommand { get; set; }
         
         public RoverPhotoDialogViewModel(
-            IFileDownloadService downloaderService,
             ObservableCollection<MarsRoverPhoto> roverPhotos,
-            MarsRoverPhoto selectedPhoto)
+            MarsRoverPhoto selectedPhoto,
+            IFileDownloadService downloaderService)
         {
             _fileDownloadService = downloaderService;
             _roverPhotos = roverPhotos;
@@ -53,6 +53,11 @@ namespace NasaDataExplorer.ViewModels
             CurrentPhoto = updatedSelection;
         }
 
+        /// <summary>
+        /// Downloads the currently selected image from its url in a location
+        /// chosen through a folder picker.
+        /// </summary>
+        /// <returns></returns>
         public async Task DownloadImage()
         {
             try

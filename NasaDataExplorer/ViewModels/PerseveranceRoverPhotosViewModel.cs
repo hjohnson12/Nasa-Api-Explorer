@@ -160,6 +160,11 @@ namespace NasaDataExplorer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Downloads rover photos for the selected date in a location chosen 
+        /// through a folder picker.
+        /// </summary>
+        /// <returns></returns>
         public async Task DownloadPhotos()
         {
             string[] urls = PerseverancePhotos.Select(x => x.ImageSourceUrl).ToArray();

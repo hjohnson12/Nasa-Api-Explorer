@@ -10,7 +10,7 @@ using NasaDataExplorer.Services.Nasa;
 
 namespace NasaDataExplorer.ViewModels
 {
-    public class HomePageViewModel : Base.Observable
+    public class AstronomyPictureViewModel : Base.Observable
     {
         private INasaApiService _nasaApiService;
         private AstronomyPictureOfTheDay _astronomyPictureOfTheDay;
@@ -18,7 +18,7 @@ namespace NasaDataExplorer.ViewModels
 
         public ICommand LoadApodCommand { get; set; }
 
-        public HomePageViewModel(INasaApiService nasaApiService)
+        public AstronomyPictureViewModel(INasaApiService nasaApiService)
         {
             _nasaApiService = nasaApiService;
 

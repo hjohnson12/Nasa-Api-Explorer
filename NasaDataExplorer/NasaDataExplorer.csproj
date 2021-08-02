@@ -145,7 +145,7 @@
     <Compile Include="Services\Nasa\NasaApiService.cs" />
     <Compile Include="Helpers\TimeoutDelegatingHandler.cs" />
     <Compile Include="ViewModels\CuriosityRoverPhotosViewModel.cs" />
-    <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\AstronomyPictureViewModel.cs" />
     <Compile Include="ViewModels\NaturalEventTrackerViewModel.cs" />
     <Compile Include="ViewModels\OpportunityRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\PerseveranceRoverPhotosViewModel.cs" />

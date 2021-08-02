@@ -5,7 +5,7 @@ using NasaDataExplorer.Services.Nasa.MarsRoverPhotos;
 namespace NasaDataExplorer.Services.Nasa
 {
     /// <summary>
-    /// Class for interacting with other api services from a
+    /// Class for interacting with other nasa api services from a
     /// single location
     /// </summary>
     public class NasaApiService : INasaApiService
