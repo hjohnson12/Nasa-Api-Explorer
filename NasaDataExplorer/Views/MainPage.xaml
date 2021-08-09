@@ -106,12 +106,12 @@
                     Content="InSight Mars Lander Weather Data"
                     Icon="Help"
                     Tag="InsightLander_Weather" />-->
-                <muxc:NavigationViewItemSeparator />
+                <!--<muxc:NavigationViewItemSeparator />
                 <muxc:NavigationViewItemHeader Content="EONET" />
                 <muxc:NavigationViewItem
                     Content="Earth Natrual Event Tracker Data"
                     Icon="Help"
-                    Tag="Earth_EventTracker" />
+                    Tag="Earth_EventTracker" />-->
                 <!--<muxc:NavigationViewItemHeader Content="Space" />
                 <muxc:NavigationViewItem Content="News Feeds" SelectsOnInvoked="False">
                     <muxc:NavigationViewItem.Icon>
