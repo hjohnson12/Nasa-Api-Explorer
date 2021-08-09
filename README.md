@@ -1,9 +1,9 @@
 # Nasa Data Explorer
-A windows application demo using some of Nasa's Open APIs from https://api.nasa.gov/ such as Mars Rover Photos and Astonomy Picture of the Day.
+A windows application demo using the Astronomy Picture of the Day API and Mars Rover Photos API from Nasa's Open APIs https://api.nasa.gov/. 
 
 # Details
 Uses C# .NET and Universal Windows Platform (UWP) with Model-View-ViewModel (MVVM) architecture. 
 
-This application includes usage of the following APIs from the website above: 
+This application includes usage of the following APIs from https://api.nasa.gov/: 
 - Mars Rover Photos
 - Astronomy Picture of the Day
