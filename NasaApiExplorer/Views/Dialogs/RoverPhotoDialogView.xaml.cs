@@ -22,12 +22,13 @@ namespace NasaApiExplorer.Views.Dialogs
         {
             this.InitializeComponent();
 
-            this.DataContext = new RoverPhotoDialogViewModel(
-                    roverPhotos,
-                    currentPhoto,
-                    ((App)Application.Current).ServiceHost.Services.GetRequiredService<IFileDownloadService>());
-
+            this.DataContext =
+                App.Current.ServiceHost.Services.GetService<RoverPhotoDialogViewModel>();
+            
             DataContext = ViewModel;
+
+            ViewModel.CurrentPhoto = currentPhoto;
+            ViewModel.RoverPhotos = roverPhotos;
         }
 
         public RoverPhotoDialogViewModel ViewModel => (RoverPhotoDialogViewModel)DataContext;

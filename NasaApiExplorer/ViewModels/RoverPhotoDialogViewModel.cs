@@ -21,14 +21,9 @@ namespace NasaApiExplorer.ViewModels
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand DownloadImageCommand { get; set; }
         
-        public RoverPhotoDialogViewModel(
-            List<MarsRoverPhoto> roverPhotos,
-            MarsRoverPhoto selectedPhoto,
-            IFileDownloadService downloaderService)
+        public RoverPhotoDialogViewModel(IFileDownloadService downloaderService)
         {
             _fileDownloadService = downloaderService;
-            _roverPhotos = roverPhotos;
-            _currentPhoto = selectedPhoto;
 
             ChangeSelectionCommand = 
                 new Base.RelayCommand<MarsRoverPhoto>(ChangeSelection, () => true);
