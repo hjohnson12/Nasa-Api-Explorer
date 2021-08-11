@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NasaApiExplorer.ViewModels;
 using NasaApiExplorer.Models;
 using NasaApiExplorer.Views.Dialogs;
+using System.Linq;
 
 namespace NasaApiExplorer.Views
 {
@@ -32,7 +33,7 @@ namespace NasaApiExplorer.Views
             // Display photo in dialog on selection
             RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
                 e.ClickedItem as MarsRoverPhoto,
-                ViewModel.CuriosityPhotos);
+                ViewModel.CuriosityPhotos.ToList());
 
             await photoDialog.ShowAsync();
         }

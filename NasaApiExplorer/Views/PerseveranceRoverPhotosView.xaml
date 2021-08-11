@@ -68,8 +68,10 @@
                 x:Name="GridViewControl"
                 HorizontalAlignment="Stretch"
                 IsItemClickEnabled="True"
-                ItemClick="GridViewControl_ItemClick"
                 ItemsSource="{x:Bind ViewModel.PerseverancePhotos, Mode=OneWay}">
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:ItemClickBehavior Command="{x:Bind ViewModel.SelectPhotoCommand}" />
+                </interactivity:Interaction.Behaviors>
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid CornerRadius="4">

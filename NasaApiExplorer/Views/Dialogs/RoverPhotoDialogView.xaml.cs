@@ -18,12 +18,11 @@ namespace NasaApiExplorer.Views.Dialogs
 {
     public sealed partial class RoverPhotoDialogView : ContentDialog
     {
-        public RoverPhotoDialogView(MarsRoverPhoto currentPhoto, ObservableCollection<MarsRoverPhoto> roverPhotos)
+        public RoverPhotoDialogView(MarsRoverPhoto currentPhoto, List<MarsRoverPhoto> roverPhotos)
         {
             this.InitializeComponent();
 
-            ViewModel =
-                new RoverPhotoDialogViewModel(
+            this.DataContext = new RoverPhotoDialogViewModel(
                     roverPhotos,
                     currentPhoto,
                     ((App)Application.Current).ServiceHost.Services.GetRequiredService<IFileDownloadService>());
@@ -31,7 +30,7 @@ namespace NasaApiExplorer.Views.Dialogs
             DataContext = ViewModel;
         }
 
-        public RoverPhotoDialogViewModel ViewModel { get; set; }
+        public RoverPhotoDialogViewModel ViewModel => (RoverPhotoDialogViewModel)DataContext;
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {

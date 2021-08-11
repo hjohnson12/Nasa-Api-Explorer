@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using NasaApiExplorer.Models;
 using NasaApiExplorer.ViewModels;
 using NasaApiExplorer.Views.Dialogs;
+using System.Linq;
 
 namespace NasaApiExplorer.Views
 {
@@ -35,7 +36,7 @@ namespace NasaApiExplorer.Views
         {
             RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
                e.ClickedItem as MarsRoverPhoto,
-               ViewModel.OpportunityPhotos);
+               ViewModel.OpportunityPhotos.ToList());
 
             await photoDialog.ShowAsync();
         }

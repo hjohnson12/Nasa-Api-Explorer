@@ -16,13 +16,13 @@ namespace NasaApiExplorer.ViewModels
     {
         private IFileDownloadService _fileDownloadService;
         private MarsRoverPhoto _currentPhoto;
-        private ObservableCollection<MarsRoverPhoto> _roverPhotos;
+        private List<MarsRoverPhoto> _roverPhotos;
 
         public ICommand ChangeSelectionCommand { get; set; }
         public ICommand DownloadImageCommand { get; set; }
         
         public RoverPhotoDialogViewModel(
-            ObservableCollection<MarsRoverPhoto> roverPhotos,
+            List<MarsRoverPhoto> roverPhotos,
             MarsRoverPhoto selectedPhoto,
             IFileDownloadService downloaderService)
         {
@@ -36,7 +36,7 @@ namespace NasaApiExplorer.ViewModels
                 new AsyncRelayCommand(DownloadImage, () => !CurrentPhoto.ImageSourceUrl.Equals(""));
         }
 
-        public ObservableCollection<MarsRoverPhoto> RoverPhotos
+        public List<MarsRoverPhoto> RoverPhotos
         {
             get => _roverPhotos;
             set => SetProperty(ref _roverPhotos, value);

@@ -38,14 +38,5 @@ namespace NasaApiExplorer.Views
             // Current day since mission is still active
             RoverPhotosDatePicker.MaxDate = DateTime.Today;
         }
-
-        private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
-                e.ClickedItem as MarsRoverPhoto,
-                ViewModel.PerseverancePhotos);
-
-            await photoDialog.ShowAsync();
-        }
     }
 }

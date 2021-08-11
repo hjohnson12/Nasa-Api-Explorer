@@ -122,6 +122,7 @@
     <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="Behaviors\ComboBoxSelectionChangedTriggerBehavior.cs" />
     <Compile Include="Behaviors\DateChangedTriggerBehavior.cs" />
+    <Compile Include="Behaviors\ItemClickBehavior.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Models\AstronomyPictureOfTheDay.cs" />
@@ -133,8 +134,10 @@
     <Compile Include="Models\MarsRoverCamera.cs" />
     <Compile Include="Models\SolDay.cs" />
     <Compile Include="Helpers\RetryDelegatingHandler.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\FileDownloadService.cs" />
     <Compile Include="Services\FolderService.cs" />
+    <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IFileDownloadService.cs" />
     <Compile Include="Services\IFolderService.cs" />
     <Compile Include="Services\Nasa\Apod\AstronomyPictureOfTheDayService.cs" />

@@ -17,6 +17,7 @@ namespace NasaApiExplorer.ViewModels
         private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private INasaApiService _nasaApiService;
         private IFileDownloadService _fileDownloadService;
+        private IDialogService _dialogService;
         private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
         private ObservableCollection<string> _roverCameras;
@@ -28,13 +29,18 @@ namespace NasaApiExplorer.ViewModels
 
         public ICommand LoadPhotosCommand { get; set; }
         public ICommand DownloadPhotosCommand { get; set; }
+        public ICommand SelectPhotoCommand { get; set; }
         public ICommand UpdateDateCommand { get; set; }
         public ICommand UpdateSelectedCameraCommand { get; set; }
 
-        public PerseveranceRoverPhotosViewModel(INasaApiService nasaApiService, IFileDownloadService fileDownloadService)
+        public PerseveranceRoverPhotosViewModel(
+            INasaApiService nasaApiService,
+            IFileDownloadService fileDownloadService,
+            IDialogService dialogService)
         {
             _nasaApiService = nasaApiService;
             _fileDownloadService = fileDownloadService;
+            _dialogService = dialogService;
 
             var cameraList = MarsRoverPhotoData.PerseveranceCameras;
             _roverCameras2 = new ObservableCollection<string>(
@@ -49,6 +55,8 @@ namespace NasaApiExplorer.ViewModels
                 new AsyncRelayCommand(LoadPerseveranceRoverPhotos);
             UpdateDateCommand =
                 new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
+            SelectPhotoCommand =
+                new AsyncRelayCommand<MarsRoverPhoto>(SelectPhoto);
             UpdateSelectedCameraCommand =
                 new Base.RelayCommand<string>(UpdateSelectedCamera);
             DownloadPhotosCommand =
@@ -177,6 +185,11 @@ namespace NasaApiExplorer.ViewModels
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public async Task SelectPhoto(MarsRoverPhoto roverPhoto)
+        {
+            await _dialogService.ShowPhotoDialog(roverPhoto, PerseverancePhotos.ToList());
         }
 
         public void UpdateSelectedDate(DateTimeOffset? date)

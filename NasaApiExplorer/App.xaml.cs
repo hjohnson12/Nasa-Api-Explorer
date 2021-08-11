@@ -74,12 +74,14 @@ namespace NasaApiExplorer
                     services.AddSingleton<IFolderService, FolderService>();
                     services.AddHttpClient<IFileDownloadService, FileDownloadService>();
                     services.AddSingleton<INasaApiService, NasaApiService>();
+                    services.AddSingleton<IDialogService, DialogService>();
 
                     // View Models
                     services.AddTransient<AstronomyPictureViewModel>();
                     services.AddTransient<PerseveranceRoverPhotosViewModel>();
                     services.AddTransient<CuriosityRoverPhotosViewModel>();
                     services.AddTransient<OpportunityRoverPhotosViewModel>();
+                    services.AddTransient<RoverPhotoDialogViewModel>();
                 }).UseConsoleLifetime();
 
             ServiceHost = builder.Build();
@@ -95,12 +97,14 @@ namespace NasaApiExplorer
             services.AddSingleton<IFolderService, FolderService>();
             services.AddHttpClient<IFileDownloadService, FileDownloadService>();
             services.AddSingleton<INasaApiService, NasaApiService>();
+            services.AddSingleton<IDialogService, DialogService>();
 
             // View Models
             services.AddTransient<AstronomyPictureViewModel>();
             services.AddTransient<PerseveranceRoverPhotosViewModel>();
             services.AddTransient<CuriosityRoverPhotosViewModel>();
             services.AddTransient<OpportunityRoverPhotosViewModel>();
+            services.AddTransient<RoverPhotoDialogViewModel>();
 
             return services.BuildServiceProvider();
         }
