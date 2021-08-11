@@ -14,10 +14,10 @@ namespace NasaApiExplorer.ViewModels
 {
     public class PerseveranceRoverPhotosViewModel : Base.Observable
     {
-        private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private INasaApiService _nasaApiService;
         private IFileDownloadService _fileDownloadService;
         private IDialogService _dialogService;
+        private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
         private ObservableCollection<string> _roverCameras;
@@ -75,10 +75,7 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public bool IsPhotosAvailable
-        {
-            get => PerseverancePhotos.Count == 0;
-        }
+        public bool IsPhotosAvailable => PerseverancePhotos.Count == 0;
 
         public bool IsLoading
         {

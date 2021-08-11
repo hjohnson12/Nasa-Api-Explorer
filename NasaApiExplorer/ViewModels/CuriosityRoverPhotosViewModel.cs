@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaApiExplorer.Models;
+using NasaApiExplorer.Services;
 using NasaApiExplorer.Services.Nasa;
 
 namespace NasaApiExplorer.ViewModels
@@ -15,24 +16,31 @@ namespace NasaApiExplorer.ViewModels
     public class CuriosityRoverPhotosViewModel : Base.Observable
     {
         private INasaApiService _nasaApiService;
+        private IDialogService _dialogService;
         private ObservableCollection<MarsRoverPhoto> _curiosityPhotos;
         private bool _isLoading;
         private DateTimeOffset? _selectedDate;
         private CancellationTokenSource _cancellationTokenSource;
 
         public ICommand LoadPhotosCommand { get; set; }
+        public ICommand SelectPhotoCommand { get; set; }
         public ICommand UpdateDateCommand { get; set; }
         public ICommand CancelRequestCommand { get; set; }
 
-        public CuriosityRoverPhotosViewModel(INasaApiService nasaApiService)
+        public CuriosityRoverPhotosViewModel(
+            INasaApiService nasaApiService,
+            IDialogService dialogService)
         {
             _nasaApiService = nasaApiService;
+            _dialogService = dialogService;
 
             SelectedDate = DateTimeOffset.Now.AddDays(1);
             CuriosityPhotos = new ObservableCollection<MarsRoverPhoto>();
 
             LoadPhotosCommand =
                new AsyncRelayCommand(LoadCuriosityRoverPhotos);
+            SelectPhotoCommand =
+                new AsyncRelayCommand<MarsRoverPhoto>(SelectPhoto);
             UpdateDateCommand =
                 new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
             CancelRequestCommand =
@@ -49,10 +57,7 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public bool IsPhotosAvailable
-        {
-            get => CuriosityPhotos.Count == 0;
-        }
+        public bool IsPhotosAvailable => CuriosityPhotos.Count == 0;
 
         public bool IsLoading
         {
@@ -112,6 +117,11 @@ namespace NasaApiExplorer.ViewModels
                 _cancellationTokenSource.Cancel();
                 _cancellationTokenSource = null;
             }
+        }
+
+        public async Task SelectPhoto(MarsRoverPhoto roverPhoto)
+        {
+            await _dialogService.ShowPhotoDialog(roverPhoto, CuriosityPhotos.ToList());
         }
 
         public void UpdateSelectedDate(DateTimeOffset? date)

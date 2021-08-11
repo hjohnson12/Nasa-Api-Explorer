@@ -10,9 +10,6 @@ using System.Linq;
 
 namespace NasaApiExplorer.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class CuriosityRoverPhotosView : Page
     {
         public CuriosityRoverPhotosViewModel ViewModel => (CuriosityRoverPhotosViewModel)DataContext;
@@ -26,16 +23,6 @@ namespace NasaApiExplorer.Views
             
             // Mission hasn't ended so can just set a previous date
             RoverPhotosDatePicker.MaxDate = DateTime.Today;
-        }
-
-        private async void GridViewControl_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            // Display photo in dialog on selection
-            RoverPhotoDialogView photoDialog = new RoverPhotoDialogView(
-                e.ClickedItem as MarsRoverPhoto,
-                ViewModel.CuriosityPhotos.ToList());
-
-            await photoDialog.ShowAsync();
         }
     }
 }
