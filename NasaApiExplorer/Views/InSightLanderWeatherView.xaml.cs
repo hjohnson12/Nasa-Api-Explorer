@@ -23,9 +23,6 @@ namespace NasaApiExplorer.Views
     // Update 07/2021: Insight Weather API currently is down
     // Info here https://mars.nasa.gov/insight/weather/
 
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class InSightLanderWeatherView : Page
     {
         public ObservableCollection<SolDay> SolWeek = new ObservableCollection<SolDay>();
@@ -75,6 +72,7 @@ namespace NasaApiExplorer.Views
                     }
                 }
             }
+
             string output = "";
             output = "On Sol " + SolWeek[0].Sol.ToString() + " the temps ranged from " + SolWeek[0].AtmostphericTemp.mx.ToString() + " degree's Celcius to " +
                 SolWeek[0].AtmostphericTemp.mn.ToString() + " degrees celcius.";

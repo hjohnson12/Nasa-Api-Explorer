@@ -51,17 +51,17 @@ namespace NasaApiExplorer
         public IHost ServiceHost { get; set; }
 
         /// <summary>
-        /// Gets the current application instance
+        /// Gets the current application instance.
         /// </summary>
         public new static App Current => (App)Application.Current;
 
         /// <summary>
-        /// Gets the IServiceProvider instance to resolve application services
+        /// Gets the IServiceProvider instance to resolve application services.
         /// </summary>
         public IServiceProvider Services { get; }
 
         /// <summary>
-        /// Configures and builds the Nasa API service
+        /// Configures and builds services with view models for dependency injection.
         /// </summary>
         private void ConfigureAndBuildServices()
         {
@@ -161,12 +161,13 @@ namespace NasaApiExplorer
                 // Ensure the current window is active
                 Window.Current.Activate();
 
+                // Expands into view and sets theme
                 ConfigureTitleBar();
             }
         }
 
         /// <summary>
-        /// Configure application title bar to application theme
+        /// Configure application title bar to application theme.
         /// </summary>
         void ConfigureTitleBar()
         {

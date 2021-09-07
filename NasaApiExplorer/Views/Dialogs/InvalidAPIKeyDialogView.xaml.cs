@@ -13,8 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace NasaApiExplorer.Views.Dialogs
 {
     public sealed partial class InvalidAPIKeyDialogView : ContentDialog
@@ -22,14 +20,6 @@ namespace NasaApiExplorer.Views.Dialogs
         public InvalidAPIKeyDialogView()
         {
             this.InitializeComponent();
-        }
-
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
         }
     }
 }

@@ -14,18 +14,18 @@ namespace NasaApiExplorer.ViewModels
 {
     public class PerseveranceRoverPhotosViewModel : Base.Observable
     {
-        private INasaApiService _nasaApiService;
-        private IFileDownloadService _fileDownloadService;
-        private IDialogService _dialogService;
+        private readonly INasaApiService _nasaApiService;
+        private readonly IFileDownloadService _fileDownloadService;
+        private readonly IDialogService _dialogService;
         private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
-        private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private MarsRover _perseveranceRover;
+        private ObservableCollection<MarsRoverPhoto> _perseverancePhotos;
         private ObservableCollection<string> _roverCameras;
         private ObservableCollection<string> _roverCameras2;
-        private CancellationTokenSource _cancellationTokenSource;
         private bool _isLoading;
         private DateTimeOffset? _selectedDate;
         private string _selectedCamera;
+        private CancellationTokenSource _cancellationTokenSource;
 
         public ICommand LoadPhotosCommand { get; set; }
         public ICommand DownloadPhotosCommand { get; set; }
@@ -56,7 +56,7 @@ namespace NasaApiExplorer.ViewModels
             UpdateDateCommand =
                 new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
             SelectPhotoCommand =
-                new AsyncRelayCommand<MarsRoverPhoto>(SelectPhoto);
+                new AsyncRelayCommand<MarsRoverPhoto>(DisplayPhoto);
             UpdateSelectedCameraCommand =
                 new Base.RelayCommand<string>(UpdateSelectedCamera);
             DownloadPhotosCommand =
@@ -75,6 +75,9 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Determines if there are photos loaded.
+        /// </summary>
         public bool IsPhotosAvailable => PerseverancePhotos.Count == 0;
 
         public bool IsLoading
@@ -115,6 +118,14 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
+        public void UpdateSelectedDate(DateTimeOffset? date) => SelectedDate = date;
+
+        public void UpdateSelectedCamera(string camera) => SelectedCamera = camera;
+
+        /// <summary>
+        /// Retrieves photos from perseverance rover using photos service.
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadPerseveranceRoverPhotos()
         {
             IsLoading = true;
@@ -123,10 +134,12 @@ namespace NasaApiExplorer.ViewModels
             {
                 Console.WriteLine("User requested to cancel.");
             });
+            var cancellationToken = _cancellationTokenSource.Token;
 
-            string photosDate = FormatDateString(SelectedDate);
             try
             {
+                string photosDate = FormatDate(SelectedDate);
+
                 if (IsCameraSelected(SelectedCamera))
                 {
                     var camera = MarsRoverPhotoData.PerseveranceCameras
@@ -136,14 +149,14 @@ namespace NasaApiExplorer.ViewModels
                     PerseverancePhotos =
                         new ObservableCollection<MarsRoverPhoto>(
                             await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
-                                photosDate, camera, _cancellationTokenSource.Token));
+                                photosDate, camera, cancellationToken));
                 }
                 else
                 {
                     PerseverancePhotos =
                         new ObservableCollection<MarsRoverPhoto>(
                             await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
-                                photosDate, _cancellationTokenSource.Token));
+                                photosDate, cancellationToken));
                 }
 
                 //PerseveranceRover = PerseverancePhotos[0].Rover;
@@ -165,6 +178,20 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
+        public bool IsCameraSelected(string selection) => !string.IsNullOrEmpty(selection);
+
+        /// <summary>
+        /// Formats the given date accordingly to match api request pattern.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public string FormatDate(DateTimeOffset? date)
+        {
+            return date.Value.Year.ToString()
+                + "-" + date.Value.Month.ToString()
+                + "-" + date.Value.Day.ToString();
+        }
+
         /// <summary>
         /// Downloads rover photos for the selected date in a location chosen 
         /// through a folder picker.
@@ -184,31 +211,14 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public async Task SelectPhoto(MarsRoverPhoto roverPhoto)
+        /// <summary>
+        /// Displays the selected photo in a dialog.
+        /// </summary>
+        /// <param name="roverPhoto"></param>
+        /// <returns></returns>
+        public async Task DisplayPhoto(MarsRoverPhoto roverPhoto)
         {
             await _dialogService.ShowPhotoDialog(roverPhoto, PerseverancePhotos.ToList());
-        }
-
-        public void UpdateSelectedDate(DateTimeOffset? date)
-        {
-            SelectedDate = date;
-        }
-
-        public void UpdateSelectedCamera(string camera)
-        {
-            SelectedCamera = camera;
-        }
-
-        public bool IsCameraSelected(string selection)
-        {
-            return !string.IsNullOrEmpty(selection);
-        }
-
-        public string FormatDateString(DateTimeOffset? date)
-        {
-            return date.Value.Year.ToString() 
-                + "-" + date.Value.Month.ToString() 
-                + "-" + date.Value.Day.ToString();
         }
     }
 }

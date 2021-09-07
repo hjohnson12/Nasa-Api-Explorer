@@ -15,8 +15,8 @@ namespace NasaApiExplorer.ViewModels
 {
     public class OpportunityRoverPhotosViewModel : Base.Observable
     {
-        private INasaApiService _nasaApiService;
-        private IDialogService _dialogService;
+        private readonly INasaApiService _nasaApiService;
+        private readonly IDialogService _dialogService;
         private ObservableCollection<MarsRoverPhoto> _opportunityPhotos;
         private bool _isLoading;
         private DateTimeOffset? _selectedDate;
@@ -43,12 +43,14 @@ namespace NasaApiExplorer.ViewModels
             LoadPhotosCommand =
                new AsyncRelayCommand(LoadOpportunityRoverPhotos);
             SelectPhotoCommand =
-                new AsyncRelayCommand<MarsRoverPhoto>(SelectPhoto);
+                new AsyncRelayCommand<MarsRoverPhoto>(DisplayPhoto);
             UpdateDateCommand =
                 new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
             CancelRequestCommand =
                 new Base.RelayCommand(CancelRequest);
         }
+
+        public MarsRover OpportunityRover { get; set; }
 
         public ObservableCollection<MarsRoverPhoto> OpportunityPhotos
         {
@@ -83,8 +85,12 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public ObservableCollection<MarsRoverPhoto> OpportunityRover { get; set; }
+        public void UpdateSelectedDate(DateTimeOffset? date) => SelectedDate = date;
 
+        /// <summary>
+        /// Retrieves photos from opportunity rover using photos service.
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadOpportunityRoverPhotos()
         {
             IsLoading = true;
@@ -94,7 +100,7 @@ namespace NasaApiExplorer.ViewModels
                 Console.WriteLine("User requested to cancel.");
             });
 
-            string photosDate = FormatDateString(SelectedDate);
+            string photosDate = FormatDate(SelectedDate);
             try
             {
                 OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(
@@ -117,13 +123,16 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public async Task<ObservableCollection<MarsRoverPhoto>> LoadOpportunityRoverPhotos(
-            string date,
-            CancellationToken cancellationToken)
+        /// <summary>
+        /// Formats the given date accordingly to match api request pattern.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public string FormatDate(DateTimeOffset? date)
         {
-            OpportunityPhotos = new ObservableCollection<MarsRoverPhoto>(
-                await _nasaApiService.MarsRoverPhotos.GetOpportunityRoverPhotosAsync(date));
-            return OpportunityPhotos;
+            return date.Value.Year.ToString()
+                + "-" + date.Value.Month.ToString()
+                + "-" + date.Value.Day.ToString();
         }
 
         public void CancelRequest()
@@ -136,21 +145,14 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public async Task SelectPhoto(MarsRoverPhoto roverPhoto)
+        /// <summary>
+        /// Displays the selected photo in a dialog.
+        /// </summary>
+        /// <param name="roverPhoto"></param>
+        /// <returns></returns>
+        public async Task DisplayPhoto(MarsRoverPhoto roverPhoto)
         {
             await _dialogService.ShowPhotoDialog(roverPhoto, OpportunityPhotos.ToList());
-        }
-
-        public void UpdateSelectedDate(DateTimeOffset? date)
-        {
-            SelectedDate = date;
-        }
-
-        public string FormatDateString(DateTimeOffset? date)
-        {
-            return date.Value.Year.ToString()
-                + "-" + date.Value.Month.ToString()
-                + "-" + date.Value.Day.ToString();
         }
     }
 }

@@ -13,9 +13,6 @@ using NasaApiExplorer.ViewModels;
 
 namespace NasaApiExplorer.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class AstronomyPictureView : Page
     {
         public AstronomyPictureViewModel ViewModel => (AstronomyPictureViewModel)DataContext;

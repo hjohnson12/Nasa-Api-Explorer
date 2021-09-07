@@ -15,8 +15,8 @@ namespace NasaApiExplorer.ViewModels
 {
     public class CuriosityRoverPhotosViewModel : Base.Observable
     {
-        private INasaApiService _nasaApiService;
-        private IDialogService _dialogService;
+        private readonly INasaApiService _nasaApiService;
+        private readonly IDialogService _dialogService;
         private ObservableCollection<MarsRoverPhoto> _curiosityPhotos;
         private bool _isLoading;
         private DateTimeOffset? _selectedDate;
@@ -40,12 +40,14 @@ namespace NasaApiExplorer.ViewModels
             LoadPhotosCommand =
                new AsyncRelayCommand(LoadCuriosityRoverPhotos);
             SelectPhotoCommand =
-                new AsyncRelayCommand<MarsRoverPhoto>(SelectPhoto);
+                new AsyncRelayCommand<MarsRoverPhoto>(DisplayPhoto);
             UpdateDateCommand =
                 new Base.RelayCommand<DateTimeOffset?>(UpdateSelectedDate);
             CancelRequestCommand =
                 new Base.RelayCommand(CancelRequest);
         }
+
+        public MarsRover CuriosityRover { get; set; }
 
         public ObservableCollection<MarsRoverPhoto> CuriosityPhotos
         {
@@ -57,6 +59,9 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Determines if there are photos loaded.
+        /// </summary>
         public bool IsPhotosAvailable => CuriosityPhotos.Count == 0;
 
         public bool IsLoading
@@ -75,8 +80,12 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public ObservableCollection<MarsRoverPhoto> CuriosityRover { get; set; }
+        public void UpdateSelectedDate(DateTimeOffset? date) => SelectedDate = date;
 
+        /// <summary>
+        /// Retrieves photos from curiosity rover using photos service.
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadCuriosityRoverPhotos()
         {
             IsLoading = true;
@@ -85,10 +94,12 @@ namespace NasaApiExplorer.ViewModels
             {
                 Console.WriteLine("User requested to cancel.");
             });
+            var cancellationToken = _cancellationTokenSource.Token;
 
-            string photosDate = FormatDateString(SelectedDate);
             try
             {
+                string photosDate = FormatDate(SelectedDate);
+
                 CuriosityPhotos = new ObservableCollection<MarsRoverPhoto>(
                         await _nasaApiService.MarsRoverPhotos.GetCuriosityRoverPhotosAsync(photosDate));
             }
@@ -109,6 +120,18 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Formats the given date accordingly to match api request pattern.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public string FormatDate(DateTimeOffset? date)
+        {
+            return date.Value.Year.ToString()
+                + "-" + date.Value.Month.ToString()
+                + "-" + date.Value.Day.ToString();
+        }
+
         public void CancelRequest()
         {
             if (_cancellationTokenSource != null)
@@ -119,21 +142,14 @@ namespace NasaApiExplorer.ViewModels
             }
         }
 
-        public async Task SelectPhoto(MarsRoverPhoto roverPhoto)
+        /// <summary>
+        /// Displays the selected photo in a dialog.
+        /// </summary>
+        /// <param name="roverPhoto"></param>
+        /// <returns></returns>
+        public async Task DisplayPhoto(MarsRoverPhoto roverPhoto)
         {
             await _dialogService.ShowPhotoDialog(roverPhoto, CuriosityPhotos.ToList());
-        }
-
-        public void UpdateSelectedDate(DateTimeOffset? date)
-        {
-            SelectedDate = date;
-        }
-
-        public string FormatDateString(DateTimeOffset? date)
-        {
-            return date.Value.Year.ToString()
-                + "-" + date.Value.Month.ToString()
-                + "-" + date.Value.Day.ToString();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace NasaApiExplorer.ViewModels
 {
     public class AstronomyPictureViewModel : Base.Observable
     {
-        private INasaApiService _nasaApiService;
+        private readonly INasaApiService _nasaApiService;
         private AstronomyPictureOfTheDay _astronomyPictureOfTheDay;
         private bool _isLoading;
 
@@ -38,9 +38,14 @@ namespace NasaApiExplorer.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
+        /// <summary>
+        /// Retrieves the Astronomy Picture of the Day from the picture service.  
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadAstronomyPictureOfTheDayAsync()
         {
             IsLoading = true;
+
             try
             {
                 AstronomyPictureOfTheDay = await _nasaApiService.Apod.GetAstronomyPictureOfTheDayAsync();
