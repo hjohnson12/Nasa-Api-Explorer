@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaApiExplorer.Services;
-using NasaApiExplorer.Services.Nasa;
+using NasaApiExplorer.Services.NasaApis;
 
 namespace NasaApiExplorer.ViewModels
 {

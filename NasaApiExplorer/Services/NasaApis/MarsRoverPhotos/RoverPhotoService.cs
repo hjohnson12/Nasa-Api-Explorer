@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using NasaApiExplorer.Extensions;
 using NasaApiExplorer.Models;
 
-namespace NasaApiExplorer.Services.Nasa.MarsRoverPhotos
+namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
 {
     /// <summary>
     /// Class for interacting with Nasa's Mars Rover Photos API

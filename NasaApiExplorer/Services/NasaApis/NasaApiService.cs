@@ -1,8 +1,8 @@
 ﻿using System;
-using NasaApiExplorer.Services.Nasa.Apod;
-using NasaApiExplorer.Services.Nasa.MarsRoverPhotos;
+using NasaApiExplorer.Services.NasaApis.Apod;
+using NasaApiExplorer.Services.NasaApis.MarsRoverPhotos;
 
-namespace NasaApiExplorer.Services.Nasa
+namespace NasaApiExplorer.Services.NasaApis
 {
     /// <summary>
     /// Class for interacting with other nasa api services from a

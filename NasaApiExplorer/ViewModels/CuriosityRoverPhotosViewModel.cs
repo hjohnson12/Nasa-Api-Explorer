@@ -9,7 +9,7 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaApiExplorer.Models;
 using NasaApiExplorer.Services;
-using NasaApiExplorer.Services.Nasa;
+using NasaApiExplorer.Services.NasaApis;
 
 namespace NasaApiExplorer.ViewModels
 {

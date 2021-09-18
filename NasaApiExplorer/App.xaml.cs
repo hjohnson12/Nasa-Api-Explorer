@@ -18,9 +18,9 @@ using Microsoft.Extensions.Hosting;
 using NasaApiExplorer.Services;
 using NasaApiExplorer.Views;
 using NasaApiExplorer.Views.Dialogs;
-using NasaApiExplorer.Services.Nasa;
-using NasaApiExplorer.Services.Nasa.MarsRoverPhotos;
-using NasaApiExplorer.Services.Nasa.Apod;
+using NasaApiExplorer.Services.NasaApis;
+using NasaApiExplorer.Services.NasaApis.MarsRoverPhotos;
+using NasaApiExplorer.Services.NasaApis.Apod;
 using NasaApiExplorer.ViewModels;
 using NasaApiExplorer.Helpers;
 

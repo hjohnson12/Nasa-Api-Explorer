@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NasaApiExplorer.Services.Nasa.MarsRoverPhotos
+namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
 {
     /// <summary>
     /// Interface for interacting with Nasa's Mars Rover Photo API

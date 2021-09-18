@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NasaApiExplorer.Extensions;
 
-namespace NasaApiExplorer.Services.Nasa.Apod
+namespace NasaApiExplorer.Services.NasaApis.Apod
 {
     /// <summary>
     /// Class for interacting with the Astronomy Picture of the Day API

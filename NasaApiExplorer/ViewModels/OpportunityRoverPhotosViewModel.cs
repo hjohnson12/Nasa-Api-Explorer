@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using NasaApiExplorer.Services.Nasa;
+using NasaApiExplorer.Services.NasaApis;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaApiExplorer.Models;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NasaApiExplorer.Services.Nasa;
+using NasaApiExplorer.Services.NasaApis;
 
 namespace NasaApiExplorer.ViewModels
 {
