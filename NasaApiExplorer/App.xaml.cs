@@ -45,9 +45,13 @@ namespace NasaApiExplorer
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            ConfigureAndBuildServices();
+            BuildServices();
         }
 
+        /// <summary>
+        /// Exposes the IServiceProvider instance, a container of
+        /// all registered services.
+        /// </summary>
         public IHost ServiceHost { get; set; }
 
         /// <summary>
@@ -56,41 +60,21 @@ namespace NasaApiExplorer
         public new static App Current => (App)Application.Current;
 
         /// <summary>
-        /// Gets the IServiceProvider instance to resolve application services.
-        /// </summary>
-        public IServiceProvider Services { get; }
-
-        /// <summary>
         /// Configures and builds services with view models for dependency injection.
         /// </summary>
-        private void ConfigureAndBuildServices()
+        private void BuildServices()
         {
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    // Services
-                    services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
-                    services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
-                    services.AddSingleton<IFolderService, FolderService>();
-                    services.AddHttpClient<IFileDownloadService, FileDownloadService>();
-                    services.AddSingleton<INasaApiService, NasaApiService>();
-                    services.AddSingleton<IDialogService, DialogService>();
-
-                    // View Models
-                    services.AddTransient<AstronomyPictureViewModel>();
-                    services.AddTransient<PerseveranceRoverPhotosViewModel>();
-                    services.AddTransient<CuriosityRoverPhotosViewModel>();
-                    services.AddTransient<OpportunityRoverPhotosViewModel>();
-                    services.AddTransient<RoverPhotoDialogViewModel>();
+                    ConfigureServices(services);
                 }).UseConsoleLifetime();
 
             ServiceHost = builder.Build();
         }
 
-        private static IServiceProvider ConfigureServices()
+        private void ConfigureServices(IServiceCollection services)
         {
-            var services = new ServiceCollection();
-
             // Services
             services.AddHttpClient<IRoverPhotoService, RoverPhotoService>();
             services.AddHttpClient<IAstronomyPictureOfTheDayService, AstronomyPictureOfTheDayService>();
@@ -105,8 +89,6 @@ namespace NasaApiExplorer
             services.AddTransient<CuriosityRoverPhotosViewModel>();
             services.AddTransient<OpportunityRoverPhotosViewModel>();
             services.AddTransient<RoverPhotoDialogViewModel>();
-
-            return services.BuildServiceProvider();
         }
 
         /// <summary>
