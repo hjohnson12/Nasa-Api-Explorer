@@ -16,9 +16,9 @@ using NasaApiExplorer.ViewModels;
 
 namespace NasaApiExplorer.Views.Dialogs
 {
-    public sealed partial class RoverPhotoDialogView : ContentDialog
+    public sealed partial class RoverPhotoDialog : ContentDialog
     {
-        public RoverPhotoDialogView(MarsRoverPhoto currentPhoto, List<MarsRoverPhoto> roverPhotos)
+        public RoverPhotoDialog(MarsRoverPhoto currentPhoto, List<MarsRoverPhoto> roverPhotos)
         {
             this.InitializeComponent();
 

@@ -15,9 +15,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NasaApiExplorer.Views.Dialogs
 {
-    public sealed partial class InvalidAPIKeyDialogView : ContentDialog
+    public sealed partial class InvalidAPIKeyDialog : ContentDialog
     {
-        public InvalidAPIKeyDialogView()
+        public InvalidAPIKeyDialog()
         {
             this.InitializeComponent();
         }

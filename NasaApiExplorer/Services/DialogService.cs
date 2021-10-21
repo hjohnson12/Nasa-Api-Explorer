@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace NasaApiExplorer.Services
 {
@@ -14,16 +15,20 @@ namespace NasaApiExplorer.Services
 
         public async Task ShowPhotoDialog(MarsRoverPhoto marsRoverPhoto, IList<MarsRoverPhoto> photos)
         {
+            var roverPhotos = new List<MarsRoverPhoto>(photos);
+            var dialog = new RoverPhotoDialog(
+                marsRoverPhoto,
+                roverPhotos);
+
+            await ShowDialog(dialog);
+        }
+
+        private async Task ShowDialog(ContentDialog dialog)
+        {
             if (_isDialogOpen)
                 return;
 
             _isDialogOpen = true;
-
-            var roverPhotos = new List<MarsRoverPhoto>(photos);
-
-            var dialog = new RoverPhotoDialogView(
-                marsRoverPhoto,
-                roverPhotos);
 
             await dialog.ShowAsync();
 

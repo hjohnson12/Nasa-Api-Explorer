@@ -103,7 +103,7 @@ namespace NasaApiExplorer
             if (Environment.GetEnvironmentVariable("NASA_API_KEY") == null)
             {
                 // Key not available, halt application?
-                InvalidAPIKeyDialogView dialog = new InvalidAPIKeyDialogView();
+                InvalidAPIKeyDialog dialog = new InvalidAPIKeyDialog();
                 await dialog.ShowAsync();
             }
             else
