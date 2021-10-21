@@ -24,8 +24,6 @@ namespace NasaApiExplorer.Views.Dialogs
 
             this.DataContext =
                 App.Current.ServiceHost.Services.GetService<RoverPhotoDialogViewModel>();
-            
-            DataContext = ViewModel;
 
             ViewModel.CurrentPhoto = currentPhoto;
             ViewModel.RoverPhotos = roverPhotos;
