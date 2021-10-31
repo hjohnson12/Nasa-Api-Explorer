@@ -153,6 +153,7 @@
     <Compile Include="ViewModels\OpportunityRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\PerseveranceRoverPhotosViewModel.cs" />
     <Compile Include="ViewModels\RoverPhotoDialogViewModel.cs" />
+    <Compile Include="ViewModels\RoverPhotosBaseViewModel.cs" />
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
     </Compile>
