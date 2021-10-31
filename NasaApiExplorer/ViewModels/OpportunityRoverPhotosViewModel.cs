@@ -15,7 +15,6 @@ namespace NasaApiExplorer.ViewModels
 {
     public class OpportunityRoverPhotosViewModel : RoverPhotosBaseViewModel
     {
-        private CancellationTokenSource _cancellationTokenSource;
         private DateTimeOffset? _missionEndDate;
 
         public ICommand LoadPhotosCommand { get; set; }

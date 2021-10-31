@@ -16,7 +16,6 @@ namespace NasaApiExplorer.ViewModels
     {
         private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private MarsRover _perseveranceRover;
-        private CancellationTokenSource _cancellationTokenSource;
 
         public ICommand LoadPhotosCommand { get; set; }
 

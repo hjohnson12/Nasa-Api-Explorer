@@ -15,8 +15,6 @@ namespace NasaApiExplorer.ViewModels
 {
     public class CuriosityRoverPhotosViewModel : RoverPhotosBaseViewModel
     {
-        private CancellationTokenSource _cancellationTokenSource;
-
         public ICommand LoadPhotosCommand { get; set; }
 
         public CuriosityRoverPhotosViewModel(

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -23,6 +24,7 @@ namespace NasaApiExplorer.ViewModels
         protected bool _isLoading;
         protected DateTimeOffset? _selectedDate;
         protected string _selectedCamera;
+        protected CancellationTokenSource _cancellationTokenSource;
 
         public ICommand DownloadPhotosCommand { get; set; }
         public ICommand SelectPhotoCommand { get; set; }
@@ -126,12 +128,12 @@ namespace NasaApiExplorer.ViewModels
 
         public void CancelRequest()
         {
-            //if (_cancellationTokenSource != null)
-            //{
-            //    // If instance already exists, buttons been pressed already
-            //    _cancellationTokenSource.Cancel();
-            //    _cancellationTokenSource = null;
-            //}
+            if (_cancellationTokenSource != null)
+            {
+                // If instance already exists, buttons been pressed already
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource = null;
+            }
         }
 
         /// <summary>
