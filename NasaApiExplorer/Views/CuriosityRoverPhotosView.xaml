@@ -4,9 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:behaviors="using:NasaApiExplorer.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:local="using:NasaApiExplorer"
+    xmlns:local="using:NasaApiExplorer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Windows.UI.Xaml.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -18,47 +19,69 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <StackPanel Margin="12,0,0,12" Orientation="Vertical">
-            <TextBlock
-                FontSize="24"
-                FontWeight="Bold"
-                Text="Curiosity Rover Photos" />
-            <muxc:CalendarDatePicker
-                x:Name="RoverPhotosDatePicker"
-                BorderThickness="1"
-                CornerRadius="2"
-                Header="Date:">
-                <interactivity:Interaction.Behaviors>
-                    <behaviors:DateChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateDateCommand}" />
-                </interactivity:Interaction.Behaviors>
-            </muxc:CalendarDatePicker>
-            <StackPanel Orientation="Horizontal">
-                <Button
-                    x:Name="btnSearch"
-                    Margin="0,4,4,4"
-                    Command="{x:Bind ViewModel.LoadPhotosCommand}"
-                    Content="Search" />
-                <Button
-                    x:Name="btnCancelRequest"
-                    Command="{x:Bind ViewModel.CancelRequestCommand}"
-                    Content="Cancel" />
-            </StackPanel>
-            <!--<Button Content="Next" Click="BtnNext_Click" />
-            <Button Content="Previous" Click="BtnPrev_Click" />-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="0,0,0,8"
+                    Orientation="Horizontal">
+                    <muxc:CalendarDatePicker
+                        x:Name="RoverPhotosDatePicker"
+                        BorderThickness="1"
+                        CornerRadius="2"
+                        Header="Date:">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:DateChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateDateCommand}" />
+                        </interactivity:Interaction.Behaviors>
+                    </muxc:CalendarDatePicker>
+                    <muxc:ComboBox
+                        x:Name="roverCamerasComboBox"
+                        Margin="8,0,8,0"
+                        Header="Cameras:"
+                        ItemsSource="{x:Bind ViewModel.RoverCameras2, Mode=OneWay}">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:ComboBoxSelectionChangedTriggerBehavior Command="{x:Bind ViewModel.UpdateSelectedCameraCommand}" />
+                        </interactivity:Interaction.Behaviors>
+                    </muxc:ComboBox>
+
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="btnSearch"
+                        Margin="0,18,8,4"
+                        Command="{x:Bind ViewModel.LoadPhotosCommand}"
+                        Content="Search" />
+                    <Button
+                        x:Name="btnCancelRequest"
+                        Margin="0,18,8,4"
+                        Content="Cancel Search" />
+                    <Button
+                        x:Name="btnDownloadPhotos"
+                        Margin="0,18,8,4"
+                        Command="{x:Bind ViewModel.DownloadPhotosCommand}"
+                        Content="Download All Photos" />
+                </StackPanel>
+            </Grid>
+
         </StackPanel>
 
-        <Grid Grid.Row="1" HorizontalAlignment="Center">
+        <Grid Grid.Row="1">
             <GridView
                 x:Name="GridViewControl"
-                Grid.Row="1"
-                Margin="12,0,0,0"
                 IsItemClickEnabled="True"
-                ItemsSource="{x:Bind ViewModel.CuriosityPhotos, Mode=OneWay}">
+                ItemsSource="{x:Bind ViewModel.RoverPhotos, Mode=OneWay}">
                 <interactivity:Interaction.Behaviors>
                     <behaviors:ItemClickBehavior Command="{x:Bind ViewModel.SelectPhotoCommand}" />
                 </interactivity:Interaction.Behaviors>
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid CornerRadius="2">
+                        <Grid CornerRadius="4">
                             <Grid.Background>
                                 <SolidColorBrush Color="{Binding Color}" />
                             </Grid.Background>
@@ -81,7 +104,7 @@
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <controls:StaggeredPanel
-                            HorizontalAlignment="Left"
+                            HorizontalAlignment="Center"
                             ColumnSpacing="5"
                             DesiredColumnWidth="250"
                             RowSpacing="5" />

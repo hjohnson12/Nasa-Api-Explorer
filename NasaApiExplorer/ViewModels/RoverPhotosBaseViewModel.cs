@@ -28,6 +28,7 @@ namespace NasaApiExplorer.ViewModels
         public ICommand SelectPhotoCommand { get; set; }
         public ICommand UpdateDateCommand { get; set; }
         public ICommand UpdateSelectedCameraCommand { get; set; }
+        public ICommand CancelRequestCommand { get; set; }
 
         protected RoverPhotosBaseViewModel(
             INasaApiService nasaApiService,
@@ -46,6 +47,8 @@ namespace NasaApiExplorer.ViewModels
                 new Base.RelayCommand<string>(UpdateSelectedCamera);
             DownloadPhotosCommand =
                 new AsyncRelayCommand(DownloadPhotos);
+            CancelRequestCommand =
+               new Base.RelayCommand(CancelRequest);
         }
 
         public ObservableCollection<MarsRoverPhoto> RoverPhotos
@@ -119,6 +122,16 @@ namespace NasaApiExplorer.ViewModels
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public void CancelRequest()
+        {
+            //if (_cancellationTokenSource != null)
+            //{
+            //    // If instance already exists, buttons been pressed already
+            //    _cancellationTokenSource.Cancel();
+            //    _cancellationTokenSource = null;
+            //}
         }
 
         /// <summary>
