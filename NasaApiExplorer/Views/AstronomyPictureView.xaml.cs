@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Net;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using NasaApiExplorer.ViewModels;
 

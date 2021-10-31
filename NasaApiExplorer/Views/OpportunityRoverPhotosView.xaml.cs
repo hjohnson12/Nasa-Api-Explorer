@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NasaApiExplorer.Models;
 using NasaApiExplorer.ViewModels;
-using NasaApiExplorer.Views.Dialogs;
-using System.Linq;
 
 namespace NasaApiExplorer.Views
 {
