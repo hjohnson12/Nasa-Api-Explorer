@@ -63,6 +63,11 @@
             IsTitleBarAutoPaddingEnabled="False"
             PaneTitle="Nasa Api Explorer"
             SelectionChanged="navMenu_SelectionChanged">
+            <muxc:NavigationView.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock FontWeight="Bold" Text="{Binding}" />
+                </DataTemplate>
+            </muxc:NavigationView.HeaderTemplate>
             <muxc:NavigationView.Style>
                 <Style TargetType="muxc:NavigationView">
                     <Setter Property="CompactPaneLength" Value="48" />

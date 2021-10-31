@@ -45,12 +45,15 @@ namespace NasaApiExplorer.Views
                         break;
                     case "PR_Photos":
                         mainFrame.Navigate(typeof(PerseveranceRoverPhotosView));
+                        navMenu.Header = "Perseverance Rover Photos";
                         break;
                     case "CR_Photos":
                         mainFrame.Navigate(typeof(CuriosityRoverPhotosView));
+                        navMenu.Header = "Curiosity Rover Photos";
                         break;
                     case "OR_Photos":
                         mainFrame.Navigate(typeof(OpportunityRoverPhotosView));
+                        navMenu.Header = "Opportunity Rover Photos"; 
                         break;
                     case "InsightLander_Weather":
                         mainFrame.Navigate(typeof(InSightLanderWeatherView));
