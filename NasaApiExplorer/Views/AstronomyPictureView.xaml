@@ -37,16 +37,10 @@
                 Grid.Row="0"
                 Margin="8,0,8,8"
                 Orientation="Vertical">
-                <!--<TextBlock
-                    HorizontalAlignment="Center"
-                    FontSize="24"
-                    FontWeight="Bold"
-                    Text="Nasa's Astronomy Picture of the Day" />-->
                 <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Title, Mode=OneWay}" />
                 <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Date, Mode=OneWay}" TextWrapping="Wrap" />
                 <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Explanation, Mode=OneWay}" TextWrapping="Wrap" />
                 <TextBlock Text="{x:Bind ViewModel.AstronomyPictureOfTheDay.Copyright, Mode=OneWay}" />
-
             </StackPanel>
             <Grid Grid.Row="1" HorizontalAlignment="Center">
                 <Image

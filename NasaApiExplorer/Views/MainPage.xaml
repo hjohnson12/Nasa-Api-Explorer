@@ -73,16 +73,6 @@
                     <Setter Property="CompactPaneLength" Value="48" />
                 </Style>
             </muxc:NavigationView.Style>
-            <!--<muxc:NavigationView.AutoSuggestBox>
-                <AutoSuggestBox
-                    x:Name="menuSearchBox"
-                    MinWidth="200"
-                    Margin="0,4,0,0"
-                    VerticalAlignment="Center"
-                    x:FieldModifier="public"
-                    PlaceholderText="Search"
-                    QueryIcon="Find" />
-            </muxc:NavigationView.AutoSuggestBox>-->
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem
                     Content="Astronomy Picture of the Day"
