@@ -28,22 +28,23 @@ namespace NasaApiExplorer.Views
                 switch (selectedItem.Tag)
                 {
                     case "APOD":
+                        navMenu.Header = "Astronomy Picture of the Day";
                         mainFrame.Navigate(typeof(AstronomyPictureView));
                         break;
                     case "Earth_EventTracker":
                         mainFrame.Navigate(typeof(NaturalEventTrackerView));
                         break;
                     case "PR_Photos":
-                        mainFrame.Navigate(typeof(PerseveranceRoverPhotosView));
                         navMenu.Header = "Perseverance Rover Photos";
+                        mainFrame.Navigate(typeof(PerseveranceRoverPhotosView));
                         break;
                     case "CR_Photos":
-                        mainFrame.Navigate(typeof(CuriosityRoverPhotosView));
                         navMenu.Header = "Curiosity Rover Photos";
+                        mainFrame.Navigate(typeof(CuriosityRoverPhotosView));
                         break;
                     case "OR_Photos":
+                        navMenu.Header = "Opportunity Rover Photos";
                         mainFrame.Navigate(typeof(OpportunityRoverPhotosView));
-                        navMenu.Header = "Opportunity Rover Photos"; 
                         break;
                     case "InsightLander_Weather":
                         mainFrame.Navigate(typeof(InSightLanderWeatherView));
