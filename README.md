@@ -1,4 +1,4 @@
-# Nasa Data Explorer
+# Nasa Api Explorer
 A windows application using the Astronomy Picture of the Day and Mars Rover Photos APIs from Nasa's Open APIs https://api.nasa.gov/
 
 # Details
