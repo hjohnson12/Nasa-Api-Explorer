@@ -12,14 +12,14 @@ using NasaApiExplorer.Services.NasaApis;
 
 namespace NasaApiExplorer.ViewModels
 {
-    public class PerseveranceRoverPhotosViewModel : RoverPhotosBaseViewModel
+    public class PerseverancePhotosViewModel : RoverPhotosBaseViewModel
     {
         private const string DEFAULT_COMBO_OPTION = "- Choose Camera (optional) -";
         private MarsRover _perseveranceRover;
 
         public ICommand LoadPhotosCommand { get; set; }
 
-        public PerseveranceRoverPhotosViewModel(
+        public PerseverancePhotosViewModel(
             INasaApiService nasaApiService,
             IFileDownloadService fileDownloadService,
             IDialogService dialogService)

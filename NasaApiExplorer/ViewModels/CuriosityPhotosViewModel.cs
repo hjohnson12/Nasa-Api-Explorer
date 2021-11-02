@@ -1,46 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using NasaApiExplorer.Services.NasaApis;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using NasaApiExplorer.Models;
 using NasaApiExplorer.Services;
+using NasaApiExplorer.Services.NasaApis;
 
 namespace NasaApiExplorer.ViewModels
 {
-    public class OpportunityRoverPhotosViewModel : RoverPhotosBaseViewModel
+    public class CuriosityPhotosViewModel : RoverPhotosBaseViewModel
     {
-        private DateTimeOffset? _missionEndDate;
-
         public ICommand LoadPhotosCommand { get; set; }
 
-        public OpportunityRoverPhotosViewModel(
+        public CuriosityPhotosViewModel(
             INasaApiService nasaApiService,
             IFileDownloadService fileDownloadService,
             IDialogService dialogService)
             : base(nasaApiService, fileDownloadService, dialogService)
         {
+            SelectedDate = DateTimeOffset.Now.AddDays(1);
             RoverPhotos = new ObservableCollection<MarsRoverPhoto>();
 
-            _missionEndDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);
-            SelectedDate = _missionEndDate;
-
             LoadPhotosCommand =
-               new AsyncRelayCommand(LoadOpportunityRoverPhotos);
+               new AsyncRelayCommand(LoadCuriosityRoverPhotos);
         }
 
-        public MarsRover OpportunityRover { get; set; }
-
+        public MarsRover CuriosityRover { get; set; }
+     
         /// <summary>
-        /// Retrieves photos from opportunity rover using photos service.
+        /// Retrieves photos from curiosity rover using photos service.
         /// </summary>
         /// <returns></returns>
-        public async Task LoadOpportunityRoverPhotos()
+        public async Task LoadCuriosityRoverPhotos()
         {
             IsLoading = true;
             _cancellationTokenSource = new CancellationTokenSource();
@@ -48,12 +44,14 @@ namespace NasaApiExplorer.ViewModels
             {
                 Console.WriteLine("User requested to cancel.");
             });
+            var cancellationToken = _cancellationTokenSource.Token;
 
-            string photosDate = FormatDate(SelectedDate);
             try
             {
+                string photosDate = FormatDate(SelectedDate);
+
                 RoverPhotos = new ObservableCollection<MarsRoverPhoto>(
-                    await _nasaApiService.MarsRoverPhotos.GetOpportunityRoverPhotosAsync(photosDate));
+                        await _nasaApiService.MarsRoverPhotos.GetCuriosityRoverPhotosAsync(photosDate));
             }
             catch (OperationCanceledException ocException)
             {

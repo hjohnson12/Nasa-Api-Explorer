@@ -147,11 +147,11 @@
     <Compile Include="Services\NasaApis\MarsRoverPhotos\RoverPhotoService.cs" />
     <Compile Include="Services\NasaApis\NasaApiService.cs" />
     <Compile Include="Helpers\TimeoutDelegatingHandler.cs" />
-    <Compile Include="ViewModels\CuriosityRoverPhotosViewModel.cs" />
+    <Compile Include="ViewModels\CuriosityPhotosViewModel.cs" />
     <Compile Include="ViewModels\AstronomyPictureViewModel.cs" />
     <Compile Include="ViewModels\NaturalEventTrackerViewModel.cs" />
-    <Compile Include="ViewModels\OpportunityRoverPhotosViewModel.cs" />
-    <Compile Include="ViewModels\PerseveranceRoverPhotosViewModel.cs" />
+    <Compile Include="ViewModels\OpportunityPhotosViewModel.cs" />
+    <Compile Include="ViewModels\PerseverancePhotosViewModel.cs" />
     <Compile Include="ViewModels\RoverPhotoDialogViewModel.cs" />
     <Compile Include="ViewModels\RoverPhotosBaseViewModel.cs" />
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">

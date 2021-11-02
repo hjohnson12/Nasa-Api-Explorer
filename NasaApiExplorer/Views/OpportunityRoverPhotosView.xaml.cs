@@ -9,14 +9,14 @@ namespace NasaApiExplorer.Views
 {
     public sealed partial class OpportunityRoverPhotosView : Page
     {
-        public OpportunityRoverPhotosViewModel ViewModel => (OpportunityRoverPhotosViewModel)DataContext;
+        public OpportunityPhotosViewModel ViewModel => (OpportunityPhotosViewModel)DataContext;
 
         public OpportunityRoverPhotosView()
         {
             this.InitializeComponent();
 
             this.DataContext =
-                App.Current.ServiceHost.Services.GetRequiredService<OpportunityRoverPhotosViewModel>();
+                App.Current.ServiceHost.Services.GetRequiredService<OpportunityPhotosViewModel>();
 
             var missionStartDate = new DateTimeOffset(2004, 1, 25, default, default, default, default);
             var missionEndDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);

@@ -85,9 +85,9 @@ namespace NasaApiExplorer
 
             // View Models
             services.AddTransient<AstronomyPictureViewModel>();
-            services.AddTransient<PerseveranceRoverPhotosViewModel>();
-            services.AddTransient<CuriosityRoverPhotosViewModel>();
-            services.AddTransient<OpportunityRoverPhotosViewModel>();
+            services.AddTransient<PerseverancePhotosViewModel>();
+            services.AddTransient<CuriosityPhotosViewModel>();
+            services.AddTransient<OpportunityPhotosViewModel>();
             services.AddTransient<RoverPhotoDialogViewModel>();
         }
 

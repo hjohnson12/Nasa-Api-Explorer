@@ -9,14 +9,14 @@ namespace NasaApiExplorer.Views
 {
     public sealed partial class PerseveranceRoverPhotosView : Page
     {
-        public PerseveranceRoverPhotosViewModel ViewModel => (PerseveranceRoverPhotosViewModel)DataContext;
+        public PerseverancePhotosViewModel ViewModel => (PerseverancePhotosViewModel)DataContext;
 
         public PerseveranceRoverPhotosView()
         {
             this.InitializeComponent();
 
             this.DataContext =
-                    App.Current.ServiceHost.Services.GetService<PerseveranceRoverPhotosViewModel>();
+                    App.Current.ServiceHost.Services.GetService<PerseverancePhotosViewModel>();
 
             // Current day since mission is still active
             RoverPhotosDatePicker.MaxDate = DateTime.Today;
