@@ -20,7 +20,6 @@ namespace NasaApiExplorer.ViewModels
         protected readonly IDialogService _dialogService;
         protected ObservableCollection<MarsRoverPhoto> _roverPhotos;
         protected ObservableCollection<string> _roverCameras;
-        protected ObservableCollection<string> _roverCameras2;
         protected bool _isLoading;
         protected DateTimeOffset? _selectedDate;
         protected string _selectedCamera;
@@ -75,12 +74,6 @@ namespace NasaApiExplorer.ViewModels
         {
             get => _roverCameras;
             set => SetProperty(ref _roverCameras, value);
-        }
-
-        public ObservableCollection<string> RoverCameras2
-        {
-            get => _roverCameras2;
-            set => SetProperty(ref _roverCameras2, value);
         }
 
         public DateTimeOffset? SelectedDate

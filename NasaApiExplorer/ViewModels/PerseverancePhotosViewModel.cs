@@ -26,10 +26,10 @@ namespace NasaApiExplorer.ViewModels
             : base(nasaApiService, fileDownloadService, dialogService)
         {
             var cameraList = MarsRoverPhotoData.PerseveranceCameras;
-            _roverCameras2 = new ObservableCollection<string>(
+            _roverCameras = new ObservableCollection<string>(
                 cameraList.Select(x => x.Item2.ToString())
                 .ToList());
-            //_roverCameras2.Insert(0, DEFAULT_COMBO_OPTION);
+            //_roverCameras.Insert(0, DEFAULT_COMBO_OPTION);
 
             SelectedDate = DateTimeOffset.Now.AddDays(1);
             RoverPhotos = new ObservableCollection<MarsRoverPhoto>();
@@ -52,32 +52,29 @@ namespace NasaApiExplorer.ViewModels
             {
                 Console.WriteLine("User requested to cancel.");
             });
-            var cancellationToken = _cancellationTokenSource.Token;
+            CancellationToken cancellationToken = _cancellationTokenSource.Token;
 
             try
             {
                 string photosDate = FormatDate(SelectedDate);
 
+                // Pass camera parameter to api call if a camera is selected
                 if (IsCameraSelected(SelectedCamera))
                 {
                     var camera = MarsRoverPhotoData.PerseveranceCameras
                         .Single(x => x.Item2.Equals(SelectedCamera))
                         .Item1;
 
-                    RoverPhotos =
-                        new ObservableCollection<MarsRoverPhoto>(
+                    RoverPhotos = new ObservableCollection<MarsRoverPhoto>(
                             await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
                                 photosDate, camera, cancellationToken));
                 }
-                else
+                else // No camera selected
                 {
-                    RoverPhotos =
-                        new ObservableCollection<MarsRoverPhoto>(
+                    RoverPhotos = new ObservableCollection<MarsRoverPhoto>(
                             await _nasaApiService.MarsRoverPhotos.GetPerseveranceRoverPhotosAsync(
                                 photosDate, cancellationToken));
                 }
-
-                //PerseveranceRover = PerseverancePhotos[0].Rover;
             }
             catch (OperationCanceledException ocException)
             {
@@ -85,8 +82,6 @@ namespace NasaApiExplorer.ViewModels
             }
             catch (Exception ex)
             {
-                //var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
-                //logger.LogError(ex, "An error occurred.");
                 Console.WriteLine(ex.Message);
             }
             finally
