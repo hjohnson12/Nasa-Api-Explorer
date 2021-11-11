@@ -28,8 +28,7 @@ namespace NasaApiExplorer.ViewModels
             // Populate the camera list for Perseverance Rover
             var cameraList = MarsRoverPhotoData.PerseveranceCameras;
             _roverCameras = new ObservableCollection<string>(
-                cameraList.Select(x => x.Item2.ToString())
-                .ToList());
+                cameraList.Select(x => x.Item2.ToString()));
             //_roverCameras.Insert(0, DEFAULT_COMBO_OPTION);
 
             SelectedDate = DateTimeOffset.Now.AddDays(1);

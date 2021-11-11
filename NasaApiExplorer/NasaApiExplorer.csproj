@@ -154,6 +154,7 @@
     <Compile Include="ViewModels\PerseverancePhotosViewModel.cs" />
     <Compile Include="ViewModels\RoverPhotoDialogViewModel.cs" />
     <Compile Include="ViewModels\RoverPhotosBaseViewModel.cs" />
+    <Compile Include="ViewModels\SpiritPhotosViewModel.cs" />
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
     </Compile>
@@ -181,6 +182,9 @@
     </Compile>
     <Compile Include="Views\PerseveranceRoverPhotosView.xaml.cs">
       <DependentUpon>PerseveranceRoverPhotosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpiritRoverPhotosView.xaml.cs">
+      <DependentUpon>SpiritRoverPhotosView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PerseveranceRoverPhotosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpiritRoverPhotosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

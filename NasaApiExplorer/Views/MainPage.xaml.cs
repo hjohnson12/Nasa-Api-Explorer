@@ -46,6 +46,10 @@ namespace NasaApiExplorer.Views
                         navMenu.Header = "Opportunity Rover Photos";
                         mainFrame.Navigate(typeof(OpportunityRoverPhotosView));
                         break;
+                    case "SR_Photos":
+                        navMenu.Header = "Spirit Rover Photos";
+                        mainFrame.Navigate(typeof(SpiritRoverPhotosView));
+                        break;
                     case "InsightLander_Weather":
                         mainFrame.Navigate(typeof(InSightLanderWeatherView));
                         break;

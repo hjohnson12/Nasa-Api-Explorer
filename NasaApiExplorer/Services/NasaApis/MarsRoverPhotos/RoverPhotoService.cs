@@ -71,6 +71,24 @@ namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
         /// <param name="dateOfPhotos"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        public async Task<IEnumerable<MarsRoverPhoto>> GetSpiritRoverPhotosAsync(
+            string dateOfPhotos,
+            CancellationToken cancellationToken)
+        {
+            var requestUri = string.Format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date={0}&api_key={1}",
+                    dateOfPhotos,
+                    StaticKeys.API_KEY);
+
+            return await GetRoverPhotosAsync(requestUri, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets photos from the Mars Perseverance Rover
+        /// </summary>
+        /// <param name="dateOfPhotos"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
             string dateOfPhotos,
             CancellationToken cancellationToken)

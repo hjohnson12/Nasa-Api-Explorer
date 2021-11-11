@@ -97,6 +97,10 @@
                     Content="Opportunity Rover Photos"
                     Icon="BrowsePhotos"
                     Tag="OR_Photos" />
+                <muxc:NavigationViewItem
+                    Content="Spirit Rover Photos"
+                    Icon="BrowsePhotos"
+                    Tag="SR_Photos" />
                 <!--<muxc:NavigationViewItem
                     Content="InSight Mars Lander Weather Data"
                     Icon="Help"
