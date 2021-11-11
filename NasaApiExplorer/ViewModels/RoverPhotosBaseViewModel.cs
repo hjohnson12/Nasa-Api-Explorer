@@ -107,6 +107,7 @@ namespace NasaApiExplorer.ViewModels
         /// <returns></returns>
         public async Task DownloadPhotos()
         {
+            // Retrieve urls from source url property of the photo objects
             string[] urls = RoverPhotos.Select(x => x.ImageSourceUrl).ToArray();
 
             try
