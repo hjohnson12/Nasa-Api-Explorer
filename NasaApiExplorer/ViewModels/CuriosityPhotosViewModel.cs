@@ -23,6 +23,11 @@ namespace NasaApiExplorer.ViewModels
             IDialogService dialogService)
             : base(nasaApiService, fileDownloadService, dialogService)
         {
+            // Populate the camera list for Curiosity Rover
+            var cameraList = MarsRoverPhotoData.CuriosityCameras;
+            _roverCameras = new ObservableCollection<string>(
+                cameraList.Select(x => x.Item2.ToString()));
+            
             SelectedDate = DateTimeOffset.Now.AddDays(1);
             RoverPhotos = new ObservableCollection<MarsRoverPhoto>();
 

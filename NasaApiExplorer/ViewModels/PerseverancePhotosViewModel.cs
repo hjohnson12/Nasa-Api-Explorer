@@ -25,6 +25,7 @@ namespace NasaApiExplorer.ViewModels
             IDialogService dialogService)
             : base(nasaApiService, fileDownloadService, dialogService)
         {
+            // Populate the camera list for Perseverance Rover
             var cameraList = MarsRoverPhotoData.PerseveranceCameras;
             _roverCameras = new ObservableCollection<string>(
                 cameraList.Select(x => x.Item2.ToString())

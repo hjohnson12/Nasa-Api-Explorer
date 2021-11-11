@@ -25,6 +25,11 @@ namespace NasaApiExplorer.ViewModels
             IDialogService dialogService)
             : base(nasaApiService, fileDownloadService, dialogService)
         {
+            // Populate the camera list for Opportunity Rover
+            var cameraList = MarsRoverPhotoData.OpportunityCameras;
+            _roverCameras = new ObservableCollection<string>(
+                cameraList.Select(x => x.Item2.ToString()));
+
             RoverPhotos = new ObservableCollection<MarsRoverPhoto>();
 
             _missionEndDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);
