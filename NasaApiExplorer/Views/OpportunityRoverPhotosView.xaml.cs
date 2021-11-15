@@ -17,7 +17,7 @@ namespace NasaApiExplorer.Views
 
             this.DataContext =
                 App.Current.ServiceHost.Services.GetRequiredService<OpportunityPhotosViewModel>();
-
+            
             var missionStartDate = new DateTimeOffset(2004, 1, 25, default, default, default, default);
             var missionEndDate = new DateTimeOffset(2018, 6, 10, default, default, default, default);
             

@@ -66,8 +66,6 @@ namespace NasaApiExplorer.ViewModels
             }
             catch (Exception ex)
             {
-                //var logger = ((App)Application.Current).ServiceHost.Services.GetRequiredService<ILogger<App>>();
-                //logger.LogError(ex, "An error occurred.");
                 Console.WriteLine(ex.Message);
             }
             finally

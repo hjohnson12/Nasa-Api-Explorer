@@ -60,7 +60,8 @@ namespace NasaApiExplorer
         public new static App Current => (App)Application.Current;
 
         /// <summary>
-        /// Configures and builds services with view models for dependency injection.
+        /// Configures and builds required services with view models. 
+        /// <para>Allows view model dependences to be injected automatically</para>
         /// </summary>
         private void BuildServices()
         {
@@ -73,6 +74,11 @@ namespace NasaApiExplorer
             ServiceHost = builder.Build();
         }
 
+        /// <summary>
+        /// Adds the required services and view models for the 
+        /// application to the <see cref="IServiceCollection"/>
+        /// </summary>
+        /// <param name="services"></param>
         private void ConfigureServices(IServiceCollection services)
         {
             // Services
