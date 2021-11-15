@@ -78,11 +78,7 @@
                     Content="Astronomy Picture of the Day"
                     Icon="Home"
                     IsSelected="True"
-                    Tag="APOD">
-                    <!--<muxc:NavigationViewItem.MenuItems>
-                        <muxc:NavigationViewItem Content="Test" Tag="Test" />
-                    </muxc:NavigationViewItem.MenuItems>-->
-                </muxc:NavigationViewItem>
+                    Tag="APOD" />
                 <muxc:NavigationViewItemSeparator />
                 <muxc:NavigationViewItemHeader Content="Mars Rover Photos" />
                 <muxc:NavigationViewItem
@@ -101,27 +97,14 @@
                     Content="Spirit Rover Photos"
                     Icon="BrowsePhotos"
                     Tag="SR_Photos" />
-                <!--<muxc:NavigationViewItem
-                    Content="InSight Mars Lander Weather Data"
-                    Icon="Help"
-                    Tag="InsightLander_Weather" />-->
-                <!--<muxc:NavigationViewItemSeparator />
-                <muxc:NavigationViewItemHeader Content="EONET" />
-                <muxc:NavigationViewItem
-                    Content="Earth Natrual Event Tracker Data"
-                    Icon="Help"
-                    Tag="Earth_EventTracker" />-->
-                <!--<muxc:NavigationViewItemHeader Content="Space" />
-                <muxc:NavigationViewItem Content="News Feeds" SelectsOnInvoked="False">
-                    <muxc:NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE14C;" />
-                    </muxc:NavigationViewItem.Icon>
-                    <muxc:NavigationViewItem.MenuItems>
-                        <muxc:NavigationViewItem Content="NASA Climate Feed" Tag="NASAClimate_Feed" />
-                        <muxc:NavigationViewItem Content="Earth Observatory Feed" Tag="NASAEarthObserv_Feed" />
-                    </muxc:NavigationViewItem.MenuItems>
-                </muxc:NavigationViewItem>-->
             </muxc:NavigationView.MenuItems>
+            <muxc:NavigationView.FooterMenuItems>
+                <muxc:NavigationViewItem Content="About" Tag="About">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE946;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+            </muxc:NavigationView.FooterMenuItems>
             <Grid>
                 <Frame x:Name="mainFrame" />
             </Grid>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Windows.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using NasaApiExplorer.Views.Dialogs;
 
 namespace NasaApiExplorer.Views
 {
@@ -50,8 +51,8 @@ namespace NasaApiExplorer.Views
                         navMenu.Header = "Spirit Rover Photos";
                         mainFrame.Navigate(typeof(SpiritRoverPhotosView));
                         break;
-                    case "InsightLander_Weather":
-                        mainFrame.Navigate(typeof(InSightLanderWeatherView));
+                    case "About":
+                        mainFrame.Navigate(typeof(AboutDialog));
                         break;
                     default:
                         mainFrame.Navigate(typeof(AstronomyPictureView));
