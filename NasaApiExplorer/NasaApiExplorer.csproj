@@ -155,11 +155,11 @@
     <Compile Include="ViewModels\RoverPhotoDialogViewModel.cs" />
     <Compile Include="ViewModels\RoverPhotosBaseViewModel.cs" />
     <Compile Include="ViewModels\SpiritPhotosViewModel.cs" />
+    <Compile Include="Views\AboutPageView.xaml.cs">
+      <DependentUpon>AboutPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CuriosityRoverPhotosView.xaml.cs">
       <DependentUpon>CuriosityRoverPhotosView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\AboutDialog.xaml.cs">
-      <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\RoverPhotoDialog.xaml.cs">
       <DependentUpon>RoverPhotoDialog.xaml</DependentUpon>
@@ -210,13 +210,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\AboutPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CuriosityRoverPhotosView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Dialogs\AboutDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\RoverPhotoDialog.xaml">
       <SubType>Designer</SubType>

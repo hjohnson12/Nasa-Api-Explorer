@@ -52,7 +52,8 @@ namespace NasaApiExplorer.Views
                         mainFrame.Navigate(typeof(SpiritRoverPhotosView));
                         break;
                     case "About":
-                        mainFrame.Navigate(typeof(AboutDialog));
+                        navMenu.Header = "About";
+                        mainFrame.Navigate(typeof(AboutPageView));
                         break;
                     default:
                         mainFrame.Navigate(typeof(AstronomyPictureView));
