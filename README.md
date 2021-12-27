@@ -9,3 +9,9 @@ Topics currently being learned that are utilized in this project are: MVVM with 
 This application includes usage of the following APIs from https://api.nasa.gov/: 
 - Mars Rover Photos (Perseverance Rover, Curiosity Rover, Opportunity Rover, Spirit Rover)
 - Astronomy Picture of the Day
+
+# Screenshots
+![Image of Program](Images/screenshot1.png)
+![Image of Program](Images/screenshot2.png)
+![Image of Program](Images/screenshot3.png)
+![Image of Program](Images/screenshot4.png)
