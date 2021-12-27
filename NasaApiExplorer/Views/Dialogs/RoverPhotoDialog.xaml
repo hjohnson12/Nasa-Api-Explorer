@@ -12,10 +12,6 @@
     x:Name="dialogWindow"
     Background="{ThemeResource SystemControlChromeHighAcrylicElementMediumBrush}"
     CornerRadius="4"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    PrimaryButtonText="Button1"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
-    SecondaryButtonText="Close"
     mc:Ignorable="d">
     <ContentDialog.Resources>
         <x:Double x:Key="ContentDialogMaxWidth">800</x:Double>
@@ -23,8 +19,14 @@
     </ContentDialog.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
         <muxc:FlipView
             x:Name="flipView"
+            Grid.Row="0"
             Background="Transparent"
             ItemsSource="{x:Bind ViewModel.RoverPhotos}"
             SelectedItem="{x:Bind ViewModel.CurrentPhoto}">
@@ -111,5 +113,14 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
         </muxc:FlipView>
+        <Grid Grid.Row="1">
+            <Button
+                x:Name="btnCloseDialog"
+                Click="btnCloseDialog_Click"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Content="Close" />
+        </Grid>
     </Grid>
 </ContentDialog>

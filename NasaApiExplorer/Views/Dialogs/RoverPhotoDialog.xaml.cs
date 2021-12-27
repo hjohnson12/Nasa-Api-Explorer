@@ -21,12 +21,9 @@ namespace NasaApiExplorer.Views.Dialogs
 
         public RoverPhotoDialogViewModel ViewModel => (RoverPhotoDialogViewModel)DataContext;
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private void btnCloseDialog_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
+            this.Hide();
         }
     }
 }
