@@ -55,7 +55,7 @@ namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
         /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetCuriosityRoverPhotosAsync(
             string dateOfPhotos,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken = default)
         {
             var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={0}&api_key={1}",
@@ -73,7 +73,7 @@ namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
         /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetSpiritRoverPhotosAsync(
             string dateOfPhotos,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken = default)
         {
             var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date={0}&api_key={1}",
@@ -91,7 +91,7 @@ namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
         /// <returns></returns>
         public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
             string dateOfPhotos,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken = default)
         {
             var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date={0}&api_key={1}",
@@ -111,7 +111,7 @@ namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
         public async Task<IEnumerable<MarsRoverPhoto>> GetPerseveranceRoverPhotosAsync(
             string dateOfPhotos,
             string camera,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken = default)
         {
             var requestUri = string.Format(
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?api_key={2}&earth_date={0}&camera={1}",
@@ -168,7 +168,7 @@ namespace NasaApiExplorer.Services.NasaApis.MarsRoverPhotos
         /// <returns></returns>
         private async Task<IEnumerable<MarsRoverPhoto>> GetRoverPhotosAsync(
             string uriAddress,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken = default)
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
