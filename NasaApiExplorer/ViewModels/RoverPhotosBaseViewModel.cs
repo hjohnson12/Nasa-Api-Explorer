@@ -112,7 +112,7 @@ namespace NasaApiExplorer.ViewModels
 
             try
             {
-                await _fileDownloadService.DownloadFiles(urls);
+                await _fileDownloadService.DownloadFilesAsync(urls);
             }
             catch (Exception ex)
             {

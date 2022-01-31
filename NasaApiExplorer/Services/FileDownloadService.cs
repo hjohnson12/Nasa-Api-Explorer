@@ -40,7 +40,13 @@ namespace NasaApiExplorer.Services
             }
         }
 
-        public async Task DownloadFiles(string[] imageUrls)
+        /// <summary>
+        /// Downloads all files to a folder specified from a folder picker shown
+        /// to the user.
+        /// </summary>
+        /// <param name="imageUrls"></param>
+        /// <returns></returns>
+        public async Task DownloadFilesAsync(string[] imageUrls)
         {
             var pickedFolder = await _folderService.OpenFolderPickerAsync();
             var photoFolder = await _folderService.CreateFolderByNameAsync(pickedFolder, "Mars Rover Photos");
@@ -73,13 +79,6 @@ namespace NasaApiExplorer.Services
             {
                 stream.Write(buffer, 0, buffer.Length);
             }
-        }
-
-        internal async Task Test(string url)
-        {
-            byte[] buffer = await _httpClient.GetByteArrayAsync(url);
-
-            File.WriteAllBytes(@"C:\", buffer);
         }
     }
 }
